@@ -195,7 +195,7 @@ int main(int argc, char* args[])
 		// present screen (switch buffers)
 		SDL_RenderPresent(renderer);
 
-		SDL_Delay(0); // can be used to wait for a certain amount of ms
+		SDL_Delay(2); // can be used to wait for a certain amount of ms
 	}
 
 	return 0;
