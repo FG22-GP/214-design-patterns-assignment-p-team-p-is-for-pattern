@@ -6,6 +6,7 @@
 #include <SDL.h>
 #include <iostream>
 #include <map>
+#include <SDL_TTf.h>
 
 class TextureManager
 {
@@ -15,7 +16,9 @@ public:
 
 	~TextureManager() {}
 
-	bool Load(std::string fileName, std::string id, SDL_Renderer* pRenderer);
+	bool LoadImage(std::string fileName, std::string id, SDL_Renderer* pRenderer);
+	bool LoadText(std::string fileName, std::string id, SDL_Color textColor, 
+				  int fontSize, std::string text, SDL_Point& dimensions, SDL_Renderer* pRenderer);
 
 	void Draw(std::string id, SDL_Rect targetRectangle, SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
 	void DrawFrame(std::string id, SDL_Rect targetRectangle, SDL_Renderer* pRenderer, int currentRow, int currentFrame,
