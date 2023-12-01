@@ -158,6 +158,12 @@ void Input::UpdateInput() {
                     keyboard.find(ToLower("S"))->second->held = false;
                 }
             }
+
+            if (e.key.keysym.sym == SDLK_ESCAPE) {
+                if (keyboard.contains(ToLower("ESCAPE"))) {
+                    keyboard.find(ToLower("ESCAPE"))->second->held = false;
+                }
+            }
             break;
         default: ;
         }

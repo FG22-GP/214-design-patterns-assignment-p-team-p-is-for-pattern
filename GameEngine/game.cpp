@@ -4,6 +4,7 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
+#include "Input.h"
 #include "IGameWindow.h"
 #include "GameWindow.h"
 
@@ -17,7 +18,8 @@ const char* pikachuImagePath{ "img/pikachu.png" };
 int main(int argc, char* args[])
 {
 	const auto game_window = new GameWindow(1024, 768, IMG_INIT_PNG);
-
+	std::string KeysToRegister[] = {"LEFT", "RIGHT", "UP", "DOWN", "W", "A", "S", "D", "ENTER", "RETURN", "ESCAPE", "SPACEs"};
+	Input::RegisterKeys(KeysToRegister, std::size(KeysToRegister));
 	// All data related to pikachu
 	SDL_Texture* pikachu = NULL; // The final optimized image
 	bool pikachuMoveRight = false;
@@ -91,52 +93,13 @@ int main(int argc, char* args[])
 	// while the user doesn't want to quit
 	while (quit == false)
 	{
-		SDL_GetTicks(); // can be used, to see, how much time in ms has passed since app start
-
-
-		// loop through all pending events from Windows (OS)
-		while (SDL_PollEvent(&e))
-		{
-			// check, if it's an event we want to react to:
-			switch (e.type) {
-				case SDL_QUIT: {
-					quit = true;
-				} break;
-
-					// This is an example on how to use input events:
-				case SDL_KEYDOWN: {
-					// input example: if left, then make pikachu move left
-					if (e.key.keysym.sym == SDLK_LEFT) {
-						pikachuMoveRight = false;
-					}
-					// if right, then make pikachu move right
-					if (e.key.keysym.sym == SDLK_RIGHT) {
-						pikachuMoveRight = true;
-					}
-				} break;
-			} 
-		}
-
-		// This is an example for how to check, whether keys are currently pressed:
-		const Uint8* keystate = SDL_GetKeyboardState(NULL);
-		if (keystate[SDL_SCANCODE_UP])
-		{
-			pik_y--;
-		}
-		if (keystate[SDL_SCANCODE_DOWN])
-		{
-			pik_y++;
-		}
-
-		// our current game logic :)
-		if (pikachuMoveRight) {
-			pik_x++;
-			if (pik_x > 599) pikachuMoveRight = false;
-		}
-		else {
-			pik_x--;
-			if (pik_x < 1) pikachuMoveRight = true;
-		}
+		SDL_GetTicks();
+		Input::UpdateInput();
+		
+		if (Input::GetKey("W")) pik_y--;
+		if (Input::GetKey("S")) pik_y++;
+		if (Input::GetKey("D")) pik_x++;
+		if (Input::GetKey("A")) pik_x--;
 		
 		// clear the screen
 		game_window->Clear();
