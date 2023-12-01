@@ -1,6 +1,6 @@
 #include "TextureManager.h"
 
-bool TextureManager::Load(std::string fileName, std::string id, SDL_Renderer* pRenderer)
+bool TextureManager::LoadImage(std::string fileName, std::string id, SDL_Renderer* pRenderer)
 {
 	SDL_Surface* loadedSurface = IMG_Load(fileName.c_str());
 
@@ -22,6 +22,41 @@ bool TextureManager::Load(std::string fileName, std::string id, SDL_Renderer* pR
 	else if (textureToLoad != 0)
 	{
 		textureMap[id] = textureToLoad;
+		return true;
+	}
+
+
+	return false;
+}
+
+bool TextureManager::LoadText(std::string fileName, std::string id, SDL_Color textColor, int fontSize, std::string text ,SDL_Point& dimensions,SDL_Renderer* pRenderer)
+{
+
+	TTF_Font* fontToLoad = TTF_OpenFont(fileName.c_str(), fontSize);
+
+	if (fontToLoad == 0)
+	{
+		printf("Failed to font:%s SDL_ttf Error: %s\n", fileName.c_str(), TTF_GetError());
+		return false;
+	}
+
+	SDL_Surface* textSurface = TTF_RenderText_Solid(fontToLoad, text.c_str(), textColor);
+
+	if (textSurface == 0)
+	{
+		printf("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
+		return false;
+	}
+	SDL_Texture* textTexture = SDL_CreateTextureFromSurface(pRenderer, textSurface);
+	SDL_FreeSurface(textSurface);
+	if (textTexture == 0)
+	{
+		printf("Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError());
+		return false;
+	}
+	else if(textTexture !=0)
+	{
+		textureMap[id] = textTexture;
 		return true;
 	}
 
