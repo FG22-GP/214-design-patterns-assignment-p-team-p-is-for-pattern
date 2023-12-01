@@ -18,7 +18,7 @@ const char* pikachuImagePath{ "img/pikachu.png" };
 int main(int argc, char* args[])
 {
 	const auto game_window = new GameWindow(1024, 768, IMG_INIT_PNG);
-	std::string KeysToRegister[] = {"LEFT", "RIGHT", "UP", "DOWN", "W", "A", "S", "D", "ENTER", "RETURN", "ESCAPE", "SPACEs"};
+	std::string KeysToRegister[] = {"LEFT", "RIGHT", "UP", "DOWN", "W", "A", "S", "D", "ENTER", "RETURN", "ESCAPE", "SPACE"};
 	Input::RegisterKeys(KeysToRegister, std::size(KeysToRegister));
 	// All data related to pikachu
 	SDL_Texture* pikachu = NULL; // The final optimized image
@@ -88,7 +88,7 @@ int main(int argc, char* args[])
 		SDL_FreeSurface(textSurface);
 	}
 
-	SDL_Event e; bool quit = false;
+	bool quit = false;
 
 	// while the user doesn't want to quit
 	while (quit == false)
@@ -96,10 +96,10 @@ int main(int argc, char* args[])
 		SDL_GetTicks();
 		Input::UpdateInput();
 		
-		if (Input::GetKey("W")) pik_y--;
-		if (Input::GetKey("S")) pik_y++;
-		if (Input::GetKey("D")) pik_x++;
-		if (Input::GetKey("A")) pik_x--;
+		if (Input::GetKey("W") || Input::GetKey("UP")) pik_y--;
+		if (Input::GetKey("S") || Input::GetKey("DOWN")) pik_y++;
+		if (Input::GetKey("D") || Input::GetKey("RIGHT")) pik_x++;
+		if (Input::GetKey("A") || Input::GetKey("LEFT")) pik_x--;
 		
 		// clear the screen
 		game_window->Clear();
