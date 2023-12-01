@@ -6,7 +6,6 @@
 #include <SDL_image.h>
 
 #include "IGameWindow.h"
-#include "IImage.h"
 
 
 class GameWindow : public IGameWindow {
@@ -14,17 +13,15 @@ class GameWindow : public IGameWindow {
     SDL_Window* window_{};
     //The surface contained by the window
     SDL_Surface* screen_surface_{};
-    //Whether Window Startup was successful
+    SDL_Renderer* renderer;
     bool b_success_;
     int img_flags_;
 
 public:
-    // dependency to the ImageLoader
-    SDL_Renderer* renderer_;
-
     GameWindow(int screen_width, int screen_height, int image_flags = IMG_INIT_PNG);
-    bool was_successful() override;
-    void render(IImage* image);
-    void clear() override;
-    void present() override;
+    //Whether Window Startup was successful
+    bool WasSuccessful() override;
+    void Clear() override;
+    void Present() override;
+    SDL_Renderer* GetRenderer() const;
 };
