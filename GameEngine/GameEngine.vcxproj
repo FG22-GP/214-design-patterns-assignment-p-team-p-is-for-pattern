@@ -28,13 +28,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp" />
-    <ClCompile Include="Command.cpp" />
-    <ClCompile Include="Input.cpp" />
+<ClCompile Include="Command.cpp" />
+<ClCompile Include="Input.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="IGameWindow.cpp" />
+    <ClCompile Include="GameWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Command.h" />
-    <ClInclude Include="Input.h" />
+    <ClInclude Include="TextureManager.h" />
+<ClCompile Include="Command.h" />
+<ClCompile Include="Input.h" />
+    <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Window.h" />
+    <ClInclude Include="IGameWindow.h" />
+    <ClInclude Include="GameWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="..\ext\SDL2-2.26.4\lib\x64\SDL2.dll">
