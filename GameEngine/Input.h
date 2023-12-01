@@ -12,10 +12,10 @@ public:
 
     static std::map<std::string, InputValue*> keyboard;
 
-    void static register_keys(std::string values[], size_t size);
-    void static update_input();
+    void static UpdateInput();
     bool static GetKeyDown(std::string key);
     bool static GetKey(std::string key);
+    void static RegisterKeys(std::string values[], size_t size);
 
 private:
     static std::string ToLower(std::string inputString);

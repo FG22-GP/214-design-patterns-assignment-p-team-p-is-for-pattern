@@ -18,7 +18,7 @@ int main(int argc, char* args[]) {
     SDL_Window* window{}; // why are there just declared in main
     SDL_Renderer* renderer; // the window's rendering surface
 
-   
+
     // initialize SDL_Image for image loading
     int imgFlags = IMG_INIT_PNG;
     if (!(IMG_Init(imgFlags) & imgFlags)) {
@@ -71,9 +71,9 @@ int main(int argc, char* args[]) {
         //Get rid of old loaded surface
         SDL_FreeSurface(loadedSurface);
     }
-    
-    std::string keys[] = {"LEFT", "RIGHT", "UP", "DOWN", "SPACE", "RETURN"};
-    Input::register_keys(keys, std::size(keys));
+
+    std::string keys[] = {"LEFT", "RIGHT", "UP", "DOWN", "SPACE", "RETURN", "W", "A", "S", "D"};
+    Input::RegisterKeys(keys, std::size(keys));
 
     // load font
     auto font = TTF_OpenFont("font/lazy.ttf", 100);
@@ -116,96 +116,20 @@ int main(int argc, char* args[]) {
     // while the user doesn't want to quit
     //bool pikachuStop = true;
 
-        bool pikachuMoveRight = false;
-        bool pikachuMoveUp = false;
+    bool pikachuMoveRight = false;
+    bool pikachuMoveUp = false;
     while (quit == false) {
         SDL_GetTicks(); // can be used, to see, how much time in ms has passed since app start
-        Input::update_input();
-        // loop through all pending events from Windows (OS)
-        // while (SDL_PollEvent(&e)) {
-        //     // check, if it's an event we want to react to:
-        //     switch (e.type) {
-        //     case SDL_QUIT:
-        //         {
-        //             quit = true;
-        //         }
-        //         break;
-        //
-        //     // This is an example on how to use input events:
-        //     case SDL_KEYDOWN:
-        //         {
-        //             // input example: if left, then make pikachu move left
-        //             if (e.key.keysym.sym == SDLK_LEFT) {
-        //                 pikachuMoveRight = false;
-        //             }
-        //             // if right, then make pikachu move right
-        //             if (e.key.keysym.sym == SDLK_RIGHT) {
-        //                 pikachuMoveRight = true;
-        //                 //printf("We do be pressing right");
-        //             }
-        //
-        //             if (e.key.keysym.sym == SDLK_UP) {
-        //                 pikachuMoveUp = true;
-        //             }
-        //
-        //             if (e.key.keysym.sym == SDLK_DOWN) {
-        //                 pikachuMoveUp = false;
-        //             }
-        //             
-        //         }
-        //         break;
-        //     case SDL_KEYUP:
-        //         if (e.key.keysym.sym == SDLK_LEFT) {
-        //             pikachuMoveRight = false;
-        //         }
-        //
-        //         if (e.key.keysym.sym == SDLK_RIGHT) {
-        //             pikachuMoveRight = true;
-        //         }
-        //
-        //         if (e.key.keysym.sym == SDLK_UP) {
-        //             pikachuMoveUp = true;
-        //         }
-        //
-        //         if (e.key.keysym.sym == SDLK_DOWN) {
-        //             pikachuMoveUp = false;
-        //             
-        //         }
-        //         break;
-        //     }
-        // }
-
-        // This is an example for how to check, whether keys are currently pressed:
-        // const Uint8* keystate = SDL_GetKeyboardState(NULL);
-        // if (keystate[SDL_SCANCODE_UP]) {
-        //     printf("We do be pressing SPACE");
-        //     pik_y--;
-        // }
-        // if (keystate[SDL_SCANCODE_DOWN]) {
-        //     printf("We do be pressing right");
-        //     pik_y++;
-        // }
+        Input::UpdateInput();
         
-        // our current game logic :)
-        if (Input::GetKeyDown("RIGHT")) {
-            pik_x++;
-            if (pik_x > 599) pikachuMoveRight = false;
-        }
-        
-        // if(Input::GetKeyDown("LEFT")) {
-        //     pik_x--;
-        //     if (pik_x < 1) pikachuMoveRight = true;
-        // }
-        //
-        // if (Input::GetKeyDown("UP")) {
-        //     pik_y--;
-        //     if (pik_y < 1) pikachuMoveUp = true;
-        // }
-        // if(Input::GetKeyDown("DOWN")) {
-        //     pik_y++;
-        //     if (pik_y > 599) pikachuMoveUp = false;
-        // }
+        if (Input::GetKey("RIGHT") || Input::GetKey("D")) pik_x++;
 
+        if (Input::GetKey("LEFT") || Input::GetKey("A")) pik_x--;
+
+        if (Input::GetKey("UP") || Input::GetKey("W")) pik_y--;
+        
+        if (Input::GetKey("DOWN") || Input::GetKey("S")) pik_y++;
+        
         // clear the screen
         SDL_SetRenderDrawColor(renderer, 120, 60, 255, 255);
         SDL_RenderClear(renderer);

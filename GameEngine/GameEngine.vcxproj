@@ -28,9 +28,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="Command.cpp" />
     <ClCompile Include="Input.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Command.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
