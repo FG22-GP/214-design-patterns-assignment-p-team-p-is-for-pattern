@@ -19,16 +19,16 @@ void Input::UpdateInput() {
     while (SDL_PollEvent(&e)) {
         SDL_Keycode InputCode = e.key.keysym.sym;
         if (!keyboard.contains(InputCode)) return;
-        auto it = keyboard.find(InputCode);
+        auto pair = keyboard.find(InputCode);
         switch (e.type) {
         case SDL_KEYDOWN:
-            if (it != keyboard.end()) {
-                it->second->held = true;
-                it->second->pressed = true;
+            if (pair != keyboard.end()) {
+                pair->second->held = true;
+                pair->second->pressed = true;
             }
             break;
         case SDL_KEYUP:
-            if (it != keyboard.end()) it->second->held = false;
+            if (pair != keyboard.end()) pair->second->held = false;
             break;
         default: ;
         }
