@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <map>
+#include <SDL_keycode.h>
 #include <string>
 
 
@@ -10,7 +11,7 @@ public:
     Input();
     ~Input();
 
-    static std::map<std::string, InputValue*> keyboard;
+    static std::map<SDL_Keycode, InputValue*> keyboard;
     /**
      * \brief Has to be put main game loop loop to register input
      */
@@ -20,27 +21,25 @@ public:
      * \param key requested key as a string, not case sensitive
      * \return return true for one frame
      */
-    bool static GetKeyDown(std::string key);
+    bool static GetKeyDown(SDL_Keycode key);
     /**
      * \brief static method for reading input
      * \param key requested key as a string, not case sensitive
      * \return returns true while the button is pressed
      */
-    bool static GetKey(std::string key);
+    bool static GetKey(SDL_Keycode key);
     /**
      * \brief Static method to register input keys
      * \param values Array of strings to be registered
      * \param size Size of the array
      */
-    void static RegisterKeys(std::string values[], size_t size);
 
 private:
-    static std::string ToLower(std::string inputString);
+    void static RegisterKey(SDL_Keycode key);
 };
 
 
 struct InputValue {
-public:
     bool pressed;
     bool held;
 };
