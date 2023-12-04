@@ -4,6 +4,8 @@
 #include <SDL_keycode.h>
 #include <string>
 
+#include "Vector2D.h"
+
 
 struct InputValue;
 
@@ -30,6 +32,7 @@ public:
      * \return returns true while the button is pressed
      */
     bool static GetKey(SDL_Keycode key);
+    static Vector2D GetMousePosition();
     /**
      * \brief Static method to register input keys
      * \param values Array of strings to be registered

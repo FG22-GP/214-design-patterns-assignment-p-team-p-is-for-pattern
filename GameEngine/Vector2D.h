@@ -3,7 +3,7 @@
 #include <math.h>
 
 
-class Vector2D
+struct Vector2D
 {
 public:
 	
@@ -14,8 +14,14 @@ public:
 	float GetX() { return m_x; }
 	float GetY() { return m_y; }
 
-	void SetX(float x) { m_x = x; }
-	void SetY(float y) { m_y = y; }
+	Vector2D SetX(float x) {
+		m_x = x;
+		return *this;
+	}
+	Vector2D SetY(float y) {
+		m_y = y;
+		return *this;
+	}
 
 	float Lenght() { return sqrt(m_x * m_x + m_y * m_y); }
 

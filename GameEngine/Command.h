@@ -6,9 +6,11 @@ class Receiver {
 public:
     template<typename  T>
     void Execute(T data) {
-
+        
     }
+    
 };
+
 
 class Command {
 public:
@@ -28,7 +30,7 @@ public:
 };
 
 
-class MoveOverTimeCommand : public Command { // 
+class MoveOverTimeCommand : public Command { 
 public:
     Vector2D _targetMovement;
     Receiver* _target;
