@@ -2,13 +2,6 @@
 #include <functional>
 #include "Vector2D.h"
 
-
-class Entity {
-public:
-    void Translate(Vector2D movement);
-}; 
-
-
 class Receiver {
 public:
     template<typename  T>
@@ -16,7 +9,6 @@ public:
 
     }
 };
-
 
 class Command {
 public:
