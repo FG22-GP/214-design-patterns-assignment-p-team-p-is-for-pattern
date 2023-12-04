@@ -20,17 +20,15 @@ public:
 
 class Command {
 public:
-    virtual ~Command() {  }
+    virtual ~Command() = default;
     virtual void Execute() const = 0;
 };
 
 class MoveCommand : public Command {
-private:
     Vector2D _targetMovement;
     Receiver* _target;
     
 public:
-    
     MoveCommand(Vector2D TargetMovement, Receiver* Receiver) : _targetMovement(TargetMovement), _target(Receiver) {}
     void Execute() const override {
         _target->Execute(this);
@@ -38,13 +36,12 @@ public:
 };
 
 
-class MoveOverTimeCommand : public Command {
+class MoveOverTimeCommand : public Command { // 
 public:
     Vector2D _targetMovement;
     Receiver* _target;
     float _duration;
     
-
     MoveOverTimeCommand(Vector2D TargetMovement, float duration, Receiver* Receiver) : _targetMovement(TargetMovement), _target(Receiver), _duration(duration) {}
     void Execute() const override {
         _target->Execute(this);

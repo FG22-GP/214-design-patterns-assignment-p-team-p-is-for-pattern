@@ -1,15 +1,14 @@
 ﻿#include "Input.h"
-
 #include <ranges>
 #include <SDL_events.h>
 
 Input::Input() = default;
 Input::~Input() = default;
 
-std::map<SDL_Keycode, InputValue*> Input::keyboard;
+std::map<SDL_Keycode, std::shared_ptr<InputValue>> Input::keyboard;
 
 void Input::RegisterKey(SDL_Keycode key) {
-    keyboard.insert(std::make_pair(key, new InputValue()));
+    keyboard.insert(std::make_pair(key, std::make_shared<InputValue>())); // memory leak, how do I manage these pointers
 }
 
 void Input::UpdateInput() {

@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <map>
+#include <memory>
 #include <SDL_keycode.h>
 #include <string>
 
@@ -11,11 +12,12 @@ public:
     Input();
     ~Input();
 
-    static std::map<SDL_Keycode, InputValue*> keyboard;
+    static std::map<SDL_Keycode, std::shared_ptr<InputValue>> keyboard;
     /**
      * \brief Has to be put main game loop loop to register input
      */
     void static UpdateInput();
+    void Clean();
     /**
      * \brief static method for reading input
      * \param key requested key as a string, not case sensitive
@@ -39,7 +41,7 @@ private:
 };
 
 
-struct InputValue {
+struct InputValue : std::enable_shared_from_this<InputValue> {
     bool pressed;
     bool held;
 };
