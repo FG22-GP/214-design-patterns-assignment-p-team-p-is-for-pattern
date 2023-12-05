@@ -17,7 +17,7 @@ void Input::UpdateInput() {
     for (const auto val : keyboard | std::views::values) val->pressed = false;
 
     SDL_Event e;
-    while (SDL_PollEvent(&e)) {
+    if (SDL_PollEvent(&e)) {
         SDL_Keycode InputCode = e.key.keysym.sym;
         if (!keyboard.contains(InputCode)) return;
         auto pair = keyboard.find(InputCode);
