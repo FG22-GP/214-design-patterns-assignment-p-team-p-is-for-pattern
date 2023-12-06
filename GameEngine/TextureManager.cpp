@@ -1,6 +1,21 @@
 #include "TextureManager.h"
 
-bool TextureManager::LoadImage(std::string fileName, std::string id, SDL_Renderer* pRenderer)
+TextureManager::TextureManager()
+{
+	pRenderer = TheGameWindow::Instance()->GetRenderer();
+}
+
+
+void TextureManager::CleanUpFunction()
+{
+	for (auto id : textureMap)
+	{
+		SDL_DestroyTexture(id.second);
+	}
+	pInstance = nullptr;
+}
+
+bool TextureManager::LoadImage(std::string fileName, std::string id)
 {
 	SDL_Surface* loadedSurface = IMG_Load(fileName.c_str());
 
@@ -29,7 +44,8 @@ bool TextureManager::LoadImage(std::string fileName, std::string id, SDL_Rendere
 	return false;
 }
 
-bool TextureManager::LoadText(std::string fileName, std::string id, SDL_Color textColor, int fontSize, std::string text ,SDL_Point& dimensions,SDL_Renderer* pRenderer)
+//SDLpointer to vector  create your own color thingy maybe 
+bool TextureManager::LoadText(std::string fileName, std::string id, Color textColor, int fontSize, std::string text ,SDL_Point& dimensions) 
 {
 
 	TTF_Font* fontToLoad = TTF_OpenFont(fileName.c_str(), fontSize);
@@ -40,7 +56,13 @@ bool TextureManager::LoadText(std::string fileName, std::string id, SDL_Color te
 		return false;
 	}
 
-	SDL_Surface* textSurface = TTF_RenderText_Solid(fontToLoad, text.c_str(), textColor);
+	SDL_Color tColor;
+	tColor.r = textColor.red;
+	tColor.g = textColor.green;
+	tColor.b = textColor.blue;
+	tColor.a = textColor.alpha;
+
+	SDL_Surface* textSurface = TTF_RenderText_Solid(fontToLoad, text.c_str(), tColor);
 
 	if (textSurface == 0)
 	{
@@ -64,26 +86,53 @@ bool TextureManager::LoadText(std::string fileName, std::string id, SDL_Color te
 	return false;
 }
 
-void TextureManager::Draw(std::string id, SDL_Rect targetRectangle, SDL_Renderer* pRenderer, SDL_RendererFlip flip)
+void TextureManager::Draw(std::string id, Vector2D imagePosition, Vector2D imageSize, FlipState flip)
 {
+	SDL_Rect targetRectangle;
+	targetRectangle.x = imagePosition.GetX();
+	targetRectangle.y = imagePosition.GetY();
+	targetRectangle.w = imageSize.GetX();
+	targetRectangle.h = imageSize.GetY();
 
-	SDL_RenderCopyEx(pRenderer, textureMap[id], 0, &targetRectangle, 0, 0, flip);
+	SDL_RenderCopyEx(pRenderer, textureMap[id], 0, &targetRectangle, 0, 0, MapFlipState( flip));
 }
 
-void TextureManager::DrawFrame(std::string id, SDL_Rect targetRectangle, SDL_Renderer* pRenderer, int currentRow, int currentFrame, SDL_RendererFlip flip)
+void TextureManager::DrawFrame(std::string id, Vector2D imagePosition, Vector2D imageSize, int currentRow, int currentFrame, FlipState flip)
 {
+	SDL_Rect targetRectangle;
+	targetRectangle.x = imagePosition.GetX();
+	targetRectangle.y = imagePosition.GetY();
+	targetRectangle.w = imageSize.GetX();
+	targetRectangle.h = imageSize.GetY();
 
 	SDL_Rect srcRect;
 	srcRect.x = targetRectangle.w * currentFrame;
 	srcRect.y = targetRectangle.h * (currentRow - 1);
 	srcRect.w = targetRectangle.w;
 	srcRect.h = targetRectangle.h;
-	SDL_RenderCopyEx(pRenderer, textureMap[id], &srcRect, &targetRectangle, 0, 0, flip);
+	SDL_RenderCopyEx(pRenderer, textureMap[id], &srcRect, &targetRectangle, 0, 0, MapFlipState(flip));
 }
 
 void TextureManager::ClearFromTextureMap(std::string textureID)
 {
+	SDL_Texture* texture = textureMap[textureID];
+	SDL_DestroyTexture(texture);
 	textureMap.erase(textureID);
+}
+
+SDL_RendererFlip TextureManager::MapFlipState(FlipState flip)
+{
+	switch (flip)
+	{
+	case FLIP_NONE:
+		return SDL_FLIP_NONE;
+	case FLIP_HORIZONTAL:
+		return SDL_FLIP_HORIZONTAL;
+	case FLIP_VERTICAL:
+		return SDL_FLIP_VERTICAL;
+	default:
+		return SDL_FLIP_NONE;
+	}
 }
 
 

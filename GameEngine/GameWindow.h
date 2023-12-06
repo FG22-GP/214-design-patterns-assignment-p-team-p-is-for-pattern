@@ -17,11 +17,33 @@ class GameWindow : public IGameWindow {
     bool b_success_;
     int img_flags_;
 
+protected:
+    GameWindow() {}
+
 public:
-    GameWindow(int screen_width, int screen_height, int image_flags = IMG_INIT_PNG);
+
+    bool Init() override;
+    bool Init(int screen_width, int screen_height, int image_flags = IMG_INIT_PNG);
+
     //Whether Window Startup was successful
     bool WasSuccessful() override;
     void Clear() override;
     void Present() override;
+    void CleanUpFunction() override;
     SDL_Renderer* GetRenderer() const;
+
+    static GameWindow* pInstance;
+
+    static GameWindow* Instance()
+    {
+        if (pInstance == 0)
+        {
+            pInstance = new GameWindow();
+            return pInstance;
+        }
+        return pInstance;
+    }
+
 };
+
+typedef GameWindow TheGameWindow;
