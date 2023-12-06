@@ -9,8 +9,11 @@ Input::~Input() = default;
 
 std::map<SDL_Keycode, std::shared_ptr<InputValue>> Input::keyboard;
 
+class Apple;
+
 void Input::RegisterKey(SDL_Keycode key) {
-    keyboard.insert(std::make_pair(key, std::make_shared<InputValue>())); 
+    keyboard.insert(std::make_pair(key, std::make_shared<InputValue>()));
+    
 }
 
 void Input::UpdateInput() {

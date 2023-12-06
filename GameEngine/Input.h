@@ -1,11 +1,10 @@
 ﻿#pragma once
 #include <map>
-#include <memory>
+#include <memory>#
 #include <SDL_keycode.h>
 #include <string>
 
 #include "Vector2D.h"
-
 
 struct InputValue;
 
@@ -33,13 +32,14 @@ public:
      */
     bool static GetKey(SDL_Keycode key);
     static Vector2D GetMousePosition();
+
+
+private:
     /**
      * \brief Static method to register input keys
      * \param values Array of strings to be registered
      * \param size Size of the array
      */
-
-private:
     void static RegisterKey(SDL_Keycode key);
 };
 
@@ -48,3 +48,4 @@ struct InputValue : std::enable_shared_from_this<InputValue> {
     bool pressed;
     bool held;
 };
+
