@@ -1,11 +1,14 @@
 ﻿#pragma once
+#include <SDL_log.h>
+#include <cvt/wstring>
+
 #include "IComponent.h"
-#include "IEntity.h"
 #include "Vector2D.h"
 #include "vector"
+#include "map"
 
 /**
- * \brief Temporary fake Mono class until we implement the real deal
+ * \brief Temp Mono class until the real deal
  */
 class FakeMono {
 protected:
@@ -14,48 +17,38 @@ protected:
 public:
     virtual ~FakeMono();
 
-    virtual void Start() {
-    }
-
-    virtual void Update() {
-    }
-
-    virtual void Stop() {
-    }
+    virtual void Start();
+    virtual void Update();
+    virtual void Stop();
 };
 
-class Entity : IEntity {
+class Entity : FakeMono {
 protected:
-    void AddComponent() {
-        // TODO: Add components to the Entity
+    void AddComponent(IComponent component) {
+        if (components.contains(component.GetName())) {
+            SDL_LogError(SDL_LOG_CATEGORY_ERROR, "You tried adding an already existing component!");
+            return;
+        }
+        components.insert({component.GetName(), component});
     }
 
-    void RemoveComponent() {
-        // TODO: Remove components from the Entity
+    void RemoveComponent(IComponent component) {
+        if (!components.contains(component.GetName())) {
+            SDL_LogError(SDL_LOG_CATEGORY_SYSTEM, "You tried removing a component that doesn't exist!");
+            return;
+        }
+        components.erase(component.GetName());
     }
 
 public:
     Entity();
     explicit Entity(Vector2D start_position);
+    explicit Entity(std::vector<IComponent> attachedComponents, Vector2D startPosition = Vector2D(0.f, 0.f));
 
-    void Start() override {
-        IEntity::Start();
-        for (auto component : components) {
-            component.Start();
-        }
-    }
+    Vector2D position;
+    std::map<std::string, IComponent> components;
 
-    void Update() override {
-        IEntity::Update();
-        for (auto component : components) {
-            component.Execute();
-        }
-    }
-
-    void Stop() override {
-        IEntity::Stop();
-        for (auto component : components) {
-            component.Stop();
-        }
-    }
+    void Start() override;
+    void Update() override;
+    void Stop() override;
 };

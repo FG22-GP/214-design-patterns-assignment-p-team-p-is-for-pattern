@@ -12,6 +12,10 @@ void IComponent::Execute() {
 void IComponent::Stop() {
 }
 
+std::string IComponent::GetName() {
+    return componentName;
+}
+
 void EntityComponent::Start() {
     IComponent::Start();
 }

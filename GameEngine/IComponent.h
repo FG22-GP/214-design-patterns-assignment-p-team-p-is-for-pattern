@@ -1,8 +1,11 @@
 ﻿#pragma once
+#include "string"
+
 
 class IComponent {
 protected:
     IComponent();
+    std::string componentName;
 
 public:
     virtual ~IComponent();
@@ -10,6 +13,7 @@ public:
     virtual void Start();
     virtual void Execute();
     virtual void Stop();
+    std::string GetName();
 };
 
 class EntityComponent : public IComponent {
