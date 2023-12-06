@@ -105,7 +105,7 @@
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
     <ClCompile Include="game.cpp" />
-<<<<<<< .merge_file_U8VRMK
+<!-- <<<<<<< .merge_file_U8VRMK -->
 <ClCompile Include="Command.cpp" />
 <ClCompile Include="GameManager.cpp" />
 <ClCompile Include="GameStates\GameState.cpp">
@@ -259,7 +259,8 @@
 </ClCompile>
 <ClCompile Include="GameStates\WonState.cpp" />
 <ClCompile Include="Input.cpp" />
-=======
+    <ClCompile Include="ITextureManager.cpp" />
+<!-- =======
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="GameStates\GameState.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -413,7 +414,7 @@
     <ClCompile Include="GameStates\WonState.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="ITextureManager.cpp" />
->>>>>>> .merge_file_heYGoM
+>>>>>>> .merge_file_heYGoM -->
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="IGameWindow.cpp" />
     <ClCompile Include="GameWindow.cpp" />
