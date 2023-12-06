@@ -8,7 +8,7 @@ class ITextureManager
 
 
 protected:
-	ITextureManager() {}
+	ITextureManager();
 
 public:
 
