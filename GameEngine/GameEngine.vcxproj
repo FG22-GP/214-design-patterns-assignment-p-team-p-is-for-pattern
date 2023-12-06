@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="game.cpp" />
 <!-- <<<<<<< .merge_file_U8VRMK -->
 <ClCompile Include="Command.cpp" />
@@ -258,6 +259,7 @@
   <LinkCompiled>true</LinkCompiled>
 </ClCompile>
 <ClCompile Include="GameStates\WonState.cpp" />
+<ClCompile Include="IComponent.cpp" />
 <ClCompile Include="Input.cpp" />
     <ClCompile Include="ITextureManager.cpp" />
 <!-- =======
@@ -422,6 +424,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Component.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\Entity.h" />
@@ -431,6 +434,7 @@
     <ClInclude Include="GameStates\PauseState.h" />
     <ClInclude Include="GameStates\PlayState.h" />
     <ClInclude Include="GameStates\WonState.h" />
+    <ClInclude Include="IComponent.h" />
     <ClInclude Include="ITextureManager.h" />
     <ClInclude Include="TextureManager.h" />
     <ClCompile Include="Command.h" />
