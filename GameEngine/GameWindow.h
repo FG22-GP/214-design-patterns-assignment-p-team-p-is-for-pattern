@@ -10,16 +10,15 @@
 
 class GameWindow : public IGameWindow {
     //The window we'll be rendering to
-    SDL_Window* window_{};
+    SDL_Window* window{};
     //The surface contained by the window
-    SDL_Surface* screen_surface_{};
+    SDL_Surface* screenSurface{};
     SDL_Renderer* renderer;
-    bool b_success_;
-    int img_flags_;
+    bool bSuccess;
+    int imgFlags;
 
 public:
     GameWindow(int screen_width, int screen_height, int image_flags = IMG_INIT_PNG);
-    //Whether Window Startup was successful
     bool WasSuccessful() override;
     void Clear() override;
     void Present() override;

@@ -4,14 +4,14 @@
 
 
 GameWindow::GameWindow(const int width, const int height, int image_flags) {
-    img_flags_ = image_flags;
+    imgFlags = image_flags;
     // renderer_ = SDL_CreateRenderer(window_, -1, 0);
 
     if (!GameWindow::WasSuccessful()) {
         return;
     }
-    SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE, &window_, &renderer);
-    if (!window_) {
+    SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE, &window, &renderer);
+    if (!window) {
         printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
         return;
     }
@@ -20,7 +20,7 @@ GameWindow::GameWindow(const int width, const int height, int image_flags) {
 }
 
 bool GameWindow::WasSuccessful() {
-    if (!(IMG_Init(img_flags_) & img_flags_)) {
+    if (!(IMG_Init(imgFlags) & imgFlags)) {
         printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
         return false;
     }
