@@ -1,4 +1,3 @@
-#pragma once
 #ifndef TEXTURE_MANAGER_H
 #define TEXTURE_MANAGER_H
 
@@ -9,10 +8,27 @@
 #include <SDL.h>
 #include <SDL_TTf.h>
 
+#include "ITextureManager.h"
 #include "GameWindow.h"
 #include "Vector2D.h"
 
-class TextureManager
+typedef enum
+{
+	FLIP_NONE = 0x00000000,      // Do not flip
+	FLIP_HORIZONTAL = 0x00000001, // Flip horizontally
+	FLIP_VERTICAL = 0x00000002    // Flip vertically
+}FlipState;
+
+typedef struct Color
+{
+	Uint8 red;
+	Uint8 green;
+	Uint8 blue;
+	Uint8 alpha;
+}Color;
+
+
+class TextureManager : public ITextureManager
 {
 
 	std::map<std::string, SDL_Texture*> textureMap;
@@ -29,27 +45,29 @@ class TextureManager
 
 public:
 
-
 	~TextureManager() {}
 
-	
-	//bool LoadImage() override {}
-	//bool LoadText() override {}
+	bool LoadImage() override { return false; }
+	bool LoadText() override { return false; }
 
-	//void Draw() override {}
-	//void DrawFrame() override {}
+	void Draw() override {}
+	void DrawFrame() override {}
 
-	//void ClearFromTextureMap() override {}
+	void ClearFromTextureMap() override {}
+
+	void CleanUpFunction() override;
 
 	bool LoadImage(std::string fileName, std::string id);
-	bool LoadText(std::string fileName, std::string id, SDL_Color textColor, 
+	bool LoadText(std::string fileName, std::string id, Color textColor, 
 				  int fontSize, std::string text, SDL_Point& dimensions);
 
-	void Draw(std::string id, Vector2D imagePosition, Vector2D imageSize, SDL_RendererFlip flip = SDL_FLIP_NONE);
+	void Draw(std::string id, Vector2D imagePosition, Vector2D imageSize, FlipState flip = FLIP_NONE);
 	void DrawFrame(std::string id, Vector2D imagePosition, Vector2D imageSize, int currentRow, int currentFrame,
-					SDL_RendererFlip flip = SDL_FLIP_NONE);
+		FlipState flip = FLIP_NONE);
 
 	void ClearFromTextureMap(std::string textureID);
+
+	SDL_RendererFlip MapFlipState(FlipState flip);
 
 	static TextureManager* pInstance;
 
