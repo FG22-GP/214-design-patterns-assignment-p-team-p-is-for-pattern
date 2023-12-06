@@ -2,25 +2,30 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
+bool GameWindow::Init()
+{
+    return false;
+}
 
-GameWindow::GameWindow(const int width, const int height, int image_flags) {
-    imgFlags = image_flags;
+bool GameWindow::Init(const int width, const int height, int image_flags) {
+    img_flags_ = image_flags;
     // renderer_ = SDL_CreateRenderer(window_, -1, 0);
 
     if (!GameWindow::WasSuccessful()) {
-        return;
+        return false;
     }
-    SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE, &window, &renderer);
-    if (!window) {
+    SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE, &window_, &renderer);
+    if (!window_) {
         printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
-        return;
+        return false;
     }
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
     SDL_RenderSetLogicalSize(renderer, width, height);
+    return true;
 }
 
 bool GameWindow::WasSuccessful() {
-    if (!(IMG_Init(imgFlags) & imgFlags)) {
+    if (!(IMG_Init(img_flags_) & img_flags_)) {
         printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
         return false;
     }
@@ -42,6 +47,16 @@ void GameWindow::Present() {
     SDL_RenderPresent(renderer);
 }
 
+void GameWindow::CleanUpFunction()
+{
+    SDL_DestroyWindow(window_);
+    SDL_DestroyRenderer(renderer);
+    pInstance = nullptr;
+    SDL_Quit();
+}
+
 SDL_Renderer* GameWindow::GetRenderer() const {
     return renderer;
 }
+
+GameWindow* GameWindow::pInstance = 0 ;

@@ -6,7 +6,6 @@
 class Vector2D
 {
 public:
-	
 	Vector2D() :m_x(0), m_y(0) {}
 	
 	Vector2D(float x, float y) : m_x(x), m_y(y) {}
@@ -14,8 +13,14 @@ public:
 	float GetX() { return m_x; }
 	float GetY() { return m_y; }
 
-	void SetX(float x) { m_x = x; }
-	void SetY(float y) { m_y = y; }
+	Vector2D SetX(float x) {
+		m_x = x;
+		return *this;
+	}
+	Vector2D SetY(float y) {
+		m_y = y;
+		return *this;
+	}
 
 	float Lenght() { return sqrt(m_x * m_x + m_y * m_y); }
 
@@ -71,6 +76,11 @@ public:
 		{
 			(*this *= 1 / length);
 		}
+	}
+
+	static float Distance(Vector2D& v1, Vector2D& v2)
+	{
+		return sqrt(pow((v1.GetX() - v2.GetX()), 2) + pow((v1.GetY()-v2.GetY()), 2));
 	}
 
 private:

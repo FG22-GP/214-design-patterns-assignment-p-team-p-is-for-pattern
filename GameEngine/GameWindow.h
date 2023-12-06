@@ -10,17 +10,40 @@
 
 class GameWindow : public IGameWindow {
     //The window we'll be rendering to
-    SDL_Window* window{};
+    SDL_Window* window_{};
     //The surface contained by the window
-    SDL_Surface* screenSurface{};
+    SDL_Surface* screen_surface_{};
     SDL_Renderer* renderer;
-    bool bSuccess;
-    int imgFlags;
+    bool b_success_;
+    int img_flags_;
+
+protected:
+    GameWindow() {}
 
 public:
-    GameWindow(int screen_width, int screen_height, int image_flags = IMG_INIT_PNG);
+
+    bool Init() override;
+    bool Init(int screen_width, int screen_height, int image_flags = IMG_INIT_PNG);
+
+    //Whether Window Startup was successful
     bool WasSuccessful() override;
     void Clear() override;
     void Present() override;
+    void CleanUpFunction() override;
     SDL_Renderer* GetRenderer() const;
+
+    static GameWindow* pInstance;
+
+    static GameWindow* Instance()
+    {
+        if (pInstance == 0)
+        {
+            pInstance = new GameWindow();
+            return pInstance;
+        }
+        return pInstance;
+    }
+
 };
+
+typedef GameWindow TheGameWindow;
