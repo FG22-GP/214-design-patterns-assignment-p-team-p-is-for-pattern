@@ -9,6 +9,7 @@
 #include "Input.h"
 #include "IGameWindow.h"
 #include "GameWindow.h"
+#include "TextureManager.h"
 
 
 //Screen dimension constants
@@ -18,7 +19,7 @@ const int SCREEN_HEIGHT = 768;
 const char* pikachuImagePath{"img/pikachu.png"};
 
 int main(int argc, char* args[]) {
-    const auto game_window = new GameWindow(1024, 768, IMG_INIT_PNG);
+    TheGameWindow::Instance()->Init(1024, 768, IMG_INIT_PNG);
     // All data related to pikachu
     SDL_Texture* pikachu = NULL; // The final optimized image
     bool pikachuMoveRight = false;
@@ -28,23 +29,8 @@ int main(int argc, char* args[]) {
     pik_w = pik_h = 200;
 
     //Load image at specified path
-    SDL_Surface* loadedSurface = IMG_Load(pikachuImagePath);
-    if (loadedSurface == NULL) {
-        printf("Unable to load image %s! SDL_image Error: %s\n", pikachuImagePath, IMG_GetError());
-        return -1;
-    }
-    else {
-        //Convert surface to screen format
-        pikachu = SDL_CreateTextureFromSurface(game_window->GetRenderer(), loadedSurface);
-        if (pikachu == NULL) {
-            printf("Unable to create texture from %s! SDL Error: %s\n", pikachuImagePath, SDL_GetError());
-            return -1;
-        }
 
-        //Get rid of old loaded surface
-        SDL_FreeSurface(loadedSurface);
-    }
-
+    TheTextureManager::Instance()->LoadImage(pikachuImagePath, "pikachu");
     // load font
     auto font = TTF_OpenFont("font/lazy.ttf", 100);
     if (font == NULL) {
@@ -66,7 +52,7 @@ int main(int argc, char* args[]) {
     }
     else {
         // Create texture GPU-stored texture from surface pixels
-        textTexture = SDL_CreateTextureFromSurface(game_window->GetRenderer(), textSurface);
+        textTexture = SDL_CreateTextureFromSurface(TheGameWindow::Instance()->GetRenderer(), textSurface);
         if (textTexture == NULL) {
             printf("Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError());
             return -1;
@@ -103,9 +89,13 @@ int main(int argc, char* args[]) {
                 CommandQueue.pop();
             }
         }
+        if (Input::GetKeyDown(SDLK_ESCAPE))
+        {
+            quit = true;
+        }
 
         // clear the screen
-        game_window->Clear();
+        TheGameWindow::Instance()->Clear();
 
         // render Pikachu
         SDL_Rect targetRectangle{
@@ -114,7 +104,7 @@ int main(int argc, char* args[]) {
             pik_w,
             pik_h
         };
-        SDL_RenderCopy(game_window->GetRenderer(), pikachu, NULL, &targetRectangle);
+        TheTextureManager::Instance()->Draw("pikachu", Vector2D(pik_x,pik_y), Vector2D(pik_w, pik_h));
 
         // render the text
         targetRectangle = SDL_Rect{
@@ -123,13 +113,15 @@ int main(int argc, char* args[]) {
             textWidth,
             textHeight
         };
-        SDL_RenderCopy(game_window->GetRenderer(), textTexture, NULL, &targetRectangle);
+        SDL_RenderCopy(TheGameWindow::Instance()->GetRenderer(), textTexture, NULL, &targetRectangle);
 
         // present screen (switch buffers)
-        game_window->Present();
+        TheGameWindow::Instance()->Present();
 
         SDL_Delay(3); // can be used to wait for a certain amount of ms
     }
+
+    TheGameWindow::Instance()->CleanUpFunction();
 
     return 0;
 }

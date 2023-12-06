@@ -1,6 +1,12 @@
 #include "TextureManager.h"
 
-bool TextureManager::LoadImage(std::string fileName, std::string id, SDL_Renderer* pRenderer)
+TextureManager::TextureManager()
+{
+	pRenderer = TheGameWindow::Instance()->GetRenderer();
+}
+
+
+bool TextureManager::LoadImage(std::string fileName, std::string id)
 {
 	SDL_Surface* loadedSurface = IMG_Load(fileName.c_str());
 
@@ -29,7 +35,8 @@ bool TextureManager::LoadImage(std::string fileName, std::string id, SDL_Rendere
 	return false;
 }
 
-bool TextureManager::LoadText(std::string fileName, std::string id, SDL_Color textColor, int fontSize, std::string text ,SDL_Point& dimensions,SDL_Renderer* pRenderer)
+//SDLpointer to vector  create your own color thingy maybe 
+bool TextureManager::LoadText(std::string fileName, std::string id, SDL_Color textColor, int fontSize, std::string text ,SDL_Point& dimensions) 
 {
 
 	TTF_Font* fontToLoad = TTF_OpenFont(fileName.c_str(), fontSize);
@@ -64,14 +71,24 @@ bool TextureManager::LoadText(std::string fileName, std::string id, SDL_Color te
 	return false;
 }
 
-void TextureManager::Draw(std::string id, SDL_Rect targetRectangle, SDL_Renderer* pRenderer, SDL_RendererFlip flip)
+void TextureManager::Draw(std::string id, Vector2D imagePosition, Vector2D imageSize, SDL_RendererFlip flip)
 {
+	SDL_Rect targetRectangle;
+	targetRectangle.x = imagePosition.GetX();
+	targetRectangle.y = imagePosition.GetY();
+	targetRectangle.w = imageSize.GetX();
+	targetRectangle.h = imageSize.GetY();
 
 	SDL_RenderCopyEx(pRenderer, textureMap[id], 0, &targetRectangle, 0, 0, flip);
 }
 
-void TextureManager::DrawFrame(std::string id, SDL_Rect targetRectangle, SDL_Renderer* pRenderer, int currentRow, int currentFrame, SDL_RendererFlip flip)
+void TextureManager::DrawFrame(std::string id, Vector2D imagePosition, Vector2D imageSize, int currentRow, int currentFrame, SDL_RendererFlip flip)
 {
+	SDL_Rect targetRectangle;
+	targetRectangle.x = imagePosition.GetX();
+	targetRectangle.y = imagePosition.GetY();
+	targetRectangle.w = imageSize.GetX();
+	targetRectangle.h = imageSize.GetY();
 
 	SDL_Rect srcRect;
 	srcRect.x = targetRectangle.w * currentFrame;
