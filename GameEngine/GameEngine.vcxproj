@@ -28,6 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp" />
+<<<<<<< Updated upstream
 <ClCompile Include="Command.cpp" />
 <ClCompile Include="GameStates\GameState.cpp">
   <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -180,18 +181,29 @@
 </ClCompile>
 <ClCompile Include="GameStates\WonState.cpp" />
 <ClCompile Include="Input.cpp" />
+=======
+    <ClCompile Include="Command.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="ITextureManager.cpp" />
+>>>>>>> Stashed changes
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="IGameWindow.cpp" />
     <ClCompile Include="GameWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< Updated upstream
     <ClInclude Include="GameStates\GameState.h" />
     <ClInclude Include="GameStates\PauseState.h" />
     <ClInclude Include="GameStates\PlayState.h" />
     <ClInclude Include="GameStates\WonState.h" />
+=======
+    <ClInclude Include="ITextureManager.h" />
+>>>>>>> Stashed changes
     <ClInclude Include="TextureManager.h" />
 <ClCompile Include="Command.h" />
 <ClCompile Include="Input.h" />
+    <ClCompile Include="Command.h" />
+    <ClCompile Include="Input.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="IGameWindow.h" />
