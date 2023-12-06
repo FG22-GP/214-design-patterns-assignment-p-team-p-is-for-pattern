@@ -79,6 +79,11 @@ public:
 		}
 	}
 
+	static float Distance(Vector2D& v1, Vector2D& v2)
+	{
+		return sqrt(pow((v1.GetX() - v2.GetX()), 2) + pow((v1.GetY()-v2.GetY()), 2));
+	}
+
 private:
 
 	float m_x;
