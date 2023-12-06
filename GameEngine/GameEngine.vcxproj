@@ -418,9 +418,11 @@
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="IGameWindow.cpp" />
     <ClCompile Include="GameWindow.cpp" />
+    <ClCompile Include="EventHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Component.h" />
+    <ClInclude Include="EventHandler.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\Entity.h" />
     <ClInclude Include="Engine\Mono.h" />
