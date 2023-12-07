@@ -2,17 +2,17 @@
 
 #include <ranges>
 
-FakeMono::FakeMono() = default;
-FakeMono::~FakeMono() = default;
-
-void FakeMono::Start() {
-}
-
-void FakeMono::Update() {
-}
-
-void FakeMono::Stop() {
-}
+// FakeMono::FakeMono() = default;
+// FakeMono::~FakeMono() = default;
+//
+// void FakeMono::Start() {
+// }
+//
+// void FakeMono::Update() {
+// }
+//
+// void FakeMono::Stop() {
+// }
 
 Entity::Entity() = default;
 Entity::Entity(const Vector2D start_position) { position = start_position; }
@@ -28,21 +28,21 @@ Entity::Entity(std::vector<IComponent> attachedComponents, const Vector2D startP
 }
 
 void Entity::Start() {
-    FakeMono::Start();
+    Mono::Start();
     for (auto val : components | std::views::values) {
         val.Start();
     }
 }
 
 void Entity::Update() {
-    FakeMono::Update();
+    Mono::Update();
     for (auto val : components | std::views::values) {
         val.Execute();
     }
 }
 
 void Entity::Stop() {
-    FakeMono::Stop();
+    Mono::Stop();
     for (auto val : components | std::views::values) {
         val.Stop();
     }

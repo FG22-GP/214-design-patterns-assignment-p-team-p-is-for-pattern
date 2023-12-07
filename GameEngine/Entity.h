@@ -6,23 +6,24 @@
 #include "Vector2D.h"
 #include "vector"
 #include "map"
+#include "Engine/Mono.h"
+//
+// /**
+//  * \brief Temp Mono class until the real deal
+//  */
+// class FakeMono {
+// protected:
+//     FakeMono();
+//
+// public:
+//     virtual ~FakeMono();
+//
+//     virtual void Start();
+//     virtual void Update();
+//     virtual void Stop();
+// };
 
-/**
- * \brief Temp Mono class until the real deal
- */
-class FakeMono {
-protected:
-    FakeMono();
-
-public:
-    virtual ~FakeMono();
-
-    virtual void Start();
-    virtual void Update();
-    virtual void Stop();
-};
-
-class Entity : FakeMono {
+class Entity : Mono {
 protected:
     void AddComponent(IComponent component) {
         if (components.contains(component.GetName())) {
