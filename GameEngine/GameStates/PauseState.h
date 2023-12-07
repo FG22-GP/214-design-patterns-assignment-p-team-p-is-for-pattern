@@ -1,9 +1,16 @@
 #pragma once
 #include "GameState.h"
 
-struct PauseState : GameState
+class PauseState : public GameState
 {
-    void OnEnter() override;
-    void OnExit() override;
+
+public:
+    PauseState() {}
+    void Start() override;
+    void Stop() override;
     void Update() override;
+
+    std::string GetStateID() override;
+
+    ~PauseState() {}
 };

@@ -9,6 +9,10 @@
 #include "GameWindow.h"
 #include "TextureManager.h"
 #include "Vector2D.h"
+#include "GameManager.h"
+#include "GameStates/PlayState.h"
+#include "GameStates/PauseState.h"
+#include "GameStates/WonState.h"
 
 
 //Screen dimension constants
@@ -38,43 +42,58 @@ int main(int argc, char* args[]) {
     bool quit = false;
 
     std::queue<std::shared_ptr<Command>> CommandQueue;
+
+    GameManager* gameStateMachine = new GameManager();
+    std::shared_ptr<WonState> wonState = std::make_shared<WonState>();
+    gameStateMachine->PushState(wonState);
     // while the user doesn't want to quit
     while (quit == false) {
         SDL_GetTicks();
         Input::UpdateInput();
 
-        if (Input::GetKey(SDLK_UP)) pik_y--;
-        if (Input::GetKey(SDLK_DOWN)) pik_y++;
-        if (Input::GetKey(SDLK_d)) pik_x++;
-        if (Input::GetKey(SDLK_a)) pik_x--;
-
-        if (Input::GetKeyDown(SDLK_SPACE)) {
-            const std::shared_ptr<Entity> entity = std::make_shared<Entity>();
-            CommandQueue.push(std::make_shared<MoveCommand>(MoveCommand(Vector2D(1, 1), entity)));
-        }
-        if (Input::GetKeyDown(SDLK_RETURN)) {
-            while (!CommandQueue.empty()) {
-                CommandQueue.back()->Execute();
-                CommandQueue.pop();
-            }
-        }
-        if (Input::GetKeyDown(SDLK_ESCAPE))
+        if (Input::GetKey(SDLK_a))
         {
-            quit = true;
+            gameStateMachine->PopState();
+            gameStateMachine->PushState(std::make_shared<PlayState>());
+        }
+        if (Input::GetKey(SDLK_d))
+        {
+            gameStateMachine->PopState();
+            gameStateMachine->PushState(std::make_shared<PauseState>());
         }
 
-        // clear the screen
-        TheGameWindow::Instance()->Clear();
+        //if (Input::GetKey(SDLK_UP)) pik_y--;
+        //if (Input::GetKey(SDLK_DOWN)) pik_y++;
+        //if (Input::GetKey(SDLK_d)) pik_x++;
+        //if (Input::GetKey(SDLK_a)) pik_x--;
 
-        // render Pikachu
-        SDL_Rect targetRectangle{
-            pik_x,
-            pik_y,
-            pik_w,
-            pik_h
-        };
-        TheTextureManager::Instance()->Draw("pikachu", Vector2D(pik_x,pik_y), Vector2D(pik_w, pik_h));
-        TheTextureManager::Instance()->Draw("lazy", Vector2D(500, 500), dimensions);
+        //if (Input::GetKeyDown(SDLK_SPACE)) {
+        //    const std::shared_ptr<Entity> entity = std::make_shared<Entity>();
+        //    CommandQueue.push(std::make_shared<MoveCommand>(MoveCommand(Vector2D(1, 1), entity)));
+        //}
+        //if (Input::GetKeyDown(SDLK_RETURN)) {
+        //    while (!CommandQueue.empty()) {
+        //        CommandQueue.back()->Execute();
+        //        CommandQueue.pop();
+        //    }
+        //}
+        //if (Input::GetKeyDown(SDLK_ESCAPE))
+        //{
+        //    quit = true;
+        //}
+
+        //// clear the screen
+        //TheGameWindow::Instance()->Clear();
+
+        //// render Pikachu
+        //SDL_Rect targetRectangle{
+        //    pik_x,
+        //    pik_y,
+        //    pik_w,
+        //    pik_h
+        //};
+        //TheTextureManager::Instance()->Draw("pikachu", Vector2D(pik_x,pik_y), Vector2D(pik_w, pik_h));
+        //TheTextureManager::Instance()->Draw("lazy", Vector2D(500, 500), dimensions);
 
         // present screen (switch buffers)
         TheGameWindow::Instance()->Present();
@@ -82,6 +101,7 @@ int main(int argc, char* args[]) {
         SDL_Delay(3); // can be used to wait for a certain amount of ms
     }
 
+    delete gameStateMachine;
     TheGameWindow::Instance()->CleanUpFunction();
 
     return 0;

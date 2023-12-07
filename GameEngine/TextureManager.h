@@ -33,12 +33,6 @@ class TextureManager : public ITextureManager
 
 	SDL_Renderer* pRenderer;
 
-	//Need color figure a solution
-	//Use vector for points
-	
-	//Maaaaaybe create your own enums for flipping
-	//Modify the Rect to position
-
 	TextureManager();
 
 public:

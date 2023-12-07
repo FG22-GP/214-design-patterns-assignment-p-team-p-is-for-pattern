@@ -5,27 +5,47 @@
 
 GameManager::GameManager()
 {
-    currentState = new PlayState();
+
 }
 
-void GameManager::ChangeState(GameState* newState)
+void GameManager::PushState(std::shared_ptr<GameState> pushState)
 {
-    currentState->OnExit();
-    currentState = newState;
-    currentState->OnEnter();
+	gameStates.push_back(pushState);
+	gameStates.back()->Start();
 }
 
-void GameManager::Start()
+void GameManager::PopState()
 {
-    currentState->OnEnter();
+	if (gameStates.empty())
+	{
+		return;
+	}
+	gameStates.back()->Stop();
+	gameStates.pop_back();
+
+}
+
+void GameManager::ChangeState(std::shared_ptr<GameState> changeState)
+{
+	if (!gameStates.empty())
+	{
+		if (gameStates.back()->GetStateID() == changeState->GetStateID())
+		{
+			return;
+		}
+		gameStates.back()->Stop();
+		gameStates.pop_back();
+	}
+	gameStates.push_back(changeState);
+	gameStates.back()->Start();
 }
 
 void GameManager::Update()
 {
-    currentState->Update();
+	if (gameStates.empty())
+	{
+		return;
+	}
+	gameStates.back()->Update();
 }
 
-void GameManager::Stop()
-{
-    currentState->OnExit();
-}

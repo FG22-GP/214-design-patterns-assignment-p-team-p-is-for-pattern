@@ -1,16 +1,28 @@
 #pragma once
-#include "Engine/Mono.h"
 #include "GameStates/GameState.h"
+#include <vector>
+#include <memory>
 
-struct GameManager : Mono
+class GameManager 
 {
-    GameState* currentState;
+   
+    std::vector<std::shared_ptr<GameState>> gameStates;
+
+protected:
+
+
+
+public:
+
 
     GameManager();
-    
-    void ChangeState(GameState* newState);
 
-    void Start() override;
-    void Update() override;
-    void Stop() override;
+    void PushState(std::shared_ptr<GameState> pushState);
+    void PopState();
+    void ChangeState(std::shared_ptr<GameState> changeState);
+
+
+    void Update();
+
+    ~GameManager() {}
 };
