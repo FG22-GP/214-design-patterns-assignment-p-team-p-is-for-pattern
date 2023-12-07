@@ -440,7 +440,6 @@
     <ClCompile Include="Command.h" />
     <ClCompile Include="Input.h" />
     <ClInclude Include="Vector2D.h" />
-    <ClInclude Include="Window.h" />
     <ClInclude Include="IGameWindow.h" />
     <ClInclude Include="GameWindow.h" />
   </ItemGroup>
