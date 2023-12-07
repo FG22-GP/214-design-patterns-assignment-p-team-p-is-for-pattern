@@ -31,8 +31,6 @@ typedef struct Color
 class TextureManager : public ITextureManager
 {
 
-	std::map<std::string, SDL_Texture*> textureMap;
-
 	SDL_Renderer* pRenderer;
 
 	//Need color figure a solution
@@ -59,7 +57,7 @@ public:
 
 	bool LoadImage(std::string fileName, std::string id);
 	bool LoadText(std::string fileName, std::string id, Color textColor, 
-				  int fontSize, std::string text, SDL_Point& dimensions);
+				  int fontSize, std::string text, Vector2D& dimensions);
 
 	void Draw(std::string id, Vector2D imagePosition, Vector2D imageSize, FlipState flip = FLIP_NONE);
 	void DrawFrame(std::string id, Vector2D imagePosition, Vector2D imageSize, int currentRow, int currentFrame,
