@@ -19,12 +19,27 @@
     <Filter Include="DLLs\x64">
       <UniqueIdentifier>{5f93dea3-f7de-4f09-8c36-f3b08a41cf5e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\States">
+      <UniqueIdentifier>{69b69749-a653-42d3-817a-427a204ac69d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\States">
+      <UniqueIdentifier>{1f0f47b5-ea89-4879-8659-4be026db6411}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Window">
+      <UniqueIdentifier>{7a3e1ab7-64e8-4b38-b164-cbe9c65d9781}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Window">
+      <UniqueIdentifier>{0dc84da1-182e-4595-bfcd-786f56d167eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\TextureManager">
+      <UniqueIdentifier>{3b7d0fed-9d56-4f5d-b8a4-faf859dbb1c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TextureManager">
+      <UniqueIdentifier>{c3e3c4ae-2ac6-46f8-8883-9daca709a03f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Command.cpp">
@@ -33,64 +48,109 @@
     <ClCompile Include="Input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IGameWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Command.h">
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="Input.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameStates\GameState.cpp">
+    <ClCompile Include="Engine\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameStates\PauseState.cpp">
+    <ClCompile Include="Engine\Engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Mono.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EventHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameStates\PlayState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\States</Filter>
     </ClCompile>
-    <ClCompile Include="GameStates\WonState.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GameStates\PauseState.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStates\GameState.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="GameWindow.cpp">
+      <Filter>Source Files\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="IGameWindow.cpp">
+      <Filter>Source Files\Window</Filter>
     </ClCompile>
     <ClCompile Include="ITextureManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Source Files\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStates\WonState.cpp">
+      <Filter>Source Files\States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Vector2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IGameWindow.h">
+    <ClInclude Include="Engine\Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameWindow.h">
+    <ClInclude Include="EventHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Mono.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameStates\GameState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\States</Filter>
     </ClInclude>
-    <ClInclude Include="GameStates\PauseState.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="GameManager.h">
+      <Filter>Header Files\States</Filter>
     </ClInclude>
     <ClInclude Include="GameStates\PlayState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\States</Filter>
     </ClInclude>
-    <ClInclude Include="GameStates\WonState.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="GameStates\PauseState.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameWindow.h">
+      <Filter>Header Files\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="GameWindow.h">
+      <Filter>Header Files\Window</Filter>
     </ClInclude>
     <ClInclude Include="ITextureManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Header Files\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStates\WonState.h">
+      <Filter>Header Files\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

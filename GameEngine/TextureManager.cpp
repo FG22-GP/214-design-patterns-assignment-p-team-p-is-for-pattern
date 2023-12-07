@@ -11,7 +11,10 @@ void TextureManager::CleanUpFunction()
 	for (auto id : textureMap)
 	{
 		SDL_Texture* textureToDestroy = static_cast<SDL_Texture*>(id.second);
-		SDL_DestroyTexture(textureToDestroy);
+		if (textureToDestroy != nullptr)
+		{
+			SDL_DestroyTexture(textureToDestroy);
+		}
 	}
 	pInstance = nullptr;
 }
