@@ -10,11 +10,11 @@ EntityComponent::EntityComponent(std::string name) {
 }
 
 void EntityComponent::Start() {
-    // First Frame code
+    // First Frame logic
 }
 
 void EntityComponent::Execute() {
-    // Component Code
+    // Component Update loop logic
 }
 
 void EntityComponent::Stop() {

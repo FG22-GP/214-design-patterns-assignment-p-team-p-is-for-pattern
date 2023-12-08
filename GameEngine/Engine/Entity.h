@@ -3,35 +3,22 @@
 #include <SDL_log.h>
 #include <cvt/wstring>
 
+#include "ComponentCreator.h"
 #include "map"
+#include "Mono.h"
 #include "vector"
 #include "../Vector2D.h"
 #include "../Components/IComponent.h"
 
-/**
- * \brief Temp Mono class until the real deal
- */
+
+class ComponentCreator;
 
 
-class FakeMono {
-protected:
-    FakeMono();
-
-public:
-    virtual ~FakeMono();
-
-    virtual void Start();
-    virtual void Update();
-    virtual void Stop();
-};
-
-class IComponent;
-
-class Entity : public FakeMono, std::enable_shared_from_this<Entity> {
+class Entity : Mono, std::enable_shared_from_this<Entity> {
     std::string EntityName;
 
-protected:
-    void AddComponent(std::shared_ptr<IComponent>& component) {
+public:
+    void AddComponent(std::shared_ptr<IComponent> component) {
         if (components.contains(component->GetName())) {
             SDL_LogError(SDL_LOG_CATEGORY_ERROR, "You tried adding an already existing component!");
             return;
@@ -47,10 +34,10 @@ protected:
         components.erase(component->GetName());
     }
 
-public:
     Entity();
     explicit Entity(Vector2D start_position);
-    explicit Entity(std::vector<std::shared_ptr<IComponent>> attachedComponents, Vector2D startPosition = Vector2D(0.f, 0.f));
+    explicit Entity(std::vector<std::shared_ptr<IComponent>>& attachedComponents, Vector2D startPosition = Vector2D(0.f, 0.f));
+    explicit Entity(const std::vector<std::shared_ptr<IComponent>>& attachedComponents);
 
     Vector2D position;
     std::map<std::string, std::shared_ptr<IComponent>> components;
@@ -78,7 +65,16 @@ std::shared_ptr<T> Entity::GetComponent() {
 }
 
 class GameClass {
-    // Entity GetNewEntity() {
-    //     auto newEntity = Entity(std::vector({static_cast<IComponent>(EntityComponent())}), Vector2D(0.f, 0.f));
-    // }
+public:
+    /**
+     * \brief Don't use unless you want crash smile
+     * \return Should return a functional Entity but doesn't rn ;-;
+     */
+    static std::shared_ptr<Entity> GetNewEntity() {
+        auto newEntity = Entity();
+        auto componentCreator = ComponentCreator();
+        //newEntity.AddComponent(componentCreator.CreateComponent());
+        SDL_Log("New entity Added with ExampleComponent on it!");
+        return std::make_shared<Entity>(newEntity);
+    }
 };

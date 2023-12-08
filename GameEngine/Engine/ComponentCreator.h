@@ -3,9 +3,9 @@
 
 
 class ComponentCreator final : IComponentFactory {
-    ComponentCreator() = default;
     void InitializeComponent(IComponent* component) override;
 
 public:
+    ComponentCreator() = default;
     IComponent* CreateComponent() override;
 };
