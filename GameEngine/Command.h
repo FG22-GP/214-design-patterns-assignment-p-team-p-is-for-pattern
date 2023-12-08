@@ -1,20 +1,10 @@
 ﻿#pragma once
 #include <functional>
 #include <memory>
-
 #include "Entity.h"
 #include "math.h"
 #include "Vector2D.h"
 
-// TODO: needs entity class, this is mockup
-// class Entity : std::enable_shared_from_this<Entity> { 
-// public:
-//     Vector2D Position;
-//
-//     Entity(Vector2D StartPosition = Vector2D(0,0)) {
-//         Position = StartPosition;
-//     }
-// };
 
 class Command : std::enable_shared_from_this<Command> {
 protected:
@@ -64,7 +54,7 @@ public:
 
     bool Execute() override { // Todo: needs time class
  
-        if (_target->position.GetY() >= _targetPosition.GetY()) {
+        if (_target->position.GetY() > _targetPosition.GetY()) {
             _target->position = _target->position - Vector2D(0, 1);
        // printf("done with long action");
             return true;
