@@ -30,11 +30,11 @@ int main(int argc, char* args[]) {
     //Load image at specified path
 
     TheTextureManager::Instance()->LoadImage(pikachuImagePath, "pikachu");
-   
+
     Color textColor = {0xff, 0xff, 0xff};
     Vector2D dimensions;
     TheTextureManager::Instance()->LoadText("font/lazy.ttf", "lazy", textColor, 100, "The lazy fox, blah blah", dimensions);
-    
+
     bool quit = false;
 
     std::queue<std::shared_ptr<Command>> CommandQueue;
@@ -58,8 +58,7 @@ int main(int argc, char* args[]) {
                 CommandQueue.pop();
             }
         }
-        if (Input::GetKeyDown(SDLK_ESCAPE))
-        {
+        if (Input::GetKeyDown(SDLK_ESCAPE)) {
             quit = true;
         }
 
@@ -73,7 +72,7 @@ int main(int argc, char* args[]) {
             pik_w,
             pik_h
         };
-        TheTextureManager::Instance()->Draw("pikachu", Vector2D(pik_x,pik_y), Vector2D(pik_w, pik_h));
+        TheTextureManager::Instance()->Draw("pikachu", Vector2D(pik_x, pik_y), Vector2D(pik_w, pik_h));
         TheTextureManager::Instance()->Draw("lazy", Vector2D(500, 500), dimensions);
 
         // present screen (switch buffers)

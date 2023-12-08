@@ -17,10 +17,8 @@ public:
 };
 
 class EntityComponent : public IComponent {
-protected:
-    EntityComponent() = default;
-
 public:
+    EntityComponent() = default;
     void Start() override;
     void Execute() override;
     void Stop() override;

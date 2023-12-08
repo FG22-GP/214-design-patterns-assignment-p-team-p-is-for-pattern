@@ -28,8 +28,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Component.cpp" />
+    <ClCompile Include="Engine\ComponentCreator.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
-    <ClCompile Include="Engine\Entity.cpp" />
     <ClCompile Include="Engine\Mono.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -260,6 +260,7 @@
 </ClCompile>
 <ClCompile Include="GameStates\WonState.cpp" />
 <ClCompile Include="IComponent.cpp" />
+<ClCompile Include="IComponentFactory.cpp" />
 <ClCompile Include="Input.cpp" />
     <ClCompile Include="ITextureManager.cpp" />
 <!-- =======
@@ -424,10 +425,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Component.h" />
+    <ClInclude Include="Engine\ComponentCreator.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="Engine\Engine.h" />
-    <ClInclude Include="Engine\Entity.h" />
     <ClInclude Include="Engine\Mono.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameStates\GameState.h" />
@@ -435,6 +436,7 @@
     <ClInclude Include="GameStates\PlayState.h" />
     <ClInclude Include="GameStates\WonState.h" />
     <ClInclude Include="IComponent.h" />
+    <ClInclude Include="IComponentFactory.h" />
     <ClInclude Include="ITextureManager.h" />
     <ClInclude Include="TextureManager.h" />
     <ClCompile Include="Command.h" />

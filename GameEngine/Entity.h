@@ -22,33 +22,45 @@ public:
     virtual void Stop();
 };
 
+
 class Entity : FakeMono {
+private:
+    std::string EntityName;
+
 protected:
-    void AddComponent(IComponent component) {
-        if (components.contains(component.GetName())) {
+    void AddComponent(IComponent* component) {
+        if (components.contains(component->GetName())) {
             SDL_LogError(SDL_LOG_CATEGORY_ERROR, "You tried adding an already existing component!");
             return;
         }
-        components.insert({component.GetName(), component});
+        components.insert({component->GetName(), component});
     }
 
-    void RemoveComponent(IComponent component) {
-        if (!components.contains(component.GetName())) {
+    void RemoveComponent(IComponent* component) {
+        if (!components.contains(component->GetName())) {
             SDL_LogError(SDL_LOG_CATEGORY_SYSTEM, "You tried removing a component that doesn't exist!");
             return;
         }
-        components.erase(component.GetName());
+        components.erase(component->GetName());
     }
 
 public:
     Entity();
     explicit Entity(Vector2D start_position);
-    explicit Entity(std::vector<IComponent> attachedComponents, Vector2D startPosition = Vector2D(0.f, 0.f));
+    explicit Entity(std::vector<IComponent*> attachedComponents, Vector2D startPosition = Vector2D(0.f, 0.f));
 
     Vector2D position;
-    std::map<std::string, IComponent> components;
+    std::map<std::string, IComponent*> components;
 
     void Start() override;
     void Update() override;
     void Stop() override;
+    std::string GetEntityName();
+};
+
+class GameClass {
+public:
+    // Entity GetNewEntity() {
+    //     auto newEntity = Entity(std::vector({static_cast<IComponent>(EntityComponent())}), Vector2D(0.f, 0.f));
+    // }
 };
