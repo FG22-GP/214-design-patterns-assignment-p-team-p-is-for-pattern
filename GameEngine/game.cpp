@@ -2,14 +2,13 @@
 #include <queue>
 #include <SDL.h>
 #include <stdio.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
 
 #include "Command.h"
 #include "Input.h"
 #include "IGameWindow.h"
 #include "GameWindow.h"
 #include "TextureManager.h"
+#include "Vector2D.h"
 
 
 //Screen dimension constants
@@ -31,41 +30,11 @@ int main(int argc, char* args[]) {
     //Load image at specified path
 
     TheTextureManager::Instance()->LoadImage(pikachuImagePath, "pikachu");
-    // load font
-    auto font = TTF_OpenFont("font/lazy.ttf", 100);
-    if (font == NULL) {
-        printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
-        return -1;
-    }
-
-    // create text from font
-    SDL_Color textColor = {0xff, 0xff, 0xff};
-    //Render text surface
-    SDL_Texture* textTexture; // The final optimized image
-
-    // render the text into an unoptimized CPU surface
-    SDL_Surface* textSurface = TTF_RenderText_Solid(font, "The lazy fox, blah blah", textColor);
-    int textWidth, textHeight;
-    if (textSurface == NULL) {
-        printf("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
-        return -1;
-    }
-    else {
-        // Create texture GPU-stored texture from surface pixels
-        textTexture = SDL_CreateTextureFromSurface(TheGameWindow::Instance()->GetRenderer(), textSurface);
-        if (textTexture == NULL) {
-            printf("Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError());
-            return -1;
-        }
-        // Get image dimensions
-        auto width = textSurface->w;
-        auto height = textSurface->h;
-        textWidth = textSurface->w;
-        textHeight = textSurface->h;
-        //Get rid of old loaded surface
-        SDL_FreeSurface(textSurface);
-    }
-
+   
+    Color textColor = {0xff, 0xff, 0xff};
+    Vector2D dimensions;
+    TheTextureManager::Instance()->LoadText("font/lazy.ttf", "lazy", textColor, 100, "The lazy fox, blah blah", dimensions);
+    
     bool quit = false;
 
     std::queue<std::shared_ptr<Command>> CommandQueue;
@@ -105,15 +74,7 @@ int main(int argc, char* args[]) {
             pik_h
         };
         TheTextureManager::Instance()->Draw("pikachu", Vector2D(pik_x,pik_y), Vector2D(pik_w, pik_h));
-
-        // render the text
-        targetRectangle = SDL_Rect{
-            500,
-            500,
-            textWidth,
-            textHeight
-        };
-        SDL_RenderCopy(TheGameWindow::Instance()->GetRenderer(), textTexture, NULL, &targetRectangle);
+        TheTextureManager::Instance()->Draw("lazy", Vector2D(500, 500), dimensions);
 
         // present screen (switch buffers)
         TheGameWindow::Instance()->Present();

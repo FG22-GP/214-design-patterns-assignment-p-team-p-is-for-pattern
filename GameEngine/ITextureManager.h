@@ -1,14 +1,14 @@
 #pragma once
 #include <iostream>
-
+#include <map>
 
 
 class ITextureManager
 {
 
-
 protected:
 	ITextureManager();
+	std::map<std::string, void*> textureMap;
 
 public:
 

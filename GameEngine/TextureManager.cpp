@@ -10,7 +10,11 @@ void TextureManager::CleanUpFunction()
 {
 	for (auto id : textureMap)
 	{
-		SDL_DestroyTexture(id.second);
+		SDL_Texture* textureToDestroy = static_cast<SDL_Texture*>(id.second);
+		if (textureToDestroy != nullptr)
+		{
+			SDL_DestroyTexture(textureToDestroy);
+		}
 	}
 	pInstance = nullptr;
 }
@@ -19,7 +23,7 @@ bool TextureManager::LoadImage(std::string fileName, std::string id)
 {
 	SDL_Surface* loadedSurface = IMG_Load(fileName.c_str());
 
-	if (loadedSurface == 0)
+	if (loadedSurface == nullptr)
 	{
 		printf("Unable to load image %s! SDL_image Error: %s\n", fileName.c_str(), IMG_GetError());
 		return false;
@@ -29,12 +33,12 @@ bool TextureManager::LoadImage(std::string fileName, std::string id)
 
 	textureToLoad = SDL_CreateTextureFromSurface(pRenderer, loadedSurface);
 	SDL_FreeSurface(loadedSurface);
-	if (textureToLoad == 0)
+	if (textureToLoad == nullptr)
 	{
 		printf("Unable to create texture from %s! SDL Error: %s\n", fileName.c_str(), SDL_GetError());
 		return false;
 	}
-	else if (textureToLoad != 0)
+	else if (textureToLoad != nullptr)
 	{
 		textureMap[id] = textureToLoad;
 		return true;
@@ -45,7 +49,7 @@ bool TextureManager::LoadImage(std::string fileName, std::string id)
 }
 
 //SDLpointer to vector  create your own color thingy maybe 
-bool TextureManager::LoadText(std::string fileName, std::string id, Color textColor, int fontSize, std::string text ,SDL_Point& dimensions) 
+bool TextureManager::LoadText(std::string fileName, std::string id, Color textColor, int fontSize, std::string text ,Vector2D& dimensions) 
 {
 
 	TTF_Font* fontToLoad = TTF_OpenFont(fileName.c_str(), fontSize);
@@ -62,6 +66,7 @@ bool TextureManager::LoadText(std::string fileName, std::string id, Color textCo
 	tColor.b = textColor.blue;
 	tColor.a = textColor.alpha;
 
+
 	SDL_Surface* textSurface = TTF_RenderText_Solid(fontToLoad, text.c_str(), tColor);
 
 	if (textSurface == 0)
@@ -70,13 +75,15 @@ bool TextureManager::LoadText(std::string fileName, std::string id, Color textCo
 		return false;
 	}
 	SDL_Texture* textTexture = SDL_CreateTextureFromSurface(pRenderer, textSurface);
+	dimensions.SetX(textSurface->w);
+	dimensions.SetY(textSurface->h);
 	SDL_FreeSurface(textSurface);
-	if (textTexture == 0)
+	if (textTexture == nullptr)
 	{
 		printf("Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError());
 		return false;
 	}
-	else if(textTexture !=0)
+	else if(textTexture != nullptr)
 	{
 		textureMap[id] = textTexture;
 		return true;
@@ -93,8 +100,11 @@ void TextureManager::Draw(std::string id, Vector2D imagePosition, Vector2D image
 	targetRectangle.y = imagePosition.GetY();
 	targetRectangle.w = imageSize.GetX();
 	targetRectangle.h = imageSize.GetY();
-
-	SDL_RenderCopyEx(pRenderer, textureMap[id], 0, &targetRectangle, 0, 0, MapFlipState( flip));
+	SDL_Texture* texture = static_cast<SDL_Texture*>(textureMap[id]);
+	if (texture != nullptr)
+	{
+		SDL_RenderCopyEx(pRenderer, texture, 0, &targetRectangle, 0, 0, MapFlipState( flip));
+	}
 }
 
 void TextureManager::DrawFrame(std::string id, Vector2D imagePosition, Vector2D imageSize, int currentRow, int currentFrame, FlipState flip)
@@ -110,12 +120,16 @@ void TextureManager::DrawFrame(std::string id, Vector2D imagePosition, Vector2D 
 	srcRect.y = targetRectangle.h * (currentRow - 1);
 	srcRect.w = targetRectangle.w;
 	srcRect.h = targetRectangle.h;
-	SDL_RenderCopyEx(pRenderer, textureMap[id], &srcRect, &targetRectangle, 0, 0, MapFlipState(flip));
+	SDL_Texture* texture = static_cast<SDL_Texture*>(textureMap[id]);
+	if (texture != nullptr)
+	{
+		SDL_RenderCopyEx(pRenderer, texture, 0, &targetRectangle, 0, 0, MapFlipState(flip));
+	}
 }
 
 void TextureManager::ClearFromTextureMap(std::string textureID)
 {
-	SDL_Texture* texture = textureMap[textureID];
+	SDL_Texture* texture = static_cast<SDL_Texture*>(textureMap[textureID]);
 	SDL_DestroyTexture(texture);
 	textureMap.erase(textureID);
 }
