@@ -1,18 +1,23 @@
 ﻿#pragma once
+#include <memory>
 #include "string"
 
+class Entity;
 
-class IComponent {
+class IComponent : public std::enable_shared_from_this<IComponent> {
 protected:
-    IComponent();
+    IComponent(const std::shared_ptr<Entity>& Owner);
+   
     std::string componentName;
-
+        
+    std::shared_ptr<Entity> owner;
 public:
-    virtual ~IComponent();
+    virtual ~IComponent() = default;
 
-    virtual void Start() = 0;
-    virtual void Execute() = 0;
-    virtual void Stop() = 0;
+    virtual void Start() = NULL;
+    virtual void Execute() = NULL;
+    virtual void Stop() = NULL;
     virtual std::string GetName();
-    virtual void InitializeComponent() = 0;
+    virtual void InitializeComponent() = NULL;
+    
 };

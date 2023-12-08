@@ -14,10 +14,10 @@ void FakeMono::Update() {
 void FakeMono::Stop() {
 }
 
-Entity::Entity() = default;
+Entity::Entity() = default; // always have to take a state(owningState)
 Entity::Entity(const Vector2D start_position) { position = start_position; }
 
-Entity::Entity(const std::vector<IComponent*>& attachedComponents, const Vector2D startPosition) {
+Entity::Entity(std::vector<std::shared_ptr<IComponent>> attachedComponents, Vector2D startPosition) {
     position = startPosition;
     for (auto component : attachedComponents) {
         if (components.contains(component->GetName())) {
@@ -26,6 +26,13 @@ Entity::Entity(const std::vector<IComponent*>& attachedComponents, const Vector2
         components.insert({component->GetName(), component});
     }
 }
+
+
+bool Entity::HasComponent(const std::string& key) const {
+    return components.contains(key);
+}
+
+
 
 void Entity::Start() {
     FakeMono::Start();

@@ -6,60 +6,51 @@
 #include "Command.h"
 
 struct promise;
- 
-struct coroutine : std::coroutine_handle<promise>
-{
+
+struct coroutine : std::coroutine_handle<promise> {
     using promise_type = ::promise;
 };
- 
-struct promise
-{
+
+struct promise {
     coroutine get_return_object() { return {coroutine::from_promise(*this)}; }
     std::suspend_always initial_suspend() noexcept { return {}; }
     std::suspend_always final_suspend() noexcept { return {}; }
-    void return_void() {}
-    void unhandled_exception() {}
+
+    void return_void() {
+    }
+
+    void unhandled_exception() {
+    }
 };
- 
-struct S
-{
+
+struct S {
     int i;
-    coroutine f()
-    {
+
+    coroutine f() {
         co_return;
     }
 };
 
 class EventHandler {
-
-private: 
-    std::queue<std::shared_ptr<Command>> CommandQueue;
-    std::mutex Mutex;
-    std::condition_variable Condition;
+private:
+    static std::queue<std::shared_ptr<Command>> CommandQueue;
     
+
 public:
-    std::shared_ptr<Command> Pop() {
-        std::unique_lock<std::mutex> lock(Mutex);
-        Condition.wait(lock, [this](){return !CommandQueue.empty(); });
+    static std::shared_ptr<Command> TryPop() {
+        
         std::shared_ptr<Command> item = CommandQueue.front();
-        CommandQueue.pop();
-        item->Execute();
+        if (!item->Execute()) {
+            CommandQueue.pop();
+        }
         return item;
     }
-    void Push(const std::shared_ptr<Command>& command) {
-        std::unique_lock<std::mutex> lock(Mutex);
+
+    static void Push(const std::shared_ptr<Command>& command) {
         CommandQueue.push(command);
-        Condition.notify_one();
     }
 
     bool Empty() const {
         return CommandQueue.empty();
     }
-
-
-
-    
-
-    
-    
 };

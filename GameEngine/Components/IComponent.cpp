@@ -1,7 +1,11 @@
 ﻿#include "IComponent.h"
 
-IComponent::IComponent() = default;
-IComponent::~IComponent() = default;
+
+IComponent::IComponent(const std::shared_ptr<Entity>& Owner) {
+    owner = Owner;
+}
+
+
 
 std::string IComponent::GetName() {
     return componentName;

@@ -27,8 +27,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Components\Collision.cpp" />
     <ClCompile Include="Components\EntityComponentExample.cpp" />
     <ClCompile Include="Components\IComponent.cpp" />
+    <ClCompile Include="Components\Movement.cpp" />
+    <ClCompile Include="Components\Render.cpp" />
     <ClCompile Include="Engine\ComponentCreator.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\Entity.cpp" />
@@ -259,6 +262,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="GameStates\Record.cpp" />
     <ClCompile Include="GameStates\WonState.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="ITextureManager.cpp" />
@@ -423,9 +427,12 @@
     <ClCompile Include="EventHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Components\Collision.h" />
     <ClInclude Include="Components\ExampleEntityComponent.h" />
     <ClInclude Include="Components\IComponent.h" />
     <ClInclude Include="Components\IComponentFactory.h" />
+    <ClInclude Include="Components\Movement.h" />
+    <ClInclude Include="Components\Render.h" />
     <ClInclude Include="Engine\ComponentCreator.h" />
     <ClInclude Include="Engine\Entity.h" />
     <ClInclude Include="EventHandler.h" />
@@ -435,6 +442,7 @@
     <ClInclude Include="GameStates\GameState.h" />
     <ClInclude Include="GameStates\PauseState.h" />
     <ClInclude Include="GameStates\PlayState.h" />
+    <ClInclude Include="GameStates\Record.h" />
     <ClInclude Include="GameStates\WonState.h" />
     <ClInclude Include="ITextureManager.h" />
     <ClInclude Include="TextureManager.h" />

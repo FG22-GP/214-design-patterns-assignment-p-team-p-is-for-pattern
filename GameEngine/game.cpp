@@ -36,8 +36,7 @@ int main(int argc, char* args[]) {
     TheTextureManager::Instance()->LoadText("font/lazy.ttf", "lazy", textColor, 100, "The lazy fox, blah blah", dimensions);
 
     bool quit = false;
-
-    std::queue<std::shared_ptr<Command>> CommandQueue;
+    
     // while the user doesn't want to quit
     while (quit == false) {
         SDL_GetTicks();
@@ -48,15 +47,17 @@ int main(int argc, char* args[]) {
         if (Input::GetKey(SDLK_d)) pik_x++;
         if (Input::GetKey(SDLK_a)) pik_x--;
 
-        if (Input::GetKeyDown(SDLK_SPACE)) {
+        
+        
+        if (Input::GetKey(SDLK_SPACE)) {
             const std::shared_ptr<Entity> entity = std::make_shared<Entity>();
-            CommandQueue.push(std::make_shared<MoveCommand>(MoveCommand(Vector2D(1, 1), entity)));
+         //   CommandQueue.push(std::make_shared<MoveCommand>(MoveCommand(Vector2D(1, 1), this))); // logic, 
         }
-        if (Input::GetKeyDown(SDLK_RETURN)) {
-            while (!CommandQueue.empty()) {
-                CommandQueue.back()->Execute();
-                CommandQueue.pop();
-            }
+         if (Input::GetKeyDown(SDLK_RETURN)) {
+            // while (!CommandQueue.empty()) {
+            //     CommandQueue.back()->Execute();
+            //     CommandQueue.pop();
+            // }
         }
         if (Input::GetKeyDown(SDLK_ESCAPE)) {
             quit = true;
