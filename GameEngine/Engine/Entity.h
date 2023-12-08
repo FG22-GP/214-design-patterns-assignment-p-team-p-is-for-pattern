@@ -2,32 +2,20 @@
 #include <SDL_log.h>
 #include <cvt/wstring>
 
+#include "ComponentCreator.h"
 #include "map"
+#include "Mono.h"
 #include "vector"
 #include "../Vector2D.h"
-#include "../Components/ExampleEntityComponent.h"
 #include "../Components/IComponent.h"
 
-/**
- * \brief Temp Mono class until the real deal
- */
-class FakeMono {
-protected:
-    FakeMono();
 
-public:
-    virtual ~FakeMono();
+class ComponentCreator;
 
-    virtual void Start();
-    virtual void Update();
-    virtual void Stop();
-};
-
-
-class Entity : FakeMono {
+class Entity : Mono {
     std::string EntityName;
 
-protected:
+public:
     void AddComponent(IComponent* component) {
         if (components.contains(component->GetName())) {
             SDL_LogError(SDL_LOG_CATEGORY_ERROR, "You tried adding an already existing component!");
@@ -44,7 +32,6 @@ protected:
         components.erase(component->GetName());
     }
 
-public:
     Entity();
     explicit Entity(Vector2D start_position);
     explicit Entity(const std::vector<IComponent*>& attachedComponents, Vector2D startPosition = Vector2D(0.f, 0.f));
@@ -59,7 +46,11 @@ public:
 };
 
 class GameClass {
-    // Entity GetNewEntity() {
-    //     auto newEntity = Entity(std::vector({static_cast<IComponent>(EntityComponent())}), Vector2D(0.f, 0.f));
-    // }
+    static Entity GetNewEntity() {
+        auto newEntity = Entity();
+        auto componentCreator = ComponentCreator();
+        newEntity.AddComponent(componentCreator.CreateComponent());
+        SDL_Log("New entity Added with ExampleComponent on it!");
+        return newEntity;
+    }
 };
