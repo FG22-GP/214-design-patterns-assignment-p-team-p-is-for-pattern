@@ -1,5 +1,11 @@
 #pragma once
-#include "../IComponentFactory.h"
+#include "../Components/IComponentFactory.h"
 
-class ComponentCreator : IComponentFactory {
+
+class ComponentCreator final : IComponentFactory {
+    ComponentCreator() = default;
+    void InitializeComponent(IComponent* component) override;
+
+public:
+    IComponent* CreateComponent() override;
 };

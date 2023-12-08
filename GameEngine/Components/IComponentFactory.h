@@ -1,4 +1,5 @@
 #pragma once
+
 #include "IComponent.h"
 
 class IComponentFactory {
@@ -7,6 +8,6 @@ protected:
     virtual ~IComponentFactory() = default;
 
 public:
-    virtual IComponent CreateComponent() = 0;
-    virtual void InitializeComponent() = 0;
+    virtual IComponent* CreateComponent() = 0;
+    virtual void InitializeComponent(IComponent* component) = 0;
 };

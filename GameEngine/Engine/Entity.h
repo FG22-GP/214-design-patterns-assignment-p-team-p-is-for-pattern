@@ -2,10 +2,10 @@
 #include <SDL_log.h>
 #include <cvt/wstring>
 
-#include "IComponent.h"
-#include "Vector2D.h"
-#include "vector"
 #include "map"
+#include "vector"
+#include "../Vector2D.h"
+#include "../Components/IComponent.h"
 
 /**
  * \brief Temp Mono class until the real deal
@@ -24,7 +24,6 @@ public:
 
 
 class Entity : FakeMono {
-private:
     std::string EntityName;
 
 protected:
@@ -59,7 +58,6 @@ public:
 };
 
 class GameClass {
-public:
     // Entity GetNewEntity() {
     //     auto newEntity = Entity(std::vector({static_cast<IComponent>(EntityComponent())}), Vector2D(0.f, 0.f));
     // }
