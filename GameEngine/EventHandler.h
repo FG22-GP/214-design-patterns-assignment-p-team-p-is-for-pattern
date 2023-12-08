@@ -43,14 +43,6 @@ public:
         Condition.wait(lock, [this](){return !CommandQueue.empty(); });
         std::shared_ptr<Command> item = CommandQueue.front();
         CommandQueue.pop();
-
-        coroutine routine = [](int i) -> coroutine {
-            co_return;
-        }(0);
-
-        routine.resume();
-        routine.destroy();
-        
         item->Execute();
         return item;
     }
