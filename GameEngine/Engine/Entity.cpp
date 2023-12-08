@@ -2,18 +2,23 @@
 
 #include <ranges>
 
-Entity::Entity() = default;
+Entity::Entity() { position = Vector2D(); }
 Entity::Entity(const Vector2D start_position) { position = start_position; }
+
+Entity::Entity(const std::vector<std::shared_ptr<IComponent>>& attachedComponents) {
+    position = Vector2D();
+    for (const auto& component : attachedComponents) {
+        AddComponent(component.get());
+    }
+}
 
 Entity::Entity(const std::vector<IComponent*>& attachedComponents, const Vector2D startPosition) {
     position = startPosition;
-    for (auto component : attachedComponents) {
-        if (components.contains(component->GetName())) {
-            SDL_LogError(SDL_LOG_CATEGORY_ERROR, "You tried adding an already existing component on this Entity!");
-        }
-        components.insert({component->GetName(), component});
+    for (const auto component : attachedComponents) {
+        AddComponent(component);
     }
 }
+
 
 void Entity::Start() {
     for (const auto val : components | std::views::values) {

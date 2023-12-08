@@ -34,6 +34,7 @@ public:
 
     Entity();
     explicit Entity(Vector2D start_position);
+    explicit Entity(const std::vector<std::shared_ptr<IComponent>>& attachedComponents);
     explicit Entity(const std::vector<IComponent*>& attachedComponents, Vector2D startPosition = Vector2D(0.f, 0.f));
 
     Vector2D position;
@@ -46,11 +47,16 @@ public:
 };
 
 class GameClass {
-    static Entity GetNewEntity() {
+public:
+    /**
+     * \brief Don't use unless you want crash smile
+     * \return Should return a functional Entity but doesn't rn ;-;
+     */
+    static std::shared_ptr<Entity> GetNewEntity() {
         auto newEntity = Entity();
         auto componentCreator = ComponentCreator();
         newEntity.AddComponent(componentCreator.CreateComponent());
         SDL_Log("New entity Added with ExampleComponent on it!");
-        return newEntity;
+        return std::make_shared<Entity>(newEntity);
     }
 };
