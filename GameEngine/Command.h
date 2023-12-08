@@ -1,9 +1,9 @@
 ﻿#pragma once
 #include <functional>
 #include <memory>
-#include "Entity.h"
 #include "math.h"
 #include "Vector2D.h"
+#include "Engine/Entity.h"
 
 
 class Command : std::enable_shared_from_this<Command> {
