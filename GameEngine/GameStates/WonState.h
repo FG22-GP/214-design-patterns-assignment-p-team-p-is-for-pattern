@@ -3,7 +3,7 @@
 
 class WonState : public GameState
 {
-
+    const std::string stateID = "Won";
     
 
 public:
@@ -12,7 +12,7 @@ public:
     void Stop() override;
     void Update() override;
 
-    std::string GetStateID() override;
+    const std::string GetStateID() override { return stateID; }
 
     ~WonState() {}
 };

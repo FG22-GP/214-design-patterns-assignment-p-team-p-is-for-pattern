@@ -8,7 +8,6 @@
 class IGameState : std::enable_shared_from_this<IGameState>
 {
 protected:
-    const static std::string stateID;
 
     std::vector<std::shared_ptr<Mono>> entityList;
 
@@ -28,15 +27,15 @@ public:
 
 class GameState : public IGameState , std::enable_shared_from_this<GameState>
 {
-
-
+    const std::string stateID = "";
+    
 public:
     GameState() = default;
     void Start() override;
     void Stop() override;
     void Update() override;
 
-    virtual std::string GetStateID() = 0;
+    virtual std::string GetStateID() const override{ return stateID; };
 
     ~GameState() {}
 };

@@ -5,47 +5,48 @@
 
 GameManager::GameManager()
 {
-
+	activeState = nullptr;
 }
 
 void GameManager::PushState(std::shared_ptr<GameState> pushState)
 {
-	gameStates.push_back(pushState);
-	gameStates.back()->Start();
+	std::cout << "Pushing state with ID: " << pushState->GetStateID() << std::endl;
+
+	allstates[pushState->GetStateID()] = pushState;
 }
 
-void GameManager::PopState()
-{
-	if (gameStates.empty())
-	{
-		return;
-	}
-	gameStates.back()->Stop();
-	gameStates.pop_back();
+//void GameManager::PopState()
+//{
+//	if (gameStates.empty())
+//	{
+//		return;
+//	}
+//	gameStates.back()->Stop();
+//	gameStates.pop_back();
+//
+//}
 
-}
-
-void GameManager::ChangeState(std::shared_ptr<GameState> changeState)
+void GameManager::ChangeActiveState(std::string changeID)
 {
-	if (!gameStates.empty())
+	std::shared_ptr<GameState> stateToChange = allstates[changeID];
+
+	
+	if (stateToChange !=nullptr )
 	{
-		if (gameStates.back()->GetStateID() == changeState->GetStateID())
-		{
-			return;
-		}
-		gameStates.back()->Stop();
-		gameStates.pop_back();
+		activeState = stateToChange;
 	}
-	gameStates.push_back(changeState);
-	gameStates.back()->Start();
+	else
+	{
+		printf("State cannot found");
+	}
 }
 
 void GameManager::Update()
 {
-	if (gameStates.empty())
+	if (activeState == nullptr)
 	{
 		return;
 	}
-	gameStates.back()->Update();
+	activeState->Update();
 }
 

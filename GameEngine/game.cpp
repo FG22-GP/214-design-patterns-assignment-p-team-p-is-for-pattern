@@ -45,21 +45,24 @@ int main(int argc, char* args[]) {
 
     GameManager* gameStateMachine = new GameManager();
     std::shared_ptr<WonState> wonState = std::make_shared<WonState>();
+    std::shared_ptr<PlayState> playState = std::make_shared<PlayState>();
+    std::shared_ptr<PauseState> pauseState = std::make_shared<PauseState>();
     gameStateMachine->PushState(wonState);
+    gameStateMachine->PushState(playState);
+    gameStateMachine->PushState(pauseState);
+    gameStateMachine->ChangeActiveState("Pause");
     // while the user doesn't want to quit
     while (quit == false) {
         SDL_GetTicks();
         Input::UpdateInput();
 
-        if (Input::GetKey(SDLK_a))
+        if (Input::GetKeyDown(SDLK_a))
         {
-            gameStateMachine->PopState();
-            gameStateMachine->PushState(std::make_shared<PlayState>());
+            gameStateMachine->ChangeActiveState("Play");
         }
-        if (Input::GetKey(SDLK_d))
+        if (Input::GetKeyDown(SDLK_d))
         {
-            gameStateMachine->PopState();
-            gameStateMachine->PushState(std::make_shared<PauseState>());
+            gameStateMachine->ChangeActiveState("Won");
         }
 
         //if (Input::GetKey(SDLK_UP)) pik_y--;
@@ -77,10 +80,10 @@ int main(int argc, char* args[]) {
         //        CommandQueue.pop();
         //    }
         //}
-        //if (Input::GetKeyDown(SDLK_ESCAPE))
-        //{
-        //    quit = true;
-        //}
+        if (Input::GetKeyDown(SDLK_ESCAPE))
+        {
+            quit = true;
+        }
 
         //// clear the screen
         //TheGameWindow::Instance()->Clear();
@@ -96,6 +99,12 @@ int main(int argc, char* args[]) {
         //TheTextureManager::Instance()->Draw("lazy", Vector2D(500, 500), dimensions);
 
         // present screen (switch buffers)
+
+        if (gameStateMachine != nullptr)
+        {
+            gameStateMachine->Update();
+        }
+
         TheGameWindow::Instance()->Present();
 
         SDL_Delay(3); // can be used to wait for a certain amount of ms

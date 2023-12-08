@@ -3,6 +3,7 @@
 
 class PauseState : public GameState
 {
+    std::string stateID = "Pause";
 
 public:
     PauseState() {}
@@ -10,7 +11,7 @@ public:
     void Stop() override;
     void Update() override;
 
-    std::string GetStateID() override;
+    std::string GetStateID() { return stateID; }
 
     ~PauseState() {}
 };

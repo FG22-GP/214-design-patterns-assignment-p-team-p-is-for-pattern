@@ -6,7 +6,7 @@ void PauseState::Start()
 {
     //State Start logic here
 
-    printf("Start State Entered");
+    printf("Start State Entered \n");
     //runs entity Start logic
     GameState::Start();
 
@@ -16,7 +16,7 @@ void PauseState::Stop()
 {
     //State Stop logic here
 
-    printf("Start State Stopped");
+    printf("Start State Stopped \n");
     //runs entity Stop logic
     GameState::Stop();
 
@@ -30,9 +30,4 @@ void PauseState::Update()
     //runs entity Update logic
     GameState::Update();
 
-}
-
-std::string PauseState::GetStateID()
-{
-    return stateID;
 }

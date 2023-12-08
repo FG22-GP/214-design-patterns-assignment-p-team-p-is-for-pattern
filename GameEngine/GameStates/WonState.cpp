@@ -29,7 +29,3 @@ void WonState::Update()
     GameState::Update();
 }
 
-std::string WonState::GetStateID()
-{
-    return stateID;
-}

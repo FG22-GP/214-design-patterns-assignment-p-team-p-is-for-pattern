@@ -1,12 +1,12 @@
 #pragma once
 #include "GameStates/GameState.h"
-#include <vector>
+#include <map>
 #include <memory>
 
 class GameManager 
 {
-   
-    std::vector<std::shared_ptr<GameState>> gameStates;
+ 
+    std::map<std::string,std::shared_ptr<GameState>> allstates;
 
 protected:
 
@@ -14,14 +14,22 @@ protected:
 
 public:
 
+    std::shared_ptr<GameState> activeState;
 
     GameManager();
 
+
+    //Warmup
+
+    //Restructure
     void PushState(std::shared_ptr<GameState> pushState);
-    void PopState();
-    void ChangeState(std::shared_ptr<GameState> changeState);
 
 
+    //Might not need pop
+    //void PopState();
+    void ChangeActiveState(std::string changeID);
+
+    //Probs same
     void Update();
 
     ~GameManager() {}
