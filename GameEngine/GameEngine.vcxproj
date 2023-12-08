@@ -27,7 +27,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Components\ExampleComponent.cpp" />
+    <ClCompile Include="Components\IComponent.cpp" />
+    <ClCompile Include="Engine\ComponentCreator.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
+    <ClCompile Include="Engine\Entity.cpp" />
     <ClCompile Include="Engine\Mono.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -102,7 +106,6 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
-    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="game.cpp" />
     <!-- <<<<<<< .merge_file_U8VRMK -->
     <ClCompile Include="Command.cpp" />
@@ -257,7 +260,6 @@
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
     <ClCompile Include="GameStates\WonState.cpp" />
-    <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="ITextureManager.cpp" />
     <!-- =======
@@ -421,7 +423,10 @@
     <ClCompile Include="EventHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Components\IComponent.h" />
+    <ClInclude Include="Components\IComponentFactory.h" />
+    <ClInclude Include="Engine\ComponentCreator.h" />
+    <ClInclude Include="Engine\Entity.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\Mono.h" />
@@ -430,7 +435,6 @@
     <ClInclude Include="GameStates\PauseState.h" />
     <ClInclude Include="GameStates\PlayState.h" />
     <ClInclude Include="GameStates\WonState.h" />
-    <ClInclude Include="IComponent.h" />
     <ClInclude Include="ITextureManager.h" />
     <ClInclude Include="TextureManager.h" />
     <ClCompile Include="Command.h" />
