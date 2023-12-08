@@ -8,6 +8,6 @@ protected:
     virtual ~IComponentFactory() = default;
 
 public:
-    virtual IComponent* CreateComponent() = 0;
+    virtual std::shared_ptr<IComponent> CreateComponent() = 0;
     virtual void InitializeComponent(IComponent* component) = 0;
 };

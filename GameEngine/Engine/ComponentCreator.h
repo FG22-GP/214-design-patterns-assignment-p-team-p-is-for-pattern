@@ -7,5 +7,5 @@ class ComponentCreator final : IComponentFactory {
 
 public:
     ComponentCreator() = default;
-    IComponent* CreateComponent() override;
+    std::shared_ptr<IComponent> CreateComponent() override;
 };
