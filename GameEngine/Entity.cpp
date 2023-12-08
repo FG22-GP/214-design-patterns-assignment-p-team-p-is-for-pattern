@@ -28,21 +28,18 @@ Entity::Entity(std::vector<IComponent> attachedComponents, const Vector2D startP
 }
 
 void Entity::Start() {
-    Mono::Start();
     for (auto val : components | std::views::values) {
         val.Start();
     }
 }
 
 void Entity::Update() {
-    Mono::Update();
     for (auto val : components | std::views::values) {
         val.Execute();
     }
 }
 
 void Entity::Stop() {
-    Mono::Stop();
     for (auto val : components | std::views::values) {
         val.Stop();
     }

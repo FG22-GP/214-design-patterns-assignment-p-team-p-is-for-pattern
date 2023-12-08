@@ -1,7 +1,8 @@
 #pragma once
 
-struct Mono
+class Mono
 {
+public:
     Mono();
     virtual void Start() = 0;
     virtual void Update() = 0;

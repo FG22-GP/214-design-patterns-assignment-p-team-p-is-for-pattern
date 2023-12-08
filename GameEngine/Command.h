@@ -1,30 +1,10 @@
 ﻿#pragma once
 #include <functional>
 #include <memory>
+#include "Entity.h"
 #include "math.h"
 #include "Vector2D.h"
 
-class Entity : std::enable_shared_from_this<Entity> { // TODO: needs entity class, this is mockup
-public:
-    Vector2D Position;
-
-    Entity(Vector2D StartPosition = Vector2D(0,0)) {
-        Position = StartPosition;
-    }
-
-    // bool MoveCharacter(Vector2D translation) { // these are not abstract at all
-    //     Position = translation;
-    //     printf("yo");
-    //     return true;
-    // }
-    //
-    // bool MoveCharacter(Vector2D translation, float Duration) { // continues call? or internal loop?
-    //     if (std::abs(translation.GetX() - Position.GetX()) < 10.f && std::abs(translation.GetY() - Position.GetY()) < 10.f) {
-    //         return false;
-    //     }
-    //     return true;
-    // }
-};
 
 class Command : std::enable_shared_from_this<Command> {
 protected:
@@ -52,7 +32,7 @@ public:
     }
 
     bool Execute() override {
-        _target->Position = _targetMovement;
+        _target->position = _targetMovement;
        // printf("calling move");
         return false;
     }
@@ -74,8 +54,8 @@ public:
 
     bool Execute() override { // Todo: needs time class
  
-        if (_target->Position.GetY() >= _targetPosition.GetY()) {
-            _target->Position = _target->Position - Vector2D(0, 1);
+        if (_target->position.GetY() > _targetPosition.GetY()) {
+            _target->position = _target->position - Vector2D(0, 1);
        // printf("done with long action");
             return true;
         }
