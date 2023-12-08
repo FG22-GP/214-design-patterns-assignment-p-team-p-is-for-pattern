@@ -74,7 +74,7 @@ public:
 
     bool Execute() override { // Todo: needs time class
  
-        if (_target->Position.GetY() >= _targetPosition.GetY()) {
+        if (_target->Position.GetY() > _targetPosition.GetY()) {
             _target->Position = _target->Position - Vector2D(0, 1);
        // printf("done with long action");
             return true;
