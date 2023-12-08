@@ -5,6 +5,7 @@
 #include "map"
 #include "vector"
 #include "../Vector2D.h"
+#include "../Components/ExampleEntityComponent.h"
 #include "../Components/IComponent.h"
 
 /**
@@ -46,7 +47,7 @@ protected:
 public:
     Entity();
     explicit Entity(Vector2D start_position);
-    explicit Entity(std::vector<IComponent*> attachedComponents, Vector2D startPosition = Vector2D(0.f, 0.f));
+    explicit Entity(const std::vector<IComponent*>& attachedComponents, Vector2D startPosition = Vector2D(0.f, 0.f));
 
     Vector2D position;
     std::map<std::string, IComponent*> components;

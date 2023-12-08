@@ -2,6 +2,7 @@
 #include <SDL_log.h>
 #include <utility>
 
+#include "ExampleEntityComponent.h"
 #include "IComponent.h"
 
 EntityComponent::EntityComponent(std::string name) {

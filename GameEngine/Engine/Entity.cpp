@@ -17,7 +17,7 @@ void FakeMono::Stop() {
 Entity::Entity() = default;
 Entity::Entity(const Vector2D start_position) { position = start_position; }
 
-Entity::Entity(std::vector<IComponent*> attachedComponents, const Vector2D startPosition) {
+Entity::Entity(const std::vector<IComponent*>& attachedComponents, const Vector2D startPosition) {
     position = startPosition;
     for (auto component : attachedComponents) {
         if (components.contains(component->GetName())) {

@@ -2,6 +2,8 @@
 
 #include <memory>
 
+#include "../Components/ExampleEntityComponent.h"
+
 void ComponentCreator::InitializeComponent(IComponent* component) {
     
 }
