@@ -6,17 +6,17 @@
 Engine::Engine()
 {
     //TODO
-    monos = std::map<std::string, Mono*>();
+    monos = std::map<std::string, std::shared_ptr<Mono>>();
 }
 
-void Engine::AddMono(std::string name, Mono* mono)
+void Engine::AddMono(std::string name, std::shared_ptr<Mono> mono)
 {
     monos[name] = mono;
 }
 
 void Engine::Start()
 {
-    //TODO super scuffed
+    //TODO super scuffed, why is there a while always true loop here, this supposed to be a startcall from game.cpp?
     while(true)
     {
         for (auto element : monos)

@@ -3,10 +3,10 @@
 #include <ranges>
 
 
-Entity::Entity() { position = Vector2D(); }
-Entity::Entity(const Vector2D start_position) { position = start_position; }
+Entity::Entity() : Mono(*this) { position = Vector2D(); }
+Entity::Entity(const Vector2D start_position) : Mono(*this) { position = start_position; }
 
-Entity::Entity(const std::vector<std::shared_ptr<IComponent>>& attachedComponents) {
+Entity::Entity(const std::vector<std::shared_ptr<IComponent>>& attachedComponents) : Mono(*this) {
     position = Vector2D();
     for (const auto& component : attachedComponents) {
         AddComponent(component);
@@ -14,7 +14,7 @@ Entity::Entity(const std::vector<std::shared_ptr<IComponent>>& attachedComponent
     }
 }
 
-Entity::Entity(std::vector<std::shared_ptr<IComponent>>& attachedComponents, const Vector2D startPosition) {
+Entity::Entity(std::vector<std::shared_ptr<IComponent>>& attachedComponents, const Vector2D startPosition) : Mono(*this) {
     position = startPosition;
     for (const auto& component : attachedComponents) {
         AddComponent(component); 
