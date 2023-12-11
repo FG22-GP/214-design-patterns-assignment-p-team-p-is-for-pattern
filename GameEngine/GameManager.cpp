@@ -4,24 +4,49 @@
 
 
 GameManager::GameManager() : Mono(*this) {
-    currentState = new PlayState();
+    activeState = nullptr;
 }
 
-void GameManager::ChangeState(GameState* newState) // todo: make smart pointer and enable smart pointer on gamestate.
+void GameManager::ChangeState(std::shared_ptr<GameState> pushState) 
 {
-    currentState->OnExit();
-    currentState = newState;
-    currentState->OnEnter();
+	std::cout << "Pushing state with ID: " << pushState->GetStateID() << std::endl;
+	pushState->Start();
+	allstates[pushState->GetStateID()] = pushState;
+	pushState->Stop();
 }
 
-void GameManager::Start() {
-    currentState->OnEnter();
+//void GameManager::PopState()
+//{
+//	if (gameStates.empty())
+//	{
+//		return;
+//	}
+//	gameStates.back()->Stop();
+//	gameStates.pop_back();
+//
+//}
+
+void GameManager::ChangeActiveState(std::string changeID)
+{
+	std::shared_ptr<GameState> stateToChange = allstates[changeID];
+
+	if (stateToChange !=nullptr )
+	{
+		if (activeState != nullptr)	activeState->Stop();
+		activeState = stateToChange;
+		activeState->Start();
+	}
+	else
+	{
+		printf("State cannot found");
+	}
 }
 
-void GameManager::Update() {
-    currentState->Update();
-}
-
-void GameManager::Stop() {
-    currentState->OnExit();
+void GameManager::Update()
+{
+	if (activeState == nullptr)
+	{
+		return;
+	}
+	activeState->Update();
 }

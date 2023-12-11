@@ -54,13 +54,7 @@
     <ClCompile Include="Input.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Engine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Mono.cpp">
@@ -105,9 +99,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EventHandler.h">
