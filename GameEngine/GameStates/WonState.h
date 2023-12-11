@@ -12,7 +12,7 @@ public:
     void Stop() override;
     void Update() override;
 
-    std::string GetStateID() override { return stateID; }
+    std::string GetStateID() const override { return stateID; }
 
     ~WonState() {}
 };

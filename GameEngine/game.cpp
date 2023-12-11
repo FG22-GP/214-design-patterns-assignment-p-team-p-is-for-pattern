@@ -32,9 +32,7 @@ int main(int argc, char* args[]) {
     pik_w = pik_h = 200;
 
     //Load image at specified path
-
-    TheTextureManager::Instance()->LoadImage(pikachuImagePath, "pikachu");
-   
+      
     Color textColor = {0xff, 0xff, 0xff};
     Vector2D dimensions;
     TheTextureManager::Instance()->LoadText("font/lazy.ttf", "lazy", textColor, 100, "The lazy fox, blah blah", dimensions);

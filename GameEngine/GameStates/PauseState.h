@@ -11,7 +11,7 @@ public:
     void Stop() override;
     void Update() override;
 
-    std::string GetStateID() { return stateID; }
+    std::string GetStateID() const override { return stateID; }
 
     ~PauseState() {}
 };
