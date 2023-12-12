@@ -1,6 +1,7 @@
 #include "Record.h"
 
 #include <fstream>
+#include <random>
 
 #include "..\Vector2D.h"
 #include "..\Engine/CollisionCreator.h"
@@ -14,15 +15,20 @@
 
 
 Record::Record(GameManager* manager) : GameState(manager) {
-    int rangeX = WindowSizeX - 0 + 1;
-    int numX = rand() % rangeX + 0;
-    int rangeY = WindowSizeY - 0 + 1;
-    int numY = rand() % rangeY + 0;
+    int xRangeFrom = 0;
+    int xRangeTo = WindowSizeX;
+    int yRangeFrom = 0;
+    int yRangeTo = WindowSizeY;
+    std::random_device randomDevice;
+    std::mt19937 generator(std::_Random_device());
+    std::uniform_int_distribution xDistribution(xRangeFrom, xRangeTo - 75);
+    std::uniform_int_distribution yDistribution(yRangeFrom, yRangeTo - 75);
+    
     player = std::make_shared<Entity>(Vector2D(200, 200));
     player->AddComponent(RenderCreator().CreateComponent(player, Vector2D(75, 75), "pikachu"));
     player->AddComponent(MovementCreator().CreateComponent(player));
     
-    theEnd = std::make_shared<Entity>(Vector2D(numX, numY));
+    theEnd = std::make_shared<Entity>(Vector2D(xDistribution(generator), yDistribution(generator)));
     theEnd->AddComponent(RenderCreator().CreateComponent(theEnd, Vector2D(150, 150), "pikachu"));
     theEnd->AddComponent(RenderCreator().CreateComponent(theEnd, Vector2D(150, 150), "pikachu"));
     theEnd->AddComponent(CollisionCreator().CreateComponent(theEnd, 100.0f));
