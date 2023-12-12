@@ -32,6 +32,7 @@
     <ClCompile Include="Components\IComponent.cpp" />
     <ClCompile Include="Components\Movement.cpp" />
     <ClCompile Include="Components\Render.cpp" />
+    <ClCompile Include="Engine\CollisionCreator.cpp" />
     <ClCompile Include="Engine\ComponentCreator.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\Entity.cpp" />
@@ -189,6 +190,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="GameStates\Lose.cpp" />
     <ClCompile Include="GameStates\PauseState.cpp" />
     <ClCompile Include="GameStates\PlayState.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -435,6 +437,8 @@
     <ClInclude Include="Components\IComponentFactory.h" />
     <ClInclude Include="Components\Movement.h" />
     <ClInclude Include="Components\Render.h" />
+    <ClInclude Include="Constants\Constants.h" />
+    <ClInclude Include="Engine\CollisionCreator.h" />
     <ClInclude Include="Engine\ComponentCreator.h" />
     <ClInclude Include="Engine\Entity.h" />
     <ClInclude Include="Engine\MovementCreator.h" />
@@ -444,6 +448,7 @@
     <ClInclude Include="Engine\Mono.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameStates\GameState.h" />
+    <ClInclude Include="GameStates\Lose.h" />
     <ClInclude Include="GameStates\PauseState.h" />
     <ClInclude Include="GameStates\PlayState.h" />
     <ClInclude Include="GameStates\Record.h" />
