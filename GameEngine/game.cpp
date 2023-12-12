@@ -9,34 +9,22 @@
 #include "GameWindow.h"
 #include "TextureManager.h"
 #include "Vector2D.h"
+#include "GameManager.h"
 
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 1024;
 const int SCREEN_HEIGHT = 768;
 
-const char* pikachuImagePath{"img/pikachu.png"};
-
 int main(int argc, char* args[]) {
     TheGameWindow::Instance()->Init(1024, 768, IMG_INIT_PNG);
 
     std::shared_ptr<Entity> firstEntity = GameClass::GetNewEntity();
 
-    // All data related to pikachu
-    SDL_Texture* pikachu = NULL; // The final optimized image
-    bool pikachuMoveRight = false;
-    int pik_x, pik_y;
-    pik_x = pik_y = 0;
-    int pik_w, pik_h;
-    pik_w = pik_h = 200;
+     GameManager* gameManager = new GameManager();
 
-    //Load image at specified path
-
-    TheTextureManager::Instance()->LoadImage(pikachuImagePath, "pikachu");
-
-    Color textColor = {0xff, 0xff, 0xff};
-    Vector2D dimensions;
-    TheTextureManager::Instance()->LoadText("font/lazy.ttf", "lazy", textColor, 100, "The lazy fox, blah blah", dimensions);
+    gameManager->Start();
+    gameManager->ChangeActiveState("Play");
 
     bool quit = false;
     
@@ -44,40 +32,33 @@ int main(int argc, char* args[]) {
     while (quit == false) {
         SDL_GetTicks();
         Input::UpdateInput();
-
-        if (Input::GetKey(SDLK_UP)) pik_y--;
-        if (Input::GetKey(SDLK_DOWN)) pik_y++;
-        if (Input::GetKey(SDLK_d)) pik_x++;
-        if (Input::GetKey(SDLK_a)) pik_x--;
-
         
-        
-        if (Input::GetKey(SDLK_SPACE)) {
-            const std::shared_ptr<Entity> entity = std::make_shared<Entity>();
-         //   CommandQueue.push(std::make_shared<MoveCommand>(MoveCommand(Vector2D(1, 1), this))); // logic, 
-        }
-         if (Input::GetKeyDown(SDLK_RETURN)) {
-            // while (!CommandQueue.empty()) {
-            //     CommandQueue.back()->Execute();
-            //     CommandQueue.pop();
-            // }
-        }
+        //if (Input::GetKey(SDLK_SPACE)) {
+        //    const std::shared_ptr<Entity> entity = std::make_shared<Entity>();
+        // //   CommandQueue.push(std::make_shared<MoveCommand>(MoveCommand(Vector2D(1, 1), this))); // logic, 
+        //}
+        // if (Input::GetKeyDown(SDLK_RETURN)) {
+        //    // while (!CommandQueue.empty()) {
+        //    //     CommandQueue.back()->Execute();
+        //    //     CommandQueue.pop();
+        //    // }
+        //}
         if (Input::GetKeyDown(SDLK_ESCAPE)) {
             quit = true;
+        }
+        if (Input::GetKeyDown(SDLK_a)) {
+         
+             gameManager->ChangeActiveState("Pause");
+        }
+        if (Input::GetKeyDown(SDLK_d)) {
+
+            gameManager->ChangeActiveState("Play");
         }
 
         // clear the screen
         TheGameWindow::Instance()->Clear();
 
-        // render Pikachu
-        SDL_Rect targetRectangle{
-            pik_x,
-            pik_y,
-            pik_w,
-            pik_h
-        };
-        TheTextureManager::Instance()->Draw("pikachu", Vector2D(pik_x, pik_y), Vector2D(pik_w, pik_h));
-        TheTextureManager::Instance()->Draw("lazy", Vector2D(500, 500), dimensions);
+        gameManager->Update();
 
         // present screen (switch buffers)
         TheGameWindow::Instance()->Present();
@@ -85,6 +66,9 @@ int main(int argc, char* args[]) {
         SDL_Delay(3); // can be used to wait for a certain amount of ms
     }
 
+    gameManager->Stop();
+
+    gameManager = nullptr;
     TheGameWindow::Instance()->CleanUpFunction();
 
     return 0;

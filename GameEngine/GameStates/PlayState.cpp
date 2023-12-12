@@ -1,12 +1,24 @@
 #include "PlayState.h"
 #include "..\Vector2D.h"
 
+#include "..\Components\Render.h"
+#include "..\Engine\RenderCreator.h"
+
 //const std::string PlayState::stateID = "Play";
+
+PlayState::PlayState()
+{
+    std::shared_ptr<Entity> player= std::make_shared<Entity>(Vector2D(200,200));
+    auto componentCreator = RenderCreator();
+    player->AddComponent(componentCreator.CreateComponent(player,Vector2D(200,200),"pikachu"));
+    entityList.push_back(player);
+}
 
 void PlayState::Start()
 {
     //State Start logic here
-    TheTextureManager::Instance()->LoadImage("img/pikachu.png","pikachu");
+
+    
     printf("Play State Entered \n");
     //runs entity Start logic
     GameState::Start();
@@ -16,7 +28,7 @@ void PlayState::Start()
 void PlayState::Stop()
 {
     //State Stop logic here
-    TheTextureManager::Instance()->ClearFromTextureMap("pikachu");
+
     printf("Play Stopped Entered \n");
     //runs entity Stop logic
     GameState::Stop();
@@ -24,10 +36,13 @@ void PlayState::Stop()
 
 void PlayState::Update()
 {
-    ++pos_x;
-    ++pos_y;
     //State Update logic here
-    TheTextureManager::Instance()->Draw("pikachu", Vector2D(pos_x, pos_y), Vector2D(200, 200));
+
     //runs entity Update logic
     GameState::Update();
+}
+
+PlayState::~PlayState()
+{
+    TheTextureManager::Instance()->ClearFromTextureMap("pikachu");
 }

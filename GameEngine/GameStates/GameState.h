@@ -5,11 +5,12 @@
 
 #include "../Engine/Entity.h"
 
+
 class IGameState : std::enable_shared_from_this<IGameState>
 {
 protected:
 
-    std::vector<std::shared_ptr<Mono>> entityList;
+    std::vector<std::shared_ptr<Entity>> entityList;
 
 public:
     IGameState() = default;

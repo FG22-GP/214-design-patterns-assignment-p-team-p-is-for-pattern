@@ -3,6 +3,7 @@
 #include <map>
 #include <memory>
 
+
 class GameManager 
 {
  
@@ -18,12 +19,10 @@ public:
 
     GameManager();
 
-
-    //Warmup
-
-    //Restructure
     void PushState(std::shared_ptr<GameState> pushState);
 
+    void Start();
+    void Stop();
 
     //Might not need pop
     //void PopState();

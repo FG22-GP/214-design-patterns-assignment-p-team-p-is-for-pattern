@@ -1,19 +1,21 @@
 #pragma once
 #include "GameState.h"
-#include "..\TextureManager.h"
 
 
-class PlayState : public GameState
+class Record : public GameState
 {
-    const std::string stateID = "Play";
+    const std::string stateID = "Record";
+
 
 public:
-    PlayState();
+    Record() {}
     void Start() override;
     void Stop() override;
     void Update() override;
 
     std::string GetStateID() const override { return stateID; }
 
-    ~PlayState();
+    ~Record() {}
+
 };
+
