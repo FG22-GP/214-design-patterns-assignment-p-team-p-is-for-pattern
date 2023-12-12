@@ -7,7 +7,9 @@ Vector2D& Movement::ConsumeVelocity() { // we could have slowdown here, this tur
     return currentVel;
 }
 
-Movement::Movement(const std::shared_ptr<Entity>& Owner) : IComponent(Owner) {}   
+Movement::Movement(std::string name, const std::shared_ptr<Entity>& Owner) : IComponent(Owner) {
+    componentName = name;
+}
 
 void Movement::Translate(Vector2D Translation) { // todo: this should be velocity that renderes next frame or something in its update to is beceomes addative,
                                                         // when collision happens we can stop velocity of entity making it fully stop, also we can add other fun

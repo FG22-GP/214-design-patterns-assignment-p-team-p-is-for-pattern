@@ -5,14 +5,14 @@
 
 #include "../Engine/Entity.h"
 
+class GameManager;
 
 class IGameState : std::enable_shared_from_this<IGameState>
 {
-protected:
-
-    std::vector<std::shared_ptr<Entity>> entityList;
 
 public:
+    std::vector<std::shared_ptr<Entity>> entityList;
+    GameManager* gameManager;
     IGameState() = default;
     virtual void Start() = 0;
     virtual void Stop() = 0;
@@ -31,7 +31,7 @@ class GameState : public IGameState , std::enable_shared_from_this<GameState>
     const std::string stateID = "";
     
 public:
-    GameState() = default;
+    GameState(GameManager* manager);
     void Start() override;
     void Stop() override;
     void Update() override;

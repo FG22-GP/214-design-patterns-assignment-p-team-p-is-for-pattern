@@ -10,13 +10,13 @@
 
 GameManager::GameManager() {
     activeState = nullptr;
-	std::shared_ptr<PlayState> playState = std::make_shared<PlayState>();
+	std::shared_ptr<PlayState> playState = std::make_shared<PlayState>(this);
 	PushState(playState);
-	std::shared_ptr<PauseState> pauseState = std::make_shared<PauseState>();
+	std::shared_ptr<PauseState> pauseState = std::make_shared<PauseState>(this);
 	PushState(pauseState);
-	std::shared_ptr<WonState> wonState = std::make_shared<WonState>();
+	std::shared_ptr<WonState> wonState = std::make_shared<WonState>(this);
 	PushState(wonState);
-	std::shared_ptr<Record> record = std::make_shared<Record>();
+	std::shared_ptr<Record> record = std::make_shared<Record>(this);
 	PushState(record);
 
 }
@@ -54,13 +54,17 @@ void GameManager::Stop()
 //
 //}
 
-void GameManager::ChangeActiveState(std::string changeID)
+void GameManager::ChangeActiveState(std::string changeID, bool shouldPassEntites)
 {
 	std::shared_ptr<GameState> stateToChange = allstates[changeID];
 
 	if (stateToChange !=nullptr )
 	{
 		if (activeState != nullptr)	activeState->Stop();
+		if(shouldPassEntites)
+		{
+			stateToChange->entityList = activeState->entityList;
+		}
 		activeState = stateToChange;
 		activeState->Start();
 	}

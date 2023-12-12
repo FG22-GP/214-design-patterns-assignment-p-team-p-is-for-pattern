@@ -2,18 +2,18 @@
 #include "GameStates/GameState.h"
 #include <map>
 #include <memory>
+#include <vector>
 
 
-class GameManager 
+class GameManager
 {
- 
-    std::map<std::string,std::shared_ptr<GameState>> allstates;
-
 protected:
 
 
 
 public:
+
+    std::map<std::string, std::shared_ptr<GameState>> allstates;
 
     std::shared_ptr<GameState> activeState;
 
@@ -26,10 +26,11 @@ public:
 
     //Might not need pop
     //void PopState();
-    void ChangeActiveState(std::string changeID);
+    void ChangeActiveState(std::string changeID, bool shouldPassEntites = false);
 
     //Probs same
     void Update();
 
     ~GameManager() {}
+
 };

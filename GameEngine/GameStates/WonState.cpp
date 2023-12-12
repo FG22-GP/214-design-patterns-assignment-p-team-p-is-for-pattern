@@ -2,6 +2,10 @@
 
 //const std::string WonState::stateID = "Won";
 
+WonState::WonState(GameManager* manager) : GameState(manager)
+{
+}
+
 void WonState::Start()
 {
     //State Start logic here

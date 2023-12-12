@@ -2,6 +2,11 @@
 
 //const std::string PauseState::stateID = "Pause";
 
+PauseState::PauseState(GameManager*  manager) : GameState(manager)
+{
+
+}
+
 void PauseState::Start()
 {
     //State Start logic here

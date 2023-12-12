@@ -18,13 +18,11 @@ const int SCREEN_HEIGHT = 768;
 
 int main(int argc, char* args[]) {
     TheGameWindow::Instance()->Init(1024, 768, IMG_INIT_PNG);
-
-    std::shared_ptr<Entity> firstEntity = GameClass::GetNewEntity();
-
-     GameManager* gameManager = new GameManager();
+    
+    GameManager* gameManager = new GameManager();
 
     gameManager->Start();
-    gameManager->ChangeActiveState("Play");
+    gameManager->ChangeActiveState("Record");
 
     bool quit = false;
     
@@ -45,14 +43,6 @@ int main(int argc, char* args[]) {
         //}
         if (Input::GetKeyDown(SDLK_ESCAPE)) {
             quit = true;
-        }
-        if (Input::GetKeyDown(SDLK_a)) {
-         
-             gameManager->ChangeActiveState("Pause");
-        }
-        if (Input::GetKeyDown(SDLK_d)) {
-
-            gameManager->ChangeActiveState("Play");
         }
 
         // clear the screen

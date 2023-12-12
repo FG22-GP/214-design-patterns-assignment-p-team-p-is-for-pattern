@@ -8,7 +8,7 @@ class PlayState : public GameState
     const std::string stateID = "Play";
 
 public:
-    PlayState();
+    PlayState(GameManager* manager);
     void Start() override;
     void Stop() override;
     void Update() override;

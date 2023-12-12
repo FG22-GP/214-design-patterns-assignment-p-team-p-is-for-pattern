@@ -1,17 +1,12 @@
 #include "PlayState.h"
-#include "..\Vector2D.h"
 
-#include "..\Components\Render.h"
-#include "..\Engine\RenderCreator.h"
+#include "..\EventHandler.h"
 
 //const std::string PlayState::stateID = "Play";
 
-PlayState::PlayState()
+PlayState::PlayState(GameManager* manager) : GameState(manager)
 {
-    std::shared_ptr<Entity> player= std::make_shared<Entity>(Vector2D(200,200));
-    auto componentCreator = RenderCreator();
-    player->AddComponent(componentCreator.CreateComponent(player,Vector2D(200,200),"pikachu"));
-    entityList.push_back(player);
+
 }
 
 void PlayState::Start()
@@ -36,13 +31,22 @@ void PlayState::Stop()
 
 void PlayState::Update()
 {
+    auto player = entityList[0];
     //State Update logic here
+    if (!EventHandler::Empty())
+    {
+        EventHandler::TryPop();
+        printf("Positon : %f , %f" , player->position.GetX() , player->position.GetY());
+    }
+    else
+    {
 
+    }
     //runs entity Update logic
     GameState::Update();
 }
 
 PlayState::~PlayState()
 {
-    TheTextureManager::Instance()->ClearFromTextureMap("pikachu");
+ 
 }

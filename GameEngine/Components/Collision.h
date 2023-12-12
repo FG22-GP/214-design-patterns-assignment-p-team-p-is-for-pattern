@@ -3,7 +3,7 @@
 
 class Collision final : public IComponent, std::enable_shared_from_this<Collision> {
 public:
-    Collision(const std::shared_ptr<Entity>& Owner);
+    explicit Collision(std::string name, const std::shared_ptr<Entity>& Owner);
 
     void Start() override;
     void Execute() override;

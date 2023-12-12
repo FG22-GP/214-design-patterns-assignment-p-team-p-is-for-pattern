@@ -7,7 +7,7 @@ class WonState : public GameState
     
 
 public:
-    WonState() {}
+    WonState(GameManager* manager);
     void Start() override;
     void Stop() override;
     void Update() override;

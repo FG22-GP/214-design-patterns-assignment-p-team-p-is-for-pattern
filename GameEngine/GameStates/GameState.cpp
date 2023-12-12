@@ -1,5 +1,10 @@
 #include "GameState.h"
 
+GameState::GameState(GameManager* manager)
+{
+	gameManager = manager;
+}
+
 void GameState::Start()
 {
 	for (auto entity : entityList)

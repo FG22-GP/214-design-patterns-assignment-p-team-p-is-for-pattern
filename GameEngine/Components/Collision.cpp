@@ -1,6 +1,7 @@
 #include "Collision.h"
 
-Collision::Collision(const std::shared_ptr<Entity>& Owner) : IComponent(Owner) {
+Collision::Collision(std::string name, const std::shared_ptr<Entity>& Owner) : IComponent(Owner) {
+    componentName = name;
 }
 
 void Collision::Start() {

@@ -16,7 +16,7 @@ public:
         CommandQueue.push(command);
     }
 
-    bool Empty() const {
+    static bool Empty(){
         return CommandQueue.empty();
     }
 };

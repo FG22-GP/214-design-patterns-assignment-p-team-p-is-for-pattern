@@ -109,6 +109,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="Engine\MovementCreator.cpp" />
     <ClCompile Include="Engine\RenderCreator.cpp" />
     <ClCompile Include="game.cpp" />
     <!-- <<<<<<< .merge_file_U8VRMK -->
@@ -436,6 +437,7 @@
     <ClInclude Include="Components\Render.h" />
     <ClInclude Include="Engine\ComponentCreator.h" />
     <ClInclude Include="Engine\Entity.h" />
+    <ClInclude Include="Engine\MovementCreator.h" />
     <ClInclude Include="Engine\RenderCreator.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="Engine\Engine.h" />

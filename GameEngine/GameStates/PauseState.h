@@ -6,7 +6,7 @@ class PauseState : public GameState
     std::string stateID = "Pause";
 
 public:
-    PauseState() {}
+    PauseState(GameManager* manager);
     void Start() override;
     void Stop() override;
     void Update() override;

@@ -9,7 +9,7 @@ public:
 
     Vector2D& ConsumeVelocity();
     
-    Movement(const std::shared_ptr<Entity>& Owner);
+    explicit Movement(std::string name, const std::shared_ptr<Entity>&Owner);
     void Translate(Vector2D Translation);
 
     void Start() override;
