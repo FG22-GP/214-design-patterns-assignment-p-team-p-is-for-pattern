@@ -19,7 +19,6 @@ Record::Record(GameManager* manager) : GameState(manager) {
     int xRangeTo = WindowSizeX;
     int yRangeFrom = 0;
     int yRangeTo = WindowSizeY;
-    std::random_device randomDevice;
     std::mt19937 generator(std::_Random_device());
     std::uniform_int_distribution xDistribution(xRangeFrom, xRangeTo - 75);
     std::uniform_int_distribution yDistribution(yRangeFrom, yRangeTo - 75);
