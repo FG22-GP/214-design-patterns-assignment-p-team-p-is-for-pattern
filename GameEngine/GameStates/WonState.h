@@ -7,6 +7,7 @@ class WonState : public GameState
     const std::string stateID = "Won";
     
     Vector2D wonTextSize;
+    Vector2D restartTextSize;
 
 public:
     WonState(GameManager* manager);
