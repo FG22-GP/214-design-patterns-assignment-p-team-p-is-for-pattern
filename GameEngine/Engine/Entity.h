@@ -66,14 +66,10 @@ std::shared_ptr<T> Entity::GetComponent() {
 
 class GameClass {
 public:
-    /**
-     * \brief Don't use unless you want crash smile
-     * \return Should return a functional Entity but doesn't rn ;-;
-     */
     static std::shared_ptr<Entity> GetNewEntity() {
         auto newEntity = Entity();
         auto componentCreator = ComponentCreator();
-        //newEntity.AddComponent(componentCreator.CreateComponent());
+        newEntity.AddComponent(componentCreator.CreateComponent(std::make_shared<Entity>(newEntity)));
         SDL_Log("New entity Added with ExampleComponent on it!");
         return std::make_shared<Entity>(newEntity);
     }

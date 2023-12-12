@@ -3,9 +3,9 @@
 
 
 class ComponentCreator final : IComponentFactory {
-    void InitializeComponent(IComponent* component) override;
+    void InitializeComponent(std::shared_ptr<IComponent> component) override;
 
 public:
     ComponentCreator() = default;
-    std::shared_ptr<IComponent> CreateComponent() override;
+    std::shared_ptr<IComponent> CreateComponent(std::shared_ptr<Entity> owner) override;
 };

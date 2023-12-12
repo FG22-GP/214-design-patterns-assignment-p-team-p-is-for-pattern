@@ -19,6 +19,9 @@ const char* pikachuImagePath{"img/pikachu.png"};
 
 int main(int argc, char* args[]) {
     TheGameWindow::Instance()->Init(1024, 768, IMG_INIT_PNG);
+
+    std::shared_ptr<Entity> firstEntity = GameClass::GetNewEntity();
+
     // All data related to pikachu
     SDL_Texture* pikachu = NULL; // The final optimized image
     bool pikachuMoveRight = false;

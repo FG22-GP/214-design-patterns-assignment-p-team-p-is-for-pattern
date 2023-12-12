@@ -8,6 +8,6 @@ protected:
     virtual ~IComponentFactory() = default;
 
 public:
-    virtual std::shared_ptr<IComponent> CreateComponent() = 0;
-    virtual void InitializeComponent(IComponent* component) = 0;
+    virtual std::shared_ptr<IComponent> CreateComponent(std::shared_ptr<Entity> owner) = 0;
+    virtual void InitializeComponent(std::shared_ptr<IComponent> component) = 0;
 };

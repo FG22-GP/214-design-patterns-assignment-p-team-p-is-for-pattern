@@ -5,7 +5,7 @@
 #include "ExampleEntityComponent.h"
 #include "IComponent.h"
 
-EntityComponent::EntityComponent(std::string name, std::shared_ptr<Entity>& Owner): IComponent(Owner) {
+EntityComponent::EntityComponent(std::string name, std::shared_ptr<Entity> owner): IComponent(owner) {
     componentName = std::move(name);
 }
 

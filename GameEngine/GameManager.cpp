@@ -3,11 +3,11 @@
 #include "GameStates/PlayState.h"
 
 
-GameManager::GameManager() : Mono(*this) {
+GameManager::GameManager() {
     activeState = nullptr;
 }
 
-void GameManager::ChangeState(std::shared_ptr<GameState> pushState) 
+void GameManager::PushState(std::shared_ptr<GameState> pushState) 
 {
 	std::cout << "Pushing state with ID: " << pushState->GetStateID() << std::endl;
 	pushState->Start();

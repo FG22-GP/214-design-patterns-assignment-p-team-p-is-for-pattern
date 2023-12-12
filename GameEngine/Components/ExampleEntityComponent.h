@@ -6,7 +6,7 @@
  */
 class EntityComponent final : public IComponent {
 public:
-    explicit EntityComponent(std::string name, std::shared_ptr<Entity>& Owner);
+    explicit EntityComponent(std::string name, std::shared_ptr<Entity> owner);
     void Start() override;
     void Execute() override;
     void Stop() override;

@@ -3,7 +3,7 @@
 #include <vector>
 #include <memory>
 
-#include "../Entity.h"
+#include "../Engine/Entity.h"
 
 class IGameState : std::enable_shared_from_this<IGameState>
 {
