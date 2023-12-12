@@ -33,7 +33,7 @@ void WonState::Stop()
 void WonState::Update()
 {
     TheTextureManager::Instance()->Draw("lazy",Vector2D(200,200),wonTextSize);
-    TheTextureManager::Instance()->Draw("wonRestart",Vector2D(200 + wonTextSize.GetX(), 200 + wonTextSize.GetY()), wonTextSize);
+    TheTextureManager::Instance()->Draw("wonRestart",Vector2D(200 , 200 + wonTextSize.GetY()), wonTextSize);
     if (Input::GetKeyDown(SDLK_RETURN))
     {
         gameManager->ChangeActiveState("Record");
