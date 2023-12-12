@@ -8,7 +8,7 @@ Render::Render(std::string name ,const std::shared_ptr<Entity>& Owner,Vector2D s
     componentName = name;
     imageName = imgName;
     spriteSize = size;
-    TheTextureManager::Instance()->LoadImage("img/" + imageName + ".png", imageName);
+    TheTextureManager::Instance()->LoadImage("img/SDLSprites/" + imageName + ".png", imageName);
 }
 
 void Render::Start() {
