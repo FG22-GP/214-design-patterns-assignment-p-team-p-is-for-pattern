@@ -15,6 +15,9 @@ public:
     void Stop() override;
     void Update() override;
 
+    Vector2D GenerateRandomPosition();
+    void Initilize();
+
     std::string GetStateID() const override { return stateID; }
 
     ~Record();
