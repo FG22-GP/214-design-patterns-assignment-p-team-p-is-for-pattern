@@ -39,7 +39,7 @@ bool GameWindow::WasSuccessful() {
 }
 
 void GameWindow::Clear() {
-    SDL_SetRenderDrawColor(renderer, 120, 60, 255, 255);
+    SDL_SetRenderDrawColor(renderer, 6, 6, 15, 255);
     SDL_RenderClear(renderer);
 }
 
