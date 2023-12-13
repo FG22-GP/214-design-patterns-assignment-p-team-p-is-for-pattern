@@ -1,8 +1,8 @@
 #pragma once
 #include <random>
 
-constexpr int WindowSizeX = 1024;
-constexpr int WindowSizeY = 768;
+constexpr int WindowSizeX = 1056;
+constexpr int WindowSizeY = 792;
 
 static bool IsOnScreen(Vector2D value) {
     return value.GetX() > 0 && value.GetX() < WindowSizeX

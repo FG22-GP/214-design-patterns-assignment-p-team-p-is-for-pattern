@@ -15,6 +15,7 @@ void Render::Start() {
 }
 
 void Render::Execute() {
+    
     TheTextureManager::Instance()->Draw(imageName, owner->position, spriteSize);
 }
 

@@ -54,8 +54,9 @@ public:
 				  int fontSize, std::string text, Vector2D& dimensions);
 
 	void Draw(std::string id, Vector2D imagePosition, Vector2D imageSize, FlipState flip = FLIP_NONE);
+	Uint8 SetAlpha(std::string id, Uint8 value);
 	void DrawFrame(std::string id, Vector2D imagePosition, Vector2D imageSize, int currentRow, int currentFrame,
-		FlipState flip = FLIP_NONE);
+	               FlipState flip = FLIP_NONE);
 
 	void ClearFromTextureMap(std::string textureID);
 

@@ -5,6 +5,7 @@
 #include "../Components/Collision.h"
 #include "../Constants/Constants.h"
 #include "../Engine/Engine.h"
+#include "../Components/Render.h"
 
 //const std::string PlayState::stateID = "Play";
 
@@ -23,12 +24,17 @@ void PlayState::Update() {
     GameState::Update();
     if (!EventHandler::Empty()) {
         EventHandler::TryPop();
+
         return;
     }
 
-    for (const auto& entity : entityList) {// cursed refactor
+    for (const auto& entity : entityList) {
+        // cursed refactor
         const auto CollisionComponent = entity->GetComponent<Collision>();
         if (!CollisionComponent) continue;
+
+        // TextureManager::Instance()->SetAlpha(entity->GetComponent<Render>()->imageName, 1); // TODO: Makes Entity invisible lol -Petter
+
         for (const auto& entity2 : entityList) {
             if (entity == entity2) continue;
 
@@ -39,7 +45,7 @@ void PlayState::Update() {
         }
     }
 
-    if (/* Player Collision with evil tile from hell ||*/ !IsOnScreen(gameManager->playerEntity->position) || gameManager->strokes == 3) {
+    if (/* Player Collision with evil tile of hell ||*/ !IsOnScreen(gameManager->playerEntity->position) || gameManager->strokes == 3) {
         gameManager->ChangeActiveState("Lose");
         return;
     }

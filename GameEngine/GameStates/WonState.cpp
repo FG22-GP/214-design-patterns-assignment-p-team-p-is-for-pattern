@@ -8,9 +8,9 @@
 WonState::WonState(GameManager* manager) : GameState(manager)
 {
     Color wonTextColor = { 0xff,0xff,0xff };
-    TheTextureManager::Instance()->LoadText("font/lazy.ttf", "lazy", wonTextColor, 120 ,"You Won!!!",wonTextSize);
-    TheTextureManager::Instance()->LoadText("font/lazy.ttf", "wonRestart", wonTextColor, 60, "Press Space to Play New Level", wonTextSize);
-    TheTextureManager::Instance()->LoadText("font/lazy.ttf", "wonRetry", wonTextColor, 60, "Press Enter to Retry Current Level", wonTextSize);
+    TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "lazy", wonTextColor, 120 ,"You Won!!!",wonTextSize);
+    TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "wonRestart", wonTextColor, 60, "Press Space to Play New Level", wonTextSize);
+    TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "wonRetry", wonTextColor, 60, "Press Enter to Retry Current Level", wonTextSize);
 }
 
 void WonState::Start()

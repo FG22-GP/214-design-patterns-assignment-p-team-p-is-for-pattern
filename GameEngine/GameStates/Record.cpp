@@ -14,7 +14,7 @@
 
 Record::Record(GameManager* manager) : GameState(manager) {
     player = std::make_shared<Entity>(Vector2D(200, 200));
-    player->AddComponent(RenderCreator().CreateComponent(player, Vector2D(75, 75), "MainCharacterSolo"));
+    player->AddComponent(RenderCreator().CreateComponent(player, Vector2D(32, 32), "MainCharacterSolo"));
     player->AddComponent(MovementCreator().CreateComponent(player));
 
     theEnd = std::make_shared<Entity>(GenerateRandomPosition());
