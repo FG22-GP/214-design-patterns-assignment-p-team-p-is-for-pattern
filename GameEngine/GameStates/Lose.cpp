@@ -6,8 +6,8 @@
 Lose::Lose(GameManager* manager) : GameState(manager) {
 
     Color lostTextColor = { 0xff,0xff,0xff };
-    TheTextureManager::Instance()->LoadText("font/lazy.ttf", "lost", lostTextColor, 80, "You Lost!!!", loseTextSize);
-    TheTextureManager::Instance()->LoadText("font/lazy.ttf", "restart", lostTextColor, 60, "Press Enter to Start Again", restartTextSize);
+    TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "lost", lostTextColor, 80, "You Lost!!!", loseTextSize);
+    TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "restart", lostTextColor, 60, "Press Enter to Start Again", restartTextSize);
 }
 
 void Lose::Start() {
