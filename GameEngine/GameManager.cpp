@@ -8,13 +8,14 @@
 
 GameManager::GameManager() {
     activeState = nullptr;
+    activeLevel = std::make_shared<Level>(Level());
 
-    std::shared_ptr<PlayState> playState = std::make_shared<PlayState>(this);
-    std::shared_ptr<PauseState> pauseState = std::make_shared<PauseState>(this);
-    std::shared_ptr<WonState> wonState = std::make_shared<WonState>(this);
-    std::shared_ptr<Record> record = std::make_shared<Record>(this);
-    std::shared_ptr<Lose> lose = std::make_shared<Lose>(this);
-
+    const auto playState = std::make_shared<PlayState>(this);
+    const auto pauseState = std::make_shared<PauseState>(this);
+    const auto wonState = std::make_shared<WonState>(this);
+    const auto record = std::make_shared<Record>(this);
+    const auto lose = std::make_shared<Lose>(this);
+    
     PushState(playState);
     PushState(pauseState);
     PushState(wonState);
@@ -24,23 +25,23 @@ GameManager::GameManager() {
 
 void GameManager::PushState(std::shared_ptr<GameState> pushState) {
     std::cout << "Pushing state with ID: " << pushState->GetStateID() << std::endl;
-    allstates[pushState->GetStateID()] = pushState;
+    allStates[pushState->GetStateID()] = pushState;
 }
 
 void GameManager::Start() {
-    for (auto state : allstates) {
+    for (auto state : allStates) {
         state.second->Start();
     }
 }
 
 void GameManager::Stop() {
-    for (auto state : allstates) {
+    for (auto state : allStates) {
         state.second->Stop();
     }
 }
 
 void GameManager::ChangeActiveState(std::string changeID, bool shouldPassEntites) {
-    std::shared_ptr<GameState> stateToChange = allstates[changeID];
+    std::shared_ptr<GameState> stateToChange = allStates[changeID];
 
     if (stateToChange != nullptr) {
         if (activeState != nullptr) activeState->Stop();
@@ -50,11 +51,19 @@ void GameManager::ChangeActiveState(std::string changeID, bool shouldPassEntites
         activeState = stateToChange;
         activeState->Start();
     }
-    
+}
+
+void GameManager::RestartLevel(const bool generateNewLevel) {
+    if (generateNewLevel) {
+        activeLevel->GenerateRandomLevel();
+    }
+
+    strokes = 0;
+    playerEntity->position = activeLevel->GetStartPosition();
 }
 
 void GameManager::Update() {
     if (activeState == nullptr) return;
-    
+
     activeState->Update();
 }
