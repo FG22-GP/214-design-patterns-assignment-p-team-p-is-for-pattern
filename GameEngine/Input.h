@@ -1,8 +1,7 @@
 ﻿#pragma once
 #include <map>
-#include <memory>#
+#include <memory>
 #include <SDL_keycode.h>
-#include <string>
 
 #include "Vector2D.h"
 
