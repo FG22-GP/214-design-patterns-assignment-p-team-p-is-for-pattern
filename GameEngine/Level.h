@@ -1,15 +1,18 @@
 #pragma once
 #include <memory>
 
+#include "Grid.h"
 #include "Score.h"
 #include "Vector2D.h"
+#include "Constants/Constants.h"
 
 class Level {
     Vector2D goalPosition;
     Vector2D startPosition;
 
 public:
-    Level();
+    explicit Level(std::array<std::array<char, TilemapX>, TilemapY> gridData);
+    std::shared_ptr<Grid> grid;
 
     bool bGenerateLevel;
     void GenerateRandomLevel();

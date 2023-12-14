@@ -32,6 +32,7 @@
     <ClCompile Include="Components\IComponent.cpp" />
     <ClCompile Include="Components\Movement.cpp" />
     <ClCompile Include="Components\Render.cpp" />
+    <ClCompile Include="Components\Tile.cpp" />
     <ClCompile Include="Engine\CollisionCreator.cpp" />
     <ClCompile Include="Engine\ComponentCreator.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
@@ -113,6 +114,7 @@
     <ClCompile Include="Engine\MovementCreator.cpp" />
     <ClCompile Include="Engine\RenderCreator.cpp" />
     <ClCompile Include="Engine\SystemAPI.cpp" />
+    <ClCompile Include="Engine\TileCreator.cpp" />
     <ClCompile Include="game.cpp" />
     <!-- <<<<<<< .merge_file_U8VRMK -->
     <ClCompile Include="Command.cpp" />
@@ -271,6 +273,7 @@
     <ClCompile Include="GameStates\WonState.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="ITextureManager.cpp" />
+    <ClCompile Include="Level\Parser.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Score.cpp" />
     <!-- =======
@@ -440,6 +443,7 @@
     <ClInclude Include="Components\IComponentFactory.h" />
     <ClInclude Include="Components\Movement.h" />
     <ClInclude Include="Components\Render.h" />
+    <ClInclude Include="Components\Tile.h" />
     <ClInclude Include="Constants\Constants.h" />
     <ClInclude Include="Engine\CollisionCreator.h" />
     <ClInclude Include="Engine\ComponentCreator.h" />
@@ -447,6 +451,7 @@
     <ClInclude Include="Engine\MovementCreator.h" />
     <ClInclude Include="Engine\RenderCreator.h" />
     <ClInclude Include="Engine\SystemAPI.h" />
+    <ClInclude Include="Engine\TileCreator.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\Mono.h" />
@@ -457,7 +462,10 @@
     <ClInclude Include="GameStates\PlayState.h" />
     <ClInclude Include="GameStates\Record.h" />
     <ClInclude Include="GameStates\WonState.h" />
+    <ClInclude Include="Grid.h" />
     <ClInclude Include="ITextureManager.h" />
+    <ClInclude Include="Level\Parser.h" />
+    <ClInclude Include="Level\Tileset.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="TextureManager.h" />
@@ -466,6 +474,7 @@
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="IGameWindow.h" />
     <ClInclude Include="GameWindow.h" />
+    <ClInclude Include="Vector2DInt.h" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="..\ext\SDL2-2.26.4\lib\x64\SDL2.dll">

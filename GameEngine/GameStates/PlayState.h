@@ -2,10 +2,13 @@
 #include "GameState.h"
 #include "..\TextureManager.h"
 
+class Collision;
 
 class PlayState : public GameState
 {
     const std::string stateID = "Play";
+    // std::shared_ptr<Entity> player;
+    std::shared_ptr<Collision> playerCollision;
 
 public:
     PlayState(GameManager* manager);

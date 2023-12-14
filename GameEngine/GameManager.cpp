@@ -4,11 +4,16 @@
 #include "GameStates/PauseState.h"
 #include "GameStates/WonState.h"
 #include "GameStates/Record.h"
+#include "Level/Parser.h"
 
 
 GameManager::GameManager() {
+
+    const auto gridData = new std::array<std::array<char, TilemapX>, TilemapY>();
+    Parser::ReadFromFile("Level1",*gridData);
+    
     activeState = nullptr;
-    activeLevel = std::make_shared<Level>(Level());
+    activeLevel = std::make_shared<Level>(Level(*gridData));
 
     const auto playState = std::make_shared<PlayState>(this);
     const auto pauseState = std::make_shared<PauseState>(this);

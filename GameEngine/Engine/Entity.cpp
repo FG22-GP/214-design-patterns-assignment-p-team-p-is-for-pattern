@@ -3,10 +3,17 @@
 #include <ranges>
 
 
-Entity::Entity() : Mono(*this) { position = Vector2D(); }
-Entity::Entity(const Vector2D start_position) : Mono(*this) { position = start_position; }
+Entity::Entity(std::string name) : Mono(*this) {
+    monoName = std::move(name);
+    position = Vector2D();
+}
+Entity::Entity(std::string name, const Vector2D start_position) : Mono(*this) {
+    monoName = std::move(name);
+    position = start_position;
+}
 
-Entity::Entity(const std::vector<std::shared_ptr<IComponent>>& attachedComponents) : Mono(*this) {
+Entity::Entity(std::string name, const std::vector<std::shared_ptr<IComponent>>& attachedComponents) : Mono(*this) {
+    monoName = std::move(name);
     position = Vector2D();
     for (const auto& component : attachedComponents) {
         AddComponent(component);
@@ -14,7 +21,8 @@ Entity::Entity(const std::vector<std::shared_ptr<IComponent>>& attachedComponent
     }
 }
 
-Entity::Entity(std::vector<std::shared_ptr<IComponent>>& attachedComponents, const Vector2D startPosition) : Mono(*this) {
+Entity::Entity(std::string name, std::vector<std::shared_ptr<IComponent>>& attachedComponents, const Vector2D startPosition) : Mono(*this) {
+    monoName = std::move(name);
     position = startPosition;
     for (const auto& component : attachedComponents) {
         AddComponent(component); 
@@ -43,5 +51,5 @@ void Entity::Stop() {
 }
 
 std::string Entity::GetEntityName() {
-    return EntityName;
+    return monoName;
 }

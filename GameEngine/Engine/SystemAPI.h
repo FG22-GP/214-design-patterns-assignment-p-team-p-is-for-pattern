@@ -2,16 +2,25 @@
 #include <map>
 #include <memory>
 #include <string>
-#include <type_traits>
+#include "Mono.h"
 
-class Mono;
+
+//todo: circular dependency
 
 class SystemAPI {
-    static inline std::map<std::string, std::shared_ptr<Mono>> mMonoLookup;
-public:
-    static std::shared_ptr<Mono> FindMono(const std::string& name);
-};
+    //static std::map<std::string, Mono*> mMonoLookup;
 
-inline std::shared_ptr<Mono> SystemAPI::FindMono(const std::string& name) {
-    return mMonoLookup[name];
-}
+public:
+    SystemAPI() = default;
+    ~SystemAPI() = default;
+    // static Mono* FindMono(const std::string& name) {
+    //     return mMonoLookup[name];
+    // }
+
+    // static void AddMono(Mono* mono) {
+    //     if (!mMonoLookup.contains(mono->monoName)) {
+    //         mMonoLookup.insert({mono->monoName, mono});
+    //     }
+    // }
+    
+};

@@ -15,7 +15,6 @@ class ComponentCreator;
 
 
 class Entity : Mono, std::enable_shared_from_this<Entity> {
-    std::string EntityName;
 
 public:
     void AddComponent(std::shared_ptr<IComponent> component) {
@@ -34,10 +33,14 @@ public:
         components.erase(component->GetName());
     }
 
-    Entity();
-    explicit Entity(Vector2D start_position);
-    explicit Entity(std::vector<std::shared_ptr<IComponent>>& attachedComponents, Vector2D startPosition = Vector2D(0.f, 0.f));
-    explicit Entity(const std::vector<std::shared_ptr<IComponent>>& attachedComponents);
+    void SetName(const std::string& name) {
+        monoName = name;
+    }
+
+    Entity(std::string name);
+    explicit Entity(std::string name, Vector2D start_position);
+    explicit Entity(std::string name, std::vector<std::shared_ptr<IComponent>>& attachedComponents, Vector2D startPosition = Vector2D(0.f, 0.f));
+    explicit Entity(std::string name, const std::vector<std::shared_ptr<IComponent>>& attachedComponents);
 
     Vector2D position;
     std::map<std::string, std::shared_ptr<IComponent>> components;
@@ -67,7 +70,7 @@ std::shared_ptr<T> Entity::GetComponent() {
 class GameClass {
 public:
     static std::shared_ptr<Entity> GetNewEntity() {
-        auto newEntity = Entity();
+        auto newEntity = Entity("Testing");
         auto componentCreator = ComponentCreator();
         newEntity.AddComponent(componentCreator.CreateComponent(std::make_shared<Entity>(newEntity)));
         SDL_Log("New entity Added with ExampleComponent on it!");

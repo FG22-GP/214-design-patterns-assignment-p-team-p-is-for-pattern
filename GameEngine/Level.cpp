@@ -1,9 +1,12 @@
 #include "Level.h"
 
+#include <array>
+
 #include "Constants/Constants.h"
 
-Level::Level(): bGenerateLevel(false) {
-    score = std::make_shared<Score>(Score());
+Level::Level(std::array<std::array<char, TilemapX>, TilemapY> gridData): bGenerateLevel(false) {
+    score = std::make_shared<Score>();
+    grid = std::make_shared<Grid>(gridData);
 }
 
 void Level::GenerateRandomLevel() {
