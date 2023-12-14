@@ -272,6 +272,7 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="ITextureManager.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="Score.cpp" />
     <!-- =======
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="GameStates\GameState.cpp">
@@ -458,6 +459,7 @@
     <ClInclude Include="GameStates\WonState.h" />
     <ClInclude Include="ITextureManager.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="Score.h" />
     <ClInclude Include="TextureManager.h" />
     <ClCompile Include="Command.h" />
     <ClCompile Include="Input.h" />

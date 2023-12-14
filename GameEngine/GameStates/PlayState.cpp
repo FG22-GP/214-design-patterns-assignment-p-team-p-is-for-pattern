@@ -24,7 +24,7 @@ void PlayState::Update() {
     GameState::Update();
     if (!EventHandler::Empty()) {
         EventHandler::TryPop();
-
+        gameManager->activeLevel->UpdateScore();
         return;
     }
 
