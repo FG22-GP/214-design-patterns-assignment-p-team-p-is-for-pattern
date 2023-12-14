@@ -17,11 +17,12 @@ Record::Record(GameManager* manager) : GameState(manager) {
     player = std::make_shared<Entity>("Player", Vector2D(200, 200));
     player->AddComponent(RenderCreator().CreateComponent(player, Vector2D(32, 32), "MainCharacterSolo"));
     player->AddComponent(MovementCreator().CreateComponent(player));
+    player->AddComponent(CollisionCreator().CreateComponent(player, 32.0f, 32.0f));
 
     auto Position = GenerateRandomPosition();
     theEnd = std::make_shared<Entity>("Goal", Position);
-    theEnd->AddComponent(RenderCreator().CreateComponent(theEnd, Vector2D(75, 75), "Goal"));
-    theEnd->AddComponent(CollisionCreator().CreateComponent(theEnd, 100.0f));
+    theEnd->AddComponent(RenderCreator().CreateComponent(theEnd, Vector2D(32, 32), "Goal"));
+    // theEnd->AddComponent(CollisionCreator().CreateComponent(theEnd, 100.0f));
     theEnd->AddComponent(TileCreator().CreateComponent(theEnd, TileType::Goal, Position));
 
     entityList.push_back(player);
