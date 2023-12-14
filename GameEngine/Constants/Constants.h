@@ -1,5 +1,6 @@
 #pragma once
 #include <random>
+#include "..\Vector2D.h"
 
 constexpr int WindowSizeX = 1056;
 constexpr int WindowSizeY = 792;

@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <array>
-#include "Tileset.h"
+#include "../Components/Tile.h"
 #include "../Constants/Constants.h"
 
 

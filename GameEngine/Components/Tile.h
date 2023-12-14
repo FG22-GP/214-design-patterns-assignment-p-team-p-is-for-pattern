@@ -5,7 +5,7 @@
 
 #include <cmath>
 #include "../Vector2D.h"
-enum TileType {
+enum TileType { //todo add a player enum
     Walkable,
     Hazard,
     Goal
