@@ -15,6 +15,7 @@ int main(int argc, char* args[]) {
     
     GameManager* gameManager = new GameManager();
     gameManager->Start();
+    gameManager->RestartLevel(true);
     gameManager->ChangeActiveState("Record");
 
     std::array<std::array<TileType, TilemapX>, TilemapY>* tileMap = new std::array<std::array<TileType, TilemapX>, TilemapY>();
