@@ -16,7 +16,9 @@ public:
     static const int WindowSizeX = 1056, WindowSizeY = 792;
     std::vector<std::shared_ptr<Entity>> entities;
 
-    explicit Grid(std::array<std::array<char, 32>, 24> &gridData) {
+    
+    explicit Grid(std::array<std::array<char, 32>, 24>& gridData) {
+
         // for (int i = 0; i < 32; i++) {
         //     for (int j = 0; j < 24; j++) {
         //         auto entity = std::make_shared<Entity>("Tile", Vector2D(i * 32 + i, j * 32 + j));
@@ -26,34 +28,38 @@ public:
         //         entities.push_back(entity);
         //     }
         // }
-        int x = 0;
-        int y = 0;
+        
+  
         for (int y = 0; y < gridData.size(); y++) {
             for (int x = 0; x < gridData[y].size(); x++) {
-                std::shared_ptr<Entity> entity = std::make_shared<Entity>("", Vector2D(x * 32 + x, y * 32 + y));
-                switch (gridData[y][x]) {
-                case "x":
+                std::shared_ptr<Entity> entity = std::make_shared<Entity>("", Vector2D(x * 32 + x, y* 32 + y));
+                auto c = gridData[y][x];
+                switch (c) {
+                case 'x':
                     entity->SetName("UnwalkableTile");
                     entity->AddComponent(TileCreator().CreateComponent(entity, TILE_UNWALKABLE, Vector2DInt(x, y)));
                     entity->AddComponent(RenderCreator().CreateComponent(entity, Vector2D(32, 32), "NonWalkableTile"));
                     break;
-                case "o":
+                case 'o':
                     entity->SetName("WalkableTile");
                     entity->AddComponent(TileCreator().CreateComponent(entity, TILE_WALKABLE, Vector2DInt(x, y)));
                     break;
-                case "g":
+                case 'g':
                     entity->SetName("GoalTile");
                     entity->AddComponent(TileCreator().CreateComponent(entity, TILE_GOAL, Vector2DInt(x, y)));
+                    entity->AddComponent(RenderCreator().CreateComponent(entity, Vector2D(32,32), "Goal"));
                     break;
-                case "u":
+                case 'u':
                     entity->SetName("PlayerStartTile");
                     entity->AddComponent(TileCreator().CreateComponent(entity, TILE_PLAYERSTART, Vector2DInt(x, y)));
                     break;
-                default: ;
+                default:
+                    break;
                 }
-                x++;
+                entities.push_back(entity);
+             
             }
-            y++;
+          
         }
     }
 

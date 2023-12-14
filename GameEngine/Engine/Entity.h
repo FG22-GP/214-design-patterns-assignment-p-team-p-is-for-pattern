@@ -61,7 +61,7 @@ std::shared_ptr<T> Entity::GetComponent() {
     for (const auto& val : components | std::views::values) {
         const auto& component = val;
         if (typeid(*component) == typeid(T)) {
-            return std::static_pointer_cast<T>(component);
+            return std::static_pointer_cast<T>(component); // should probably be shared pointer
         }
     }
     return std::shared_ptr<T>(); 

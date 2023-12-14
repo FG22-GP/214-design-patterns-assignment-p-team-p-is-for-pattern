@@ -31,34 +31,49 @@ void PlayState::Update() {
     GameState::Update();
     if (!EventHandler::Empty()) {
         EventHandler::TryPop();
-        gameManager->activeLevel->score->UpdateScore(); // Update those points of yours
-        return;
+        //gameManager->activeLevel->score->UpdateScore(); // Update those points of yours
     }
-    
-    for (const auto& entity : entityList) {
-        //cursed refactor
-        const auto CollisionComponent = entity->GetComponent<Collision>();
-        if (!CollisionComponent) continue;
 
-        // TextureManager::Instance()->SetAlpha(entity->GetComponent<Render>()->imageName, 1); // TODO: Makes Entity invisible lol -Petter
+    // for (const auto& entity : entityList) {
+    //     //cursed refactor
+    //     const auto CollisionComponent = entity->GetComponent<Collision>();
+    //     if (!CollisionComponent) continue;
+    //
+    //     // TextureManager::Instance()->SetAlpha(entity->GetComponent<Render>()->imageName, 1); // TODO: Makes Entity invisible lol -Petter
+    //
+    //     for (const auto& entity2 : entityList) {
+    //         if (entity == entity2) continue;
+    //
+    //         if (CollisionComponent->CheckCollision(entity2) == TILE_GOAL) {
+    //             gameManager->ChangeActiveState("Won");
+    //             SDL_Log("Score %i", gameManager->activeLevel->score->GetScore());
+    //             return;
+    //         }
+    //     }
+    // }
 
-        for (const auto& entity2 : entityList) {
-            if (entity == entity2) continue;
-
-            if (CollisionComponent->CheckCollision(entity2) == TILE_GOAL) {
-                gameManager->ChangeActiveState("Won");
-                SDL_Log("Score %i", gameManager->activeLevel->score->GetScore());
-                return;
-            }
+    switch (playerCollision->CheckCollision()) {
+    case TILE_UNWALKABLE:
+        gameManager->ChangeActiveState("Lose", true);
+        break;
+    case TILE_GOAL:
+        gameManager->ChangeActiveState("Won", true);
+        break;
+    default:
+        if (EventHandler::Empty()) {
+            gameManager->ChangeActiveState("Record", true);
         }
+        break;
     }
-    if (/* Player Collision with evil tile of hell ||*/ !IsOnScreen(gameManager->playerEntity->position) || gameManager->strokes == 3) {
-        gameManager->ChangeActiveState("Lose");
-        SDL_Log("Score %i", gameManager->activeLevel->score->GetScore());
-        return;
-    }
-    gameManager->ChangeActiveState("Record");
-    SDL_Log("Score %i", gameManager->activeLevel->score->GetScore());
+
+
+    // if (/* Player Collision with evil tile of hell ||*/ !IsOnScreen(gameManager->playerEntity->position) || gameManager->strokes == 3) {
+    //     gameManager->ChangeActiveState("Lose");
+    //     SDL_Log("Score %i", gameManager->activeLevel->score->GetScore());
+    //     return;
+    // }
+    // gameManager->ChangeActiveState("Record");
+    // SDL_Log("Score %i", gameManager->activeLevel->score->GetScore());
 }
 
 PlayState::~PlayState() = default;

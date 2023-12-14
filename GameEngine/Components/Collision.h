@@ -7,7 +7,7 @@ class Collision final : public IComponent, std::enable_shared_from_this<Collisio
 public:
     // explicit Collision(std::string name, float Range, const std::shared_ptr<Entity>& Owner);
     explicit Collision(std::string name, float Width, float Height, const std::shared_ptr<Entity>& Owner);
-    TileType CheckCollision(std::shared_ptr<Entity> otherCollider);
+    TileType CheckCollision();
 
     // int CheckTileCollision(); // Udit <3
     // float range;
@@ -22,7 +22,7 @@ public:
     Vector2DInt BottomRightCornerGridPos;
     void UpdateCornerPositions();
 
-    Vector2DInt CornorPositions[4] = {
+    Vector2DInt CornerPositions[4] = {
         TopLeftCornerGridPos,
         TopRightCornerGridPos,
         BottomLeftCornerGridPos,

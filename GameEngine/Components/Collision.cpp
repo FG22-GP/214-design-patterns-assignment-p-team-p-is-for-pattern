@@ -19,23 +19,28 @@ Collision::Collision(std::string name, float Width, float Height, const std::sha
 }
 
 
-TileType Collision::CheckCollision(std::shared_ptr<Entity> otherCollider) {
+TileType Collision::CheckCollision() {
     // todo: change to correct grid, maybe pass it... and uncomment this
-    for (auto element : CornorPositions) {
-        const auto HitTileComponent = Grid::tiles[element.GetX()][element.GetY()]->GetComponent<Tile>();
-        if (HitTileComponent->TileType == TILE_UNWALKABLE) return Grid::tiles[element.GetX()][element.GetY()]->GetComponent<Tile>()->TileType;
-        if (HitTileComponent->TileType == TILE_GOAL) return Grid::tiles[element.GetX()][element.GetY()]->GetComponent<Tile>()->TileType;
+    for (auto element : CornerPositions) {
+        const auto notNulLTile = Grid::tiles[element.GetX()][element.GetY()];
+        if (notNulLTile) {
+            auto HitTileComponent = notNulLTile->GetComponent<Tile>();
+            if (HitTileComponent->TileType == TILE_UNWALKABLE)
+                return Grid::tiles[element->GetX()][element->GetY()]->GetComponent<Tile>()->TileType;
+            if (HitTileComponent->TileType == TILE_GOAL)
+                return Grid::tiles[element.GetX()][element.GetY()]->GetComponent<Tile>()->TileType;
+        }
     }
-    // return TILE_WALKABLE;
+    return TILE_WALKABLE;
 
 
     //Distance collision
     //super temp solution, AABB collision toward, to get hitposition and entities hit, QUERY from engine, return
-    if (Vector2D::Distance(otherCollider->position, owner->position) < 100) {
-        printf("HIT");
-        return TILE_GOAL;
-    }
-    return TILE_WALKABLE;
+    // if (Vector2D::Distance(otherCollider->position, owner->position) < 100) {
+    //     printf("HIT");
+    //     return TILE_GOAL;
+    // }
+    // return TILE_WALKABLE;
 
     // ========================= AA BB ==================================================================
     // std::shared_ptr<Collision> otherCollision = otherEntity->GetComponent<Collision>();

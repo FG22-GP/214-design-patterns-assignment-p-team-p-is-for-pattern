@@ -20,13 +20,13 @@ Record::Record(GameManager* manager) : GameState(manager) {
     player->AddComponent(CollisionCreator().CreateComponent(player, 32.0f, 32.0f));
 
     auto Position = GenerateRandomPosition();
-    theEnd = std::make_shared<Entity>("Goal", Position);
-    theEnd->AddComponent(RenderCreator().CreateComponent(theEnd, Vector2D(32, 32), "Goal"));
-    // theEnd->AddComponent(CollisionCreator().CreateComponent(theEnd, 100.0f));
-    theEnd->AddComponent(TileCreator().CreateComponent(theEnd, TILE_GOAL, Grid::WorldToGridPosition(Position)));
-
-    entityList.push_back(player);
-    entityList.push_back(theEnd);
+    // theEnd = std::make_shared<Entity>("Goal", Position);
+    //theEnd->AddComponent(RenderCreator().CreateComponent(theEnd, Vector2D(32, 32), "Goal"));
+    // // theEnd->AddComponent(CollisionCreator().CreateComponent(theEnd, 100.0f));
+    // theEnd->AddComponent(TileCreator().CreateComponent(theEnd, TILE_GOAL, Grid::WorldToGridPosition(Position)));
+    //
+     entityList.push_back(player);
+    //entityList.push_back(theEnd);
     gameManager->playerEntity = player;
 }
 
@@ -41,7 +41,7 @@ void Record::Start() {
         entityList.push_back(entity);
     }
     
-    theEnd->position = gameManager->activeLevel->GetGoalPosition(); // Player position gets set on game manager when its needed
+    //theEnd->position = gameManager->activeLevel->GetGoalPosition(); // Player position gets set on game manager when its needed
 }
 
 void Record::Stop() {

@@ -21,6 +21,8 @@ public:
     virtual std::string GetStateID() const = 0;
 
     ~IGameState() = default;
+
+    
 };
 
 
