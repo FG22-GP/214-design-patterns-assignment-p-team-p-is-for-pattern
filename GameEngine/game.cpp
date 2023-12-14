@@ -7,6 +7,8 @@
 #include "Constants/Constants.h"
 #include "TextureManager.h"
 #include "GameManager.h"
+#include "Level/Parser.h"
+#include "Level/Tileset.h"
 
 int main(int argc, char* args[]) {
     TheGameWindow::Instance()->Init(WindowSizeX, WindowSizeY, IMG_INIT_PNG);
@@ -15,6 +17,9 @@ int main(int argc, char* args[]) {
     gameManager->Start();
     gameManager->RestartLevel(true);
     gameManager->ChangeActiveState("Record");
+
+    std::array<std::array<TileType, TilemapX>, TilemapY>* tileMap = new std::array<std::array<TileType, TilemapX>, TilemapY>();
+    Parser::ReadFromFile("Level1",*tileMap);
 
     bool quit = false;
     
