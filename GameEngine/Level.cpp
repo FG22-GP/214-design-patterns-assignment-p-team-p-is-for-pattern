@@ -11,10 +11,6 @@ void Level::GenerateRandomLevel() {
     goalPosition = GenerateRandomPosition();
 }
 
-void Level::UpdateScore() const {
-    score->UpdateScore();
-}
-
 Vector2D Level::GetStartPosition() const {
     return startPosition;
 }

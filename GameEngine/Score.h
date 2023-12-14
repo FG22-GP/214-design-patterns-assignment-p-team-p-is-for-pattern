@@ -6,7 +6,7 @@ class Score {
 public:
     Score();
     int GetScore() const;
-    void AddScoreValue(int toAdd);
+    void GiveScoreValue(int toAdd);
     void UpdateScore();
     void ResetScore();
 };

@@ -56,6 +56,7 @@ void Record::Update() {
     }
     if (Input::GetKeyDown(SDLK_RETURN)) {
         gameManager->strokes++;
+        gameManager->activeLevel->score->GiveScoreValue(50); // Extra points per stroke
         gameManager->ChangeActiveState("Play", true);
     }
     GameState::Update();

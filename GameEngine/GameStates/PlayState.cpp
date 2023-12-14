@@ -24,7 +24,7 @@ void PlayState::Update() {
     GameState::Update();
     if (!EventHandler::Empty()) {
         EventHandler::TryPop();
-        gameManager->activeLevel->UpdateScore();
+        gameManager->activeLevel->score->UpdateScore(); // Update those points of yours
         return;
     }
 
@@ -40,6 +40,7 @@ void PlayState::Update() {
 
             if (CollisionComponent->CheckCollision(entity2)) {
                 gameManager->ChangeActiveState("Won");
+                SDL_Log("Score %i", gameManager->activeLevel->score->GetScore());
                 return;
             }
         }
@@ -47,10 +48,12 @@ void PlayState::Update() {
 
     if (/* Player Collision with evil tile of hell ||*/ !IsOnScreen(gameManager->playerEntity->position) || gameManager->strokes == 3) {
         gameManager->ChangeActiveState("Lose");
+        SDL_Log("Score %i", gameManager->activeLevel->score->GetScore());
         return;
     }
 
     gameManager->ChangeActiveState("Record");
+    SDL_Log("Score %i", gameManager->activeLevel->score->GetScore());
 }
 
 PlayState::~PlayState() = default;

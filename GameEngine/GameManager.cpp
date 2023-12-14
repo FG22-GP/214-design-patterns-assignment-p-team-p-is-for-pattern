@@ -59,6 +59,7 @@ void GameManager::RestartLevel(const bool generateNewLevel) {
     }
 
     strokes = 0;
+    activeLevel->score->ResetScore();
     playerEntity->position = activeLevel->GetStartPosition();
 }
 
