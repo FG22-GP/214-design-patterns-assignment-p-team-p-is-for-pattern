@@ -1,5 +1,4 @@
 #include "Level.h"
-
 #include "Constants/Constants.h"
 
 Level::Level() = default;

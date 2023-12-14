@@ -31,19 +31,19 @@ TileType Parser::mapTileType(char toChange)
 	switch (toChange)
 	{
 	case 'x':
-		return TileType::Hazard;
+		return TILE_UNWALKABLE;
 		break;
 	case 'o':
-		return TileType::Walkable;
+		return TILE_WALKABLE;
 		break;
 	case 'p':
-		return TileType::Hazard; //TODO ADD A PLAYER Type
+		return TILE_PLAYERSTART; //TODO ADD A PLAYER Type
 		break;
 	case 'g':
-		return TileType::Goal;
+		return TILE_GOAL;
 		break;
 	default:
-		return TileType::Hazard;
+		return TILE_WALKABLE;
 		break;
 	}
 }

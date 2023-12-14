@@ -1,7 +1,7 @@
 #include "Record.h"
 
 #include <random>
-
+#include "../Level/Tileset.h"
 #include "..\Vector2D.h"
 #include "..\Engine/CollisionCreator.h"
 #include "..\Engine\RenderCreator.h"
@@ -23,7 +23,7 @@ Record::Record(GameManager* manager) : GameState(manager) {
     theEnd = std::make_shared<Entity>("Goal", Position);
     theEnd->AddComponent(RenderCreator().CreateComponent(theEnd, Vector2D(32, 32), "Goal"));
     // theEnd->AddComponent(CollisionCreator().CreateComponent(theEnd, 100.0f));
-    theEnd->AddComponent(TileCreator().CreateComponent(theEnd, TileType::Goal, Position));
+    theEnd->AddComponent(TileCreator().CreateComponent(theEnd, TILE_GOAL, Position));
 
     entityList.push_back(player);
     entityList.push_back(theEnd);

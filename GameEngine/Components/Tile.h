@@ -1,15 +1,14 @@
 #pragma once
 #include "IComponent.h"
 #include "../Vector2DInt.h"
-#include <math.h>
-
+#include "../Level/Tileset.h"
 #include <cmath>
 #include "../Vector2D.h"
-enum TileType { //todo add a player enum
-    Walkable,
-    Hazard,
-    Goal
-};
+// enum TileType { //todo add a player enum
+//     Walkable,
+//     Hazard,
+//     Goal
+// };
 
 
 class Tile final : public IComponent, std::enable_shared_from_this<Tile> {

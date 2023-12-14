@@ -273,7 +273,6 @@
     <ClCompile Include="GameStates\WonState.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="ITextureManager.cpp" />
-    <ClCompile Include="Level\Level.cpp" />
     <ClCompile Include="Level\Parser.cpp" />
     <ClCompile Include="Level.cpp" />
     <!-- =======
@@ -463,7 +462,6 @@
     <ClInclude Include="GameStates\Record.h" />
     <ClInclude Include="GameStates\WonState.h" />
     <ClInclude Include="ITextureManager.h" />
-    <ClInclude Include="Level\Level.h" />
     <ClInclude Include="Level\Parser.h" />
     <ClInclude Include="Level\Tileset.h" />
     <ClInclude Include="Level.h" />
