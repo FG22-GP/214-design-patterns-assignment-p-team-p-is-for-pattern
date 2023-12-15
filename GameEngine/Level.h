@@ -10,7 +10,7 @@ class Level {
     Vector2D startPosition;
 
 public:
-    explicit Level(std::array<std::array<char, TilemapX>, TilemapY> gridData);
+    explicit Level(std::unique_ptr<std::array<std::array<char, TilemapX>, TilemapY>>& gridData);
     std::shared_ptr<Grid> grid;
 
     bool bGenerateLevel;
@@ -18,6 +18,7 @@ public:
     Vector2D GetStartPosition() const;
     Vector2D GetGoalPosition() const;
     std::shared_ptr<Score> mTime;
-    float TargetTime;
+    float targetTime;
+    int nextLevelIndex;
 
 };

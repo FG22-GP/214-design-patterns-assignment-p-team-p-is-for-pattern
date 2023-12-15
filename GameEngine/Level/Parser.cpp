@@ -1,27 +1,29 @@
 #include "Parser.h"
 
-void Parser::ReadFromFile(std::string fileName, std::array<std::array<char, TilemapX>, TilemapY>& tileMap) {
-    std::string openFile = "TileMaps/" + fileName + ".txt";
-    std::ifstream level(openFile);
-    if (!level.is_open()) {
-        printf("Error opening the level file");
-        return;
-    }
-    size_t j = 0;
-    size_t i = 0;
-    while (j < TilemapY) {
-        std::string line;
-        level >> line;
-        for (const auto c : line) {
-            // TileType toMap = Parser::mapTileType(c);
-            tileMap.at(j).at(i) = c;
-            i++;
+void Parser::ReadFromFile(std::array<std::array<std::array<char, 32>, 24>, 7>& tileMaps) {
+    for (int i = 0; i < 7; i++) {
+        std::string openFile = "TileMaps/Level" + std::to_string(i + 1) + ".txt";
+        std::ifstream level(openFile);
+        if (!level.is_open()) {
+            printf("Error opening the level file");
+            return;
         }
-        i = 0;
-        j++;
-    }
+        size_t j = 0;
+        size_t k = 0;
+        while (j < TilemapY) {
+            std::string line;
+            level >> line;
+            for (const auto c : line) {
+                // TileType toMap = Parser::mapTileType(c);
+                tileMaps[i].at(j).at(k) = c;
+                k++;
+            }
+            k = 0;
+            j++;
+        }
 
-    level.close();
+        level.close();
+    }
 }
 
 TileType Parser::mapTileType(char toChange) {

@@ -8,19 +8,18 @@
 
 
 GameManager::GameManager() {
+    gridData = std::make_shared<std::array<std::array<std::array<char, TilemapX>, TilemapY>, 7>>();
+    Parser::ReadFromFile(*gridData);
 
-    const auto gridData = new std::array<std::array<char, TilemapX>, TilemapY>();
-    Parser::ReadFromFile("Level1",*gridData);
-    
     activeState = nullptr;
-    activeLevel = std::make_shared<Level>(Level(*gridData));
-
+    auto arrays = std::make_unique<std::array<std::array<char, TilemapX>, TilemapY>>(gridData->data()[0]);
+    activeLevel = std::make_shared<Level>(arrays);
     const auto playState = std::make_shared<PlayState>(this);
     const auto pauseState = std::make_shared<PauseState>(this);
     const auto wonState = std::make_shared<WonState>(this);
     const auto record = std::make_shared<Record>(this);
     const auto lose = std::make_shared<Lose>(this);
-    
+
     PushState(playState);
     PushState(pauseState);
     PushState(wonState);
@@ -58,14 +57,21 @@ void GameManager::ChangeActiveState(std::string changeID, bool shouldPassEntites
     }
 }
 
-void GameManager::RestartLevel(const bool generateNewLevel) {
-    if (generateNewLevel) {
-        activeLevel->GenerateRandomLevel(); // nextlevel
+void GameManager::RestartLevel(const bool buildNextLevel) {
+    if (buildNextLevel) {
+        BuildLevel(activeLevel->nextLevelIndex);
+        activeLevel->nextLevelIndex++;
     }
 
     strokes = 0;
     activeLevel->mTime->ResetScore();
     playerEntity->position = activeLevel->grid->entitiesLookup.find("PlayerStartTile")->second->position;
+}
+
+void GameManager::BuildLevel(const int index) {
+    auto arrays = std::make_unique<std::array<std::array<char, TilemapX>, TilemapY>>(gridData->data()[index]);
+    activeLevel = std::make_shared<Level>(arrays);
+    activeLevel->nextLevelIndex = index;
 }
 
 void GameManager::Update() {

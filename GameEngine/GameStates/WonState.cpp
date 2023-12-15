@@ -9,8 +9,8 @@ WonState::WonState(GameManager* manager) : GameState(manager)
 {
     Color wonTextColor = { 0xff,0xff,0xff };
     TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "lazy", wonTextColor, 60 ,"You Won!!!",wonTextSize);
-    TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "wonRestart", wonTextColor, 30, "Press Space to Play New Level", wonTextSize);
-    TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "wonRetry", wonTextColor, 30, "Press Enter to Retry Current Level", wonTextSize);
+    TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "wonNext", wonTextColor, 30, "Press Enter to Play Next Level", wonTextSize);
+    TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "wonRetry", wonTextColor, 30, "Press Backspace to Retry Current Level", wonTextSize);
 }
 
 void WonState::Start()
@@ -34,15 +34,15 @@ void WonState::Stop()
 void WonState::Update()
 {
     TheTextureManager::Instance()->Draw("lazy",Vector2D(WindowSizeX / 4, WindowSizeY / 4),wonTextSize);
-    TheTextureManager::Instance()->Draw("wonRestart",Vector2D(WindowSizeX / 4, WindowSizeY / 4 + wonTextSize.GetY()), wonTextSize);
+    TheTextureManager::Instance()->Draw("wonNext",Vector2D(WindowSizeX / 4, WindowSizeY / 4 + wonTextSize.GetY()), wonTextSize);
     TheTextureManager::Instance()->Draw("wonRetry",Vector2D(WindowSizeX / 4, WindowSizeY / 4 + wonTextSize.GetY() * 2), wonTextSize);
-    if (Input::GetKeyDown(SDLK_RETURN))
+    if (Input::GetKeyDown(SDLK_BACKSPACE))
     {
         gameManager->RestartLevel(false);
         gameManager->ChangeActiveState("Record");
     }
 
-    if (Input::GetKeyDown(SDLK_SPACE)) {
+    if (Input::GetKeyDown(SDLK_RETURN)) {
         gameManager->RestartLevel(true);
         gameManager->ChangeActiveState("Record");
     }

@@ -12,6 +12,7 @@ public:
     std::shared_ptr<GameState> activeState;
     std::shared_ptr<Level> activeLevel;
     std::shared_ptr<Entity> playerEntity;
+    std::shared_ptr<std::array<std::array<std::array<char, TilemapX>, TilemapY>, 7>> gridData;
     int strokes;
 
     GameManager();
@@ -22,7 +23,8 @@ public:
     //Might not need pop
     //void PopState();
     void ChangeActiveState(std::string changeID, bool shouldPassEntites = false);
-    void RestartLevel(bool generateNewLevel);
+    void RestartLevel(bool buildNextLevel);
+    void BuildLevel(int index);
     //Probs same
     void Update();
 

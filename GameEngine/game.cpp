@@ -22,7 +22,6 @@ int main(int argc, char* args[]) {
 
     bool quit = false;
 
-       // int iterator = 0;
     while (quit == false) {
         timer->Update();
 
@@ -34,9 +33,7 @@ int main(int argc, char* args[]) {
 
 
         if (timer->DeltaTime() >= 1.0f / FrameRate) {
-        // iterator++;
-        // printf("this is game.cpp: %d \n", iterator);
-        gameManager->Update();
+            gameManager->Update();
             TheGameWindow::Instance()->Present();
             timer->Reset();
         }
@@ -44,7 +41,7 @@ int main(int argc, char* args[]) {
 
     Timer::Release();
     timer = nullptr;
-    
+
     gameManager->Stop();
     gameManager = nullptr;
     TheGameWindow::Instance()->CleanUpFunction();

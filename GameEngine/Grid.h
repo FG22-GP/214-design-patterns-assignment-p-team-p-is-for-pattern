@@ -13,16 +13,15 @@ class TempTile;
 class Grid {
 public:
     static inline std::shared_ptr<Entity> tiles[32][24];
-    static const int WindowSizeX = 1056, WindowSizeY = 792;
+    static constexpr constexpr int WindowSizeX = 1056, WindowSizeY = 792;
     std::map<std::string, std::shared_ptr<Entity>> entitiesLookup;
 
-    
-    explicit Grid(std::array<std::array<char, 32>, 24>& gridData) {
+    explicit Grid(std::unique_ptr<std::array<std::array<char, 32>, 24>>& gridData) {
         Vector2D StartPos;
-        for (int y = 0; y < gridData.size(); y++) {
-            for (int x = 0; x < gridData[y].size(); x++) {
-                std::shared_ptr<Entity> entity = std::make_shared<Entity>("", Vector2D(x * 32 + x, y* 32 + y));
-                auto c = gridData[y][x];
+        for (int y = 0; y < gridData->size(); y++) {
+            for (int x = 0; x < gridData->data()[y].size(); x++) {
+                auto entity = std::make_shared<Entity>("", Vector2D(x * 32 + x, y * 32 + y));
+                auto c = gridData->data()[y][x];
                 switch (c) {
                 case 'x':
                     entity->SetName("UnwalkableTile:" + std::to_string(x) + std::to_string(y));
@@ -36,7 +35,7 @@ public:
                 case 'g':
                     entity->SetName("GoalTile");
                     entity->AddComponent(TileCreator().CreateComponent(entity, TILE_GOAL, Vector2DInt(x, y)));
-                    entity->AddComponent(RenderCreator().CreateComponent(entity, Vector2D(32,32), "Goal"));
+                    entity->AddComponent(RenderCreator().CreateComponent(entity, Vector2D(32, 32), "Goal"));
                     break;
                 case 'p':
                     entity->SetName("PlayerStartTile");
@@ -47,14 +46,12 @@ public:
                     break;
                 }
 
-                
-                entitiesLookup.insert(std::make_pair(entity->GetEntityName(),entity));
+                entitiesLookup.insert(std::make_pair(entity->GetEntityName(), entity));
                 tiles[x][y] = entity;
             }
-          
         }
-        
-        
+
+
         auto player = std::make_shared<Entity>("Player", StartPos);
         player->AddComponent(RenderCreator().CreateComponent(player, Vector2D(32, 32), "MainCharacterSolo"));
         player->AddComponent(MovementCreator().CreateComponent(player, 100.f));

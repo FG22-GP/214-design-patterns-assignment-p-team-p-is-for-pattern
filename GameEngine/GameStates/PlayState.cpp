@@ -62,7 +62,7 @@ void PlayState::Update() {
         gameManager->ChangeActiveState("Lose", true);
         break;
     case TILE_GOAL:
-        if (gameManager->activeLevel->mTime->GetScore() < gameManager->activeLevel->TargetTime)
+        if (gameManager->activeLevel->mTime->GetScore() < gameManager->activeLevel->targetTime)
             gameManager->ChangeActiveState("Won", true);
         else gameManager->ChangeActiveState("Lose", true);
         
