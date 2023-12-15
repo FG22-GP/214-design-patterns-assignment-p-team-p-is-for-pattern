@@ -57,7 +57,7 @@ public:
                     break;
                 }
                 entities.push_back(entity);
-             
+                tiles[x][y] = entity;
             }
           
         }

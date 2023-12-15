@@ -21,14 +21,14 @@ Collision::Collision(std::string name, float Width, float Height, const std::sha
 
 TileType Collision::CheckCollision() {
     // todo: change to correct grid, maybe pass it... and uncomment this
-    for (auto element : CornerPositions) {
-        const auto notNulLTile = Grid::tiles[element->GetX()][element->GetY()];
+    for (auto element : cornerPositions) {
+        const auto notNulLTile = Grid::tiles[element.GetX()][element.GetY()];
         if (notNulLTile) {
-            auto HitTileComponent = notNulLTile->GetComponent<Tile>();
-            if (HitTileComponent->TileType == TILE_UNWALKABLE)
-                return Grid::tiles[element->GetX()][element->GetY()]->GetComponent<Tile>()->TileType;
-            if (HitTileComponent->TileType == TILE_GOAL)
-                return Grid::tiles[element->GetX()][element->GetY()]->GetComponent<Tile>()->TileType;
+            const auto hitTileComponent = notNulLTile->GetComponent<Tile>();
+            if (hitTileComponent->TileType == TILE_UNWALKABLE)
+                return Grid::tiles[element.GetX()][element.GetY()]->GetComponent<Tile>()->TileType;
+            if (hitTileComponent->TileType == TILE_GOAL)
+                return Grid::tiles[element.GetX()][element.GetY()]->GetComponent<Tile>()->TileType;
         }
     }
     return TILE_WALKABLE;
@@ -101,27 +101,32 @@ void Collision::UpdateCornerPositions() {
     float YVal1 = owner->position.GetY() + (height / 2);
     int XPos1 = floor(XVal1 / 32);
     int YPos1 = floor(YVal1 / 24);
-    TopLeftCornerGridPos->SetX(XPos1);
-    TopLeftCornerGridPos->SetY(YPos1);
+    TopLeftCornerGridPos.SetX(XPos1);
+    TopLeftCornerGridPos.SetY(YPos1);
 
     float XVal2 = owner->position.GetX() + (width / 2);
     float YVal2 = owner->position.GetY() + (height / 2);
     int XPos2 = floor(XVal2 / 32);
     int YPos2 = floor(YVal2 / 24);
-    TopLeftCornerGridPos->SetX(XPos2);
-    TopLeftCornerGridPos->SetY(YPos2);
+    TopRightCornerGridPos.SetX(XPos2);
+    TopRightCornerGridPos.SetY(YPos2);
 
     float XVal3 = owner->position.GetX() - (width / 2);
     float YVal3 = owner->position.GetY() - (height / 2);
     int XPos3 = floor(XVal3 / 32);
     int YPos3 = floor(YVal3 / 24);
-    TopLeftCornerGridPos->SetX(XPos3);
-    TopLeftCornerGridPos->SetY(YPos3);
+    BottomLeftCornerGridPos.SetX(XPos3);
+    BottomLeftCornerGridPos.SetY(YPos3);
 
     float XVal4 = owner->position.GetX() + (width / 2);
     float YVal4 = owner->position.GetY() - (height / 2);
     int XPos4 = floor(XVal4 / 32);
     int YPos4 = floor(YVal4 / 24);
-    TopLeftCornerGridPos->SetX(XPos4);
-    TopLeftCornerGridPos->SetY(YPos4);
+    BottomRightCornerGridPos.SetX(XPos4);
+    BottomRightCornerGridPos.SetY(YPos4);
+
+    cornerPositions[0] = TopLeftCornerGridPos;
+    cornerPositions[1] = TopRightCornerGridPos;
+    cornerPositions[2] = BottomLeftCornerGridPos;
+    cornerPositions[3] = BottomRightCornerGridPos;
 }

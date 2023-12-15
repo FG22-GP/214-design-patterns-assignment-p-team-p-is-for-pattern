@@ -16,13 +16,13 @@ public:
     
     
     
-    std::shared_ptr<Vector2DInt> TopLeftCornerGridPos;
-    std::shared_ptr<Vector2DInt> TopRightCornerGridPos;
-    std::shared_ptr<Vector2DInt> BottomLeftCornerGridPos;
-    std::shared_ptr<Vector2DInt> BottomRightCornerGridPos;
+    Vector2DInt TopLeftCornerGridPos;
+    Vector2DInt TopRightCornerGridPos;
+    Vector2DInt BottomLeftCornerGridPos;
+    Vector2DInt BottomRightCornerGridPos;
     void UpdateCornerPositions();
 
-    std::shared_ptr<Vector2DInt> CornerPositions[4] = {
+    Vector2DInt cornerPositions[4] = {
         TopLeftCornerGridPos,
         TopRightCornerGridPos,
         BottomLeftCornerGridPos,

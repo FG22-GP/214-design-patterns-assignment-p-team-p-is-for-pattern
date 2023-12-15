@@ -12,8 +12,8 @@
 
 int main(int argc, char* args[]) {
     TheGameWindow::Instance()->Init(WindowSizeX, WindowSizeY, IMG_INIT_PNG);
-    
-    GameManager* gameManager = new GameManager();
+
+    auto gameManager = new GameManager();
     gameManager->Start();
     gameManager->RestartLevel(true);
     gameManager->ChangeActiveState("Record");
