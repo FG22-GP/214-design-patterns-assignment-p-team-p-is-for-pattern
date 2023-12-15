@@ -97,19 +97,19 @@ void Collision::InitializeComponent() {
 }
 
 void Collision::UpdateCornerPositions() {
-    Vector2DInt gridPos = Grid::WorldToGridPosition(Vector2D(owner->position.GetX(), owner->position.GetY()));
+    Vector2DInt gridPos = Grid::WorldToGridPosition(Vector2D(owner->position.GetX(), owner->position.GetY() + height));
     TopLeftCornerGridPos.SetX(gridPos.GetX());
     TopLeftCornerGridPos.SetY(gridPos.GetY());
 
-    gridPos = Grid::WorldToGridPosition(Vector2D(owner->position.GetX() + width, owner->position.GetY()));
+    gridPos = Grid::WorldToGridPosition(Vector2D(owner->position.GetX() + width, owner->position.GetY() + height));
     TopRightCornerGridPos.SetX(gridPos.GetX());
     TopRightCornerGridPos.SetY(gridPos.GetY());
 
-    gridPos = Grid::WorldToGridPosition(Vector2D(owner->position.GetX(), owner->position.GetY() - height));
+    gridPos = Grid::WorldToGridPosition(Vector2D(owner->position.GetX(), owner->position.GetY()));
     BottomLeftCornerGridPos.SetX(gridPos.GetX());
     BottomLeftCornerGridPos.SetY(gridPos.GetY());
 
-    gridPos = Grid::WorldToGridPosition(Vector2D(owner->position.GetX() + width, owner->position.GetY() - height));
+    gridPos = Grid::WorldToGridPosition(Vector2D(owner->position.GetX() + width, owner->position.GetY()));
     BottomRightCornerGridPos.SetX(gridPos.GetX());
     BottomRightCornerGridPos.SetY(gridPos.GetY());
 
