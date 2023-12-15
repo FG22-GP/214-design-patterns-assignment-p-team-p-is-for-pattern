@@ -9,6 +9,7 @@ class Record : public GameState
     std::shared_ptr<Entity> player;
     std::shared_ptr<Entity> theEnd;
 
+
 public:
     Record(GameManager* manager);
     void Start() override;

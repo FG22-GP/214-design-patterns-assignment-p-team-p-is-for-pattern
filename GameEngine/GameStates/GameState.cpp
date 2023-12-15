@@ -9,7 +9,7 @@ void GameState::Start()
 {
 	for (auto entity : entityList)
 	{
-		entity->Start();
+		entity.second->Start();
 	}
 }
 
@@ -17,7 +17,7 @@ void GameState::Stop()
 {
 	for (auto entity : entityList)
 	{
-		entity->Stop();
+		entity.second->Stop();
 	}
 
 }
@@ -26,6 +26,6 @@ void GameState::Update()
 {
 	for (auto entity : entityList)
 	{
-		entity->Update();
+		entity.second->Update();
 	}
 }

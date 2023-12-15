@@ -1,11 +1,11 @@
 #pragma once
 #include <array>
 #include <memory>
-
 #include "Vector2DInt.h"
 #include "Engine/Entity.h"
 #include "Engine/TileCreator.h"
 #include "Components/Tile.h"
+#include "Engine/MovementCreator.h"
 #include "Engine/RenderCreator.h"
 
 class TempTile;
@@ -14,34 +14,23 @@ class Grid {
 public:
     static inline std::shared_ptr<Entity> tiles[32][24];
     static const int WindowSizeX = 1056, WindowSizeY = 792;
-    std::vector<std::shared_ptr<Entity>> entities;
+    std::map<std::string, std::shared_ptr<Entity>> entitiesLookup;
 
     
     explicit Grid(std::array<std::array<char, 32>, 24>& gridData) {
-
-        // for (int i = 0; i < 32; i++) {
-        //     for (int j = 0; j < 24; j++) {
-        //         auto entity = std::make_shared<Entity>("Tile", Vector2D(i * 32 + i, j * 32 + j));
-        //         tiles[i][j] = entity;
-        //         entity->AddComponent(TileCreator().CreateComponent(entity, TILE_WALKABLE, Vector2DInt(i, j)));
-        //         entity->AddComponent(RenderCreator().CreateComponent(entity, Vector2D(32, 32), "NonWalkableTile"));
-        //         entities.push_back(entity);
-        //     }
-        // }
-
-        
+        Vector2D StartPos;
         for (int y = 0; y < gridData.size(); y++) {
             for (int x = 0; x < gridData[y].size(); x++) {
                 std::shared_ptr<Entity> entity = std::make_shared<Entity>("", Vector2D(x * 32 + x, y* 32 + y));
                 auto c = gridData[y][x];
                 switch (c) {
                 case 'x':
-                    entity->SetName("UnwalkableTile");
+                    entity->SetName("UnwalkableTile:" + std::to_string(x) + std::to_string(y));
                     entity->AddComponent(TileCreator().CreateComponent(entity, TILE_UNWALKABLE, Vector2DInt(x, y)));
                     entity->AddComponent(RenderCreator().CreateComponent(entity, Vector2D(32, 32), "NonWalkableTile"));
                     break;
                 case 'o':
-                    entity->SetName("WalkableTile");
+                    entity->SetName("Walkablew:" + std::to_string(x) + std::to_string(y));
                     entity->AddComponent(TileCreator().CreateComponent(entity, TILE_WALKABLE, Vector2DInt(x, y)));
                     break;
                 case 'g':
@@ -49,18 +38,29 @@ public:
                     entity->AddComponent(TileCreator().CreateComponent(entity, TILE_GOAL, Vector2DInt(x, y)));
                     entity->AddComponent(RenderCreator().CreateComponent(entity, Vector2D(32,32), "Goal"));
                     break;
-                case 'u':
+                case 'p':
                     entity->SetName("PlayerStartTile");
                     entity->AddComponent(TileCreator().CreateComponent(entity, TILE_PLAYERSTART, Vector2DInt(x, y)));
+                    StartPos = GridToWorldPosition(Vector2DInt(x, y));
                     break;
                 default:
                     break;
                 }
-                entities.push_back(entity);
+
+                
+                entitiesLookup.insert(std::make_pair(entity->GetEntityName(),entity));
                 tiles[x][y] = entity;
             }
           
         }
+        
+        
+        auto player = std::make_shared<Entity>("Player", StartPos);
+        player->AddComponent(RenderCreator().CreateComponent(player, Vector2D(32, 32), "MainCharacterSolo"));
+        player->AddComponent(MovementCreator().CreateComponent(player, 100.f));
+        player->AddComponent(CollisionCreator().CreateComponent(player, 32.0f, 32.0f));
+
+        entitiesLookup.insert(std::make_pair(player->GetEntityName(), player));
     }
 
     static std::shared_ptr<Tile> GetTile(Vector2DInt gridPosition) {

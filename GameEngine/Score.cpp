@@ -1,19 +1,26 @@
 #include "Score.h"
 
+#include <format>
+#include <string>
+
 Score::Score() = default;
 
-int Score::GetScore() const {
-    return score;
+float Score::GetScore() const {
+    return Time;
 }
 
-void Score::GiveScoreValue(const int toAdd) {
-    score += toAdd;
+std::string Score::GetScoreAsString() {
+    return std::format("{:.2f}", Time);
 }
 
-void Score::UpdateScore() {
-    score++;
+void Score::GiveScoreValue(float toAdd) {
+    Time += toAdd;
+}
+
+void Score::UpdateScore(float DeltaTime) {
+    Time += DeltaTime;
 }
 
 void Score::ResetScore() {
-    score = 0;
+    Time = 0;
 }

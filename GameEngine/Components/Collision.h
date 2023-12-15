@@ -16,17 +16,17 @@ public:
     
     
     
-    Vector2DInt TopLeftCornerGridPos;
-    Vector2DInt TopRightCornerGridPos;
-    Vector2DInt BottomLeftCornerGridPos;
-    Vector2DInt BottomRightCornerGridPos;
+    Vector2DInt BottomLeftCorner;
+    Vector2DInt BottomRightCorner;
+    Vector2DInt TopLeftCorner;
+    Vector2DInt TopRightCorner;
     void UpdateCornerPositions();
 
     Vector2DInt cornerPositions[4] = {
-        TopLeftCornerGridPos,
-        TopRightCornerGridPos,
-        BottomLeftCornerGridPos,
-        BottomRightCornerGridPos
+        BottomLeftCorner,
+        BottomRightCorner,
+        TopLeftCorner,
+        TopRightCorner
     };
 
     void Start() override;

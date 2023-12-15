@@ -60,12 +60,12 @@ void GameManager::ChangeActiveState(std::string changeID, bool shouldPassEntites
 
 void GameManager::RestartLevel(const bool generateNewLevel) {
     if (generateNewLevel) {
-        activeLevel->GenerateRandomLevel();
+        activeLevel->GenerateRandomLevel(); // nextlevel
     }
 
     strokes = 0;
-    activeLevel->score->ResetScore();
-    playerEntity->position = activeLevel->GetStartPosition();
+    activeLevel->mTime->ResetScore();
+    playerEntity->position = activeLevel->grid->entitiesLookup.find("PlayerStartTile")->second->position;
 }
 
 void GameManager::Update() {

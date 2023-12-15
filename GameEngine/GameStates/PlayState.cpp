@@ -1,6 +1,7 @@
 #include "PlayState.h"
 
 #include "../GameManager.h"
+#include "../Timer.h"
 #include "..\EventHandler.h"
 #include "../Components/Collision.h"
 #include "../Constants/Constants.h"
@@ -15,12 +16,13 @@ PlayState::PlayState(GameManager* manager) : GameState(manager) {
 void PlayState::Start() {
     GameState::Start();
     for (const auto& entity : entityList) {
-        if (entity->GetComponent<Movement>()) {
+        if (entity.second->GetComponent<Movement>()) {
             // player entity collision;
-            playerCollision = entity->GetComponent<Collision>();
+            playerCollision = entity.second->GetComponent<Collision>();
             break;
         }
     }
+    gameManager->activeLevel->mTime->GiveScoreValue(1.0f);
 }
 
 void PlayState::Stop() {
@@ -31,8 +33,10 @@ void PlayState::Update() {
     GameState::Update();
     if (!EventHandler::Empty()) {
         EventHandler::TryPop();
-        gameManager->activeLevel->score->UpdateScore(); // Update those points of yours
+        gameManager->activeLevel->mTime->UpdateScore(Timer::Instance()->DeltaTime()); // Update those points of yours
+        printf("YO TIME IS: %s,\n", gameManager->activeLevel->mTime->GetScoreAsString().c_str());
     }
+
 
     // for (const auto& entity : entityList) {
     //     //cursed refactor
@@ -52,12 +56,16 @@ void PlayState::Update() {
     //     }
     // }
 
+
     switch (playerCollision->CheckCollision()) {
     case TILE_UNWALKABLE:
         gameManager->ChangeActiveState("Lose", true);
         break;
     case TILE_GOAL:
-        gameManager->ChangeActiveState("Won", true);
+        if (gameManager->activeLevel->mTime->GetScore() < gameManager->activeLevel->TargetTime)
+            gameManager->ChangeActiveState("Won", true);
+        else gameManager->ChangeActiveState("Lose", true);
+        
         break;
     default:
         if (EventHandler::Empty()) {

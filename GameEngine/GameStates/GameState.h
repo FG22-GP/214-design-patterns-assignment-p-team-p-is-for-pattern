@@ -11,7 +11,7 @@ class IGameState : std::enable_shared_from_this<IGameState>
 {
 
 public:
-    std::vector<std::shared_ptr<Entity>> entityList;
+    std::map<std::string, std::shared_ptr<Entity>> entityList;
     GameManager* gameManager;
     IGameState() = default;
     virtual void Start() = 0;

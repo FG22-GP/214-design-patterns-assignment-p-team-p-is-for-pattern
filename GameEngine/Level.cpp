@@ -5,7 +5,7 @@
 #include "Constants/Constants.h"
 
 Level::Level(std::array<std::array<char, TilemapX>, TilemapY> gridData): bGenerateLevel(false) {
-    score = std::make_shared<Score>();
+    mTime = std::make_shared<Score>();
     grid = std::make_shared<Grid>(gridData);
 }
 

@@ -1,12 +1,14 @@
 #pragma once
+#include <xstring>
 
 class Score {
-    int score;
+    float Time;
     
 public:
     Score();
-    int GetScore() const;
-    void GiveScoreValue(int toAdd);
-    void UpdateScore();
+    float GetScore() const;
+    std::string GetScoreAsString();
+    void GiveScoreValue(float toAdd);
+    void UpdateScore(float DeltaTime);
     void ResetScore();
 };

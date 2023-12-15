@@ -1,6 +1,5 @@
 #pragma once
 #include <memory>
-
 #include "Grid.h"
 #include "Score.h"
 #include "Vector2D.h"
@@ -18,5 +17,7 @@ public:
     void GenerateRandomLevel();
     Vector2D GetStartPosition() const;
     Vector2D GetGoalPosition() const;
-    std::shared_ptr<Score> score;
+    std::shared_ptr<Score> mTime;
+    float TargetTime;
+
 };

@@ -22,6 +22,7 @@ int main(int argc, char* args[]) {
 
     bool quit = false;
 
+       // int iterator = 0;
     while (quit == false) {
         timer->Update();
 
@@ -31,12 +32,12 @@ int main(int argc, char* args[]) {
 
         TheGameWindow::Instance()->Clear();
 
-        gameManager->Update();
 
         if (timer->DeltaTime() >= 1.0f / FrameRate) {
+        // iterator++;
+        // printf("this is game.cpp: %d \n", iterator);
+        gameManager->Update();
             TheGameWindow::Instance()->Present();
-            printf("Static DeltaTime: %f \n", Timer::Instance()->DeltaTime());
-            printf("DeltaTime: %f \n", timer->DeltaTime());
             timer->Reset();
         }
     }
