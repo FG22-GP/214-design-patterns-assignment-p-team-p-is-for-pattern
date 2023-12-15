@@ -97,33 +97,21 @@ void Collision::InitializeComponent() {
 }
 
 void Collision::UpdateCornerPositions() {
-    float XVal1 = owner->position.GetX() - (width / 2);
-    float YVal1 = owner->position.GetY() + (height / 2);
-    int XPos1 = floor(XVal1 / 32);
-    int YPos1 = floor(YVal1 / 24);
-    TopLeftCornerGridPos.SetX(XPos1);
-    TopLeftCornerGridPos.SetY(YPos1);
+    Vector2DInt gridPos = Grid::WorldToGridPosition(Vector2D(owner->position.GetX(), owner->position.GetY()));
+    TopLeftCornerGridPos.SetX(gridPos.GetX());
+    TopLeftCornerGridPos.SetY(gridPos.GetY());
 
-    float XVal2 = owner->position.GetX() + (width / 2);
-    float YVal2 = owner->position.GetY() + (height / 2);
-    int XPos2 = floor(XVal2 / 32);
-    int YPos2 = floor(YVal2 / 24);
-    TopRightCornerGridPos.SetX(XPos2);
-    TopRightCornerGridPos.SetY(YPos2);
+    gridPos = Grid::WorldToGridPosition(Vector2D(owner->position.GetX() + width, owner->position.GetY()));
+    TopRightCornerGridPos.SetX(gridPos.GetX());
+    TopRightCornerGridPos.SetY(gridPos.GetY());
 
-    float XVal3 = owner->position.GetX() - (width / 2);
-    float YVal3 = owner->position.GetY() - (height / 2);
-    int XPos3 = floor(XVal3 / 32);
-    int YPos3 = floor(YVal3 / 24);
-    BottomLeftCornerGridPos.SetX(XPos3);
-    BottomLeftCornerGridPos.SetY(YPos3);
+    gridPos = Grid::WorldToGridPosition(Vector2D(owner->position.GetX(), owner->position.GetY() - height));
+    BottomLeftCornerGridPos.SetX(gridPos.GetX());
+    BottomLeftCornerGridPos.SetY(gridPos.GetY());
 
-    float XVal4 = owner->position.GetX() + (width / 2);
-    float YVal4 = owner->position.GetY() - (height / 2);
-    int XPos4 = floor(XVal4 / 32);
-    int YPos4 = floor(YVal4 / 24);
-    BottomRightCornerGridPos.SetX(XPos4);
-    BottomRightCornerGridPos.SetY(YPos4);
+    gridPos = Grid::WorldToGridPosition(Vector2D(owner->position.GetX() + width, owner->position.GetY() - height));
+    BottomRightCornerGridPos.SetX(gridPos.GetX());
+    BottomRightCornerGridPos.SetY(gridPos.GetY());
 
     cornerPositions[0] = TopLeftCornerGridPos;
     cornerPositions[1] = TopRightCornerGridPos;

@@ -28,8 +28,8 @@ public:
         //         entities.push_back(entity);
         //     }
         // }
+
         
-  
         for (int y = 0; y < gridData.size(); y++) {
             for (int x = 0; x < gridData[y].size(); x++) {
                 std::shared_ptr<Entity> entity = std::make_shared<Entity>("", Vector2D(x * 32 + x, y* 32 + y));
@@ -77,12 +77,12 @@ public:
     }
 
     static Vector2DInt WorldToGridPosition(Vector2D position) {
-        const int xValue = static_cast<int>(floor(position.GetX() / 32));
-        const int yValue = static_cast<int>(floor(position.GetY() / 24));
+        const int xValue = static_cast<int>(floor(position.GetX() / 33));
+        const int yValue = static_cast<int>(floor(position.GetY() / 33));
         return {xValue, yValue};
     }
 
     static Vector2D GridToWorldPosition(Vector2DInt gridPosition) {
-        return Vector2D(gridPosition.GetX() * 32, gridPosition.GetY() * 24);
+        return Vector2D(gridPosition.GetX() * 33, gridPosition.GetY() * 33);
     }
 };
