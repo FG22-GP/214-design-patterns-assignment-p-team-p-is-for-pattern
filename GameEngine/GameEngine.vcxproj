@@ -435,6 +435,7 @@
     <ClCompile Include="IGameWindow.cpp" />
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="EventHandler.cpp" />
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\Collision.h" />
@@ -471,6 +472,7 @@
     <ClInclude Include="TextureManager.h" />
     <ClCompile Include="Command.h" />
     <ClCompile Include="Input.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="IGameWindow.h" />
     <ClInclude Include="GameWindow.h" />

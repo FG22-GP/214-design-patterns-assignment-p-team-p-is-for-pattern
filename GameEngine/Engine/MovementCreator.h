@@ -8,7 +8,7 @@ class MovementCreator final : IComponentFactory
 
 public:
     MovementCreator() = default;
-    std::shared_ptr<IComponent> CreateComponent(std::shared_ptr<Entity> owner);
+    std::shared_ptr<IComponent> CreateComponent(std::shared_ptr<Entity> owner, float movementSpeed);
 
     ~MovementCreator() {}
 };

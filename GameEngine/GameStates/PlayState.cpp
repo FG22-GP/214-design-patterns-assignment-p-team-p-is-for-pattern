@@ -31,7 +31,7 @@ void PlayState::Update() {
     GameState::Update();
     if (!EventHandler::Empty()) {
         EventHandler::TryPop();
-        //gameManager->activeLevel->score->UpdateScore(); // Update those points of yours
+        gameManager->activeLevel->score->UpdateScore(); // Update those points of yours
     }
 
     // for (const auto& entity : entityList) {

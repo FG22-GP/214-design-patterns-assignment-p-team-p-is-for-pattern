@@ -9,9 +9,9 @@ void MovementCreator::InitializeComponent(std::shared_ptr<IComponent> component)
 
 }
 
-std::shared_ptr<IComponent> MovementCreator::CreateComponent(std::shared_ptr<Entity> owner)
+std::shared_ptr<IComponent> MovementCreator::CreateComponent(std::shared_ptr<Entity> owner, float movementSpeed)
 {
-    auto entityComponent = std::make_shared<Movement>("MovementComponent",owner);
+    auto entityComponent = std::make_shared<Movement>("MovementComponent",owner, movementSpeed);
     InitializeComponent(entityComponent);
     return entityComponent;
 }
