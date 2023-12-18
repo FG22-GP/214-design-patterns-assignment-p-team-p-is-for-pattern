@@ -5,16 +5,17 @@
 
 //const std::string WonState::stateID = "Won";
 
-WonState::WonState()
-{
-    Color wonTextColor = { 0xff,0xff,0xff };
-    TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "lazy", wonTextColor, 60 ,"You Won!!!",wonTextSize);
-    TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "wonNext", wonTextColor, 30, "Press Enter to Play Next Level", wonTextSize);
-    TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "wonRetry", wonTextColor, 30, "Press Backspace to Retry Current Level", wonTextSize);
+WonState::WonState() {
+    Color wonTextColor = {0xff, 0xff, 0xff};
+    TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "lazy", wonTextColor, 60, "Congratulations",
+                                            wonTextSize);
+    TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "wonNext", wonTextColor, 40, "Better time? Backspace",
+                                            restartTextSize);
+    TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "wonRetry", wonTextColor, 40, "Continue? Enter",
+                                            continueTextSize);
 }
 
-void WonState::Start()
-{
+void WonState::Start() {
     //State Start logic here
 
 
@@ -22,8 +23,7 @@ void WonState::Start()
     GameState::Start();
 }
 
-void WonState::Stop()
-{
+void WonState::Stop() {
     //State Stop logic here
 
 
@@ -33,13 +33,13 @@ void WonState::Stop()
     ClearRefs();
 }
 
-void WonState::Update()
-{
-    TheTextureManager::Instance()->Draw("lazy",Vector2D(WindowSizeX / 4, WindowSizeY / 4),wonTextSize);
-    TheTextureManager::Instance()->Draw("wonNext",Vector2D(WindowSizeX / 4, WindowSizeY / 4 + wonTextSize.GetY()), wonTextSize);
-    TheTextureManager::Instance()->Draw("wonRetry",Vector2D(WindowSizeX / 4, WindowSizeY / 4 + wonTextSize.GetY() * 2), wonTextSize);
-    if (Input::GetKeyDown(SDLK_BACKSPACE))
-    {
+void WonState::Update() {
+    TheTextureManager::Instance()->Draw("lazy", Vector2D(WindowSizeX / 8, WindowSizeY / 4), wonTextSize);
+    TheTextureManager::Instance()->Draw("wonNext", Vector2D(WindowSizeX / 6, WindowSizeY / 4 + wonTextSize.GetY()),
+                                        restartTextSize);
+    TheTextureManager::Instance()->Draw("wonRetry", Vector2D(WindowSizeX / 6, WindowSizeY / 4.44f + wonTextSize.GetY() * 2),
+                                        continueTextSize);
+    if (Input::GetKeyDown(SDLK_BACKSPACE)) {
         gameManager->RestartLevel(false);
         gameManager->ChangeActiveState("Record");
     }
@@ -48,7 +48,6 @@ void WonState::Update()
         gameManager->RestartLevel(true);
         gameManager->ChangeActiveState("Record");
     }
-    
+
     GameState::Update();
 }
-

@@ -44,7 +44,7 @@ void GameManager::Initialize(const std::shared_ptr<GameManager> gameManagerPtr) 
     playerEntity = player;
 
     player->AddComponent(RenderCreator().CreateComponent(player, Vector2D(32, 32), "MainCharacterSolo"));
-    player->AddComponent(MovementCreator().CreateComponent(player, 200.f));
+    player->AddComponent(MovementCreator().CreateComponent(player, 400.f));
     player->AddComponent(CollisionCreator().CreateComponent(player, 32.0f, 32.0f));
 
     entityMap.insert(std::make_pair(player->GetEntityName(), player));

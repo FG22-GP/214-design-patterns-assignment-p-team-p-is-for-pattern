@@ -4,13 +4,12 @@
 
 class Collision;
 
-class PlayState : public GameState
-{
+class PlayState : public GameState {
     const std::string stateID = "Play";
     std::shared_ptr<Collision> playerCollision;
     Vector2D recordingTextSize;
-    Color scoreTextColour = {0xff, 0xff, 0xff};
-
+    Color scoreRedTextColour = {0x80, 0x00, 0x00};
+    Color scoreGreenTextColour = {0x00, 0x80, 0x00};
 
 public:
     PlayState();

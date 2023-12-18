@@ -31,7 +31,6 @@ void PlayState::Update() {
     if (!EventHandler::Empty()) {
         EventHandler::TryPop();
         gameManager->activeLevel->mTime->UpdateScore(Timer::Instance()->DeltaTime()); // Update those points of yours
-        printf("YO TIME IS: %s,\n", gameManager->activeLevel->mTime->GetScoreAsString().c_str());
     }
 
 
@@ -70,8 +69,14 @@ void PlayState::Update() {
         break;
     }
 
-    TextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "PlayScore", scoreTextColour, 60, gameManager->activeLevel->mTime->GetScoreAsString(), recordingTextSize);
-    TextureManager::Instance()->Draw("PlayScore", Vector2D(WindowSizeX / 4.5, WindowSizeY / 32), recordingTextSize);
+    
+    TextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "PlayScore",
+        gameManager->activeLevel->targetTime > gameManager->activeLevel->mTime->GetScore() ? scoreGreenTextColour : scoreRedTextColour,
+        60,
+        gameManager->activeLevel->mTime->GetScoreAsString(),
+        recordingTextSize);
+    
+    TextureManager::Instance()->Draw("PlayScore", Vector2D(WindowSizeX / 20, WindowSizeY / 32), recordingTextSize);
 
 
     // if (/* Player Collision with evil tile of hell ||*/ !IsOnScreen(gameManager->playerEntity->position) || gameManager->strokes == 3) {

@@ -2,7 +2,7 @@
 #include <xstring>
 
 class Score {
-    float Time;
+    float Time = -1;
     
 public:
     Score();

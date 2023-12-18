@@ -9,7 +9,6 @@
 #include "TextureManager.h"
 #include "Timer.h"
 #include "Constants/Constants.h"
-#include "Level/Parser.h"
 
 int main(int argc, char* args[]) {
     TheGameWindow::Instance()->Init(WindowSizeX, WindowSizeY, IMG_INIT_PNG);

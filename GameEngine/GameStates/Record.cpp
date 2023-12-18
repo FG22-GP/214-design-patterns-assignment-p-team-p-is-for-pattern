@@ -8,8 +8,8 @@
 #include "..\Vector2D.h"
 
 Record::Record() {
-    constexpr Color recordingTextColour = {0xff, 0xff, 0xff};
-    TextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "Recording", recordingTextColour, 60, "Recording Input", recordingTextSize);
+   
+    TextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "Recording", scoreTextColour, 60, "Recording Input", recordingTextSize);
     // player = std::make_shared<Entity>("Player", Vector2D(200, 200));
     // player->AddComponent(RenderCreator().CreateComponent(player, Vector2D(32, 32), "MainCharacterSolo"));
     // player->AddComponent(MovementCreator().CreateComponent(player, 100.f));
@@ -30,7 +30,7 @@ void Record::Initilize() {
 }
 
 
-void Record::Start() {
+void Record::Start() { 
     GameState::Start();
     //theEnd->position = gameManager->activeLevel->GetGoalPosition(); // Player position gets set on game manager when its needed
 }
@@ -59,7 +59,14 @@ void Record::Update() {
             gameManager->ChangeActiveState("Play");
         }
     }
+    TextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "PlayScore",
+        gameManager->activeLevel->targetTime > gameManager->activeLevel->mTime->GetScore() ? scoreGreenTextColour : scoreRedTextColour,
+        60,
+        gameManager->activeLevel->mTime->GetScoreAsString(),
+        scoreTextSize);
+    TextureManager::Instance()->Draw("PlayScore", Vector2D(WindowSizeX / 20, WindowSizeY / 32), scoreTextSize);
     TextureManager::Instance()->Draw("Recording", Vector2D(WindowSizeX / 4.5, WindowSizeY / 32), recordingTextSize);
+    
     GameState::Update();
 }
 

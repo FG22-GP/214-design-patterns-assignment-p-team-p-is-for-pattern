@@ -10,7 +10,7 @@ float Score::GetScore() const {
 }
 
 std::string Score::GetScoreAsString() {
-    return std::format("{:.2f}", Time);
+    return std::format("{:.1f}", Time);
 }
 
 void Score::GiveScoreValue(float toAdd) {

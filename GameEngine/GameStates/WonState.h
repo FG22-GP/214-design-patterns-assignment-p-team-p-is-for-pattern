@@ -8,6 +8,7 @@ class WonState : public GameState
     
     Vector2D wonTextSize;
     Vector2D restartTextSize;
+    Vector2D continueTextSize;
 
 public:
     WonState();
