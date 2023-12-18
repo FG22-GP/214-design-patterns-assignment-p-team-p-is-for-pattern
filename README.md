@@ -23,6 +23,7 @@
 - EventHandler.h
 ### Singleton
 - TextureManager.h/cpp
+- GameManager.h/cpp
 ### Factory
 - ComponentCreator.h/cpp
 - IComponentFactory.h
