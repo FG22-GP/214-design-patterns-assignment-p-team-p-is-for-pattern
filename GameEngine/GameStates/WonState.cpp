@@ -29,6 +29,8 @@ void WonState::Stop()
 
     //runs entity Stop logic
     GameState::Stop();
+
+    ClearRefs();
 }
 
 void WonState::Update()

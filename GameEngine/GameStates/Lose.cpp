@@ -16,6 +16,8 @@ void Lose::Start() {
 
 void Lose::Stop() {
     GameState::Stop();
+
+    ClearRefs();
 }
 
 void Lose::Update() {

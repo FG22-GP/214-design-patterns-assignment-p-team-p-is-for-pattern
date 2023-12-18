@@ -1,5 +1,9 @@
 #include "GameState.h"
 
+void IGameState::ClearRefs() {
+	entityList.clear();
+}
+
 GameState::GameState(GameManager* manager)
 {
 	gameManager = manager;

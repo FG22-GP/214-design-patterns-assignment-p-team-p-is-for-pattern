@@ -25,7 +25,6 @@ int main(int argc, char* args[]) {
     while (quit == false) {
         timer->Update();
 
-        Input::UpdateInput();
 
         if (Input::GetKeyDown(SDLK_ESCAPE)) quit = true;
 
@@ -33,6 +32,7 @@ int main(int argc, char* args[]) {
 
 
         if (timer->DeltaTime() >= 1.0f / FrameRate) {
+            Input::UpdateInput();
             gameManager->Update();
             TheGameWindow::Instance()->Present();
             timer->Reset();

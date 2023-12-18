@@ -10,7 +10,7 @@
 
 class TempTile;
 
-class Grid {
+class Grid { // new grid, 
 public:
     static inline std::shared_ptr<Entity> tiles[32][24];
     static constexpr constexpr int WindowSizeX = 1056, WindowSizeY = 792;
@@ -18,6 +18,12 @@ public:
 
     explicit Grid(std::unique_ptr<std::array<std::array<char, 32>, 24>>& gridData) {
         Vector2D StartPos;
+        for (int i = 0; i < 32; i++) {
+            for (int j = 0; j < 24; j++) {
+                tiles[i][j] = nullptr;
+            }
+        }
+        entitiesLookup.clear();
         for (int y = 0; y < gridData->size(); y++) {
             for (int x = 0; x < gridData->data()[y].size(); x++) {
                 auto entity = std::make_shared<Entity>("", Vector2D(x * 32 + x, y * 32 + y));

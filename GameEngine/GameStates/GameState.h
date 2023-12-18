@@ -19,9 +19,9 @@ public:
     virtual void Update() = 0;
 
     virtual std::string GetStateID() const = 0;
+    void ClearRefs();
 
     ~IGameState() = default;
-
     
 };
 
