@@ -1,16 +1,20 @@
 #pragma once
 #include <array>
 #include <memory>
+#include <sstream>
+
 #include "Vector2DInt.h"
-#include "Engine/Entity.h"
-#include "Engine/TileCreator.h"
 #include "Components/Tile.h"
-#include "Engine/MovementCreator.h"
+#include "Engine/Entity.h"
 #include "Engine/RenderCreator.h"
+#include "Engine/TileCreator.h"
 
 class TempTile;
 
-class Grid { // new grid, 
+class Grid {
+    // new grid, 
+    float goalTime;
+
 public:
     static inline std::shared_ptr<Entity> tiles[32][24];
     static constexpr int WindowSizeX = 1056, WindowSizeY = 792;
@@ -23,9 +27,10 @@ public:
                 tiles[i][j] = nullptr;
             }
         }
-        
+
         entitiesLookup.clear();
-        
+        std::stringstream ss;
+        std::string goalParsed;
         for (int y = 0; y < gridData->size(); y++) {
             for (int x = 0; x < gridData->data()[y].size(); x++) {
                 auto entity = std::make_shared<Entity>("", Vector2D(x * 32 + x, y * 32 + y));
@@ -37,7 +42,7 @@ public:
                     entity->AddComponent(RenderCreator().CreateComponent(entity, Vector2D(32, 32), "NonWalkableTile"));
                     break;
                 case 'o':
-                    entity->SetName("Walkablew:" + std::to_string(x) + std::to_string(y));
+                    entity->SetName("Walkable:" + std::to_string(x) + std::to_string(y));
                     entity->AddComponent(TileCreator().CreateComponent(entity, TILE_WALKABLE, Vector2DInt(x, y)));
                     break;
                 case 'g':
@@ -48,9 +53,15 @@ public:
                 case 'p':
                     entity->SetName("PlayerStartTile");
                     entity->AddComponent(TileCreator().CreateComponent(entity, TILE_PLAYERSTART, Vector2DInt(x, y)));
-                    StartPos = GridToWorldPosition(Vector2DInt(x, y));
                     break;
                 default:
+                    if (goalParsed.empty()) {
+                        ss << gridData->data()[y][x] << gridData->data()[y][x + 1];
+                        goalParsed = ss.str();
+                        goalTime = std::stof(goalParsed);
+                    }
+                    entity->SetName("Walkable:" + std::to_string(x) + std::to_string(y));
+                    entity->AddComponent(TileCreator().CreateComponent(entity, TILE_WALKABLE, Vector2DInt(x, y)));
                     break;
                 }
 
@@ -58,9 +69,10 @@ public:
                 tiles[x][y] = entity;
             }
         }
+    }
 
-
-        
+    float GetGoalTime() const {
+        return goalTime;
     }
 
     static std::shared_ptr<Tile> GetTile(Vector2DInt gridPosition) {

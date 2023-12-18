@@ -67,7 +67,7 @@ void Record::Update() {
         }
     }
     TextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "PlayScore",
-                                         gameManager->activeLevel->targetTime > gameManager->activeLevel->mTime->GetScore()
+                                         gameManager->activeLevel->goalTime > gameManager->activeLevel->mTime->GetScore()
                                              ? scoreGreenTextColour
                                              : scoreRedTextColour,
                                          60,

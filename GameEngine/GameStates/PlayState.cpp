@@ -58,7 +58,7 @@ void PlayState::Update() {
         gameManager->ChangeActiveState("Lose");
         break;
     case TILE_GOAL:
-        if (gameManager->activeLevel->mTime->GetScore() < gameManager->activeLevel->targetTime) gameManager->ChangeActiveState("Won");
+        if (gameManager->activeLevel->mTime->GetScore() < gameManager->activeLevel->goalTime) gameManager->ChangeActiveState("Won");
         else gameManager->ChangeActiveState("Lose");
 
         break;
@@ -71,7 +71,7 @@ void PlayState::Update() {
 
     
     TextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "PlayScore",
-        gameManager->activeLevel->targetTime > gameManager->activeLevel->mTime->GetScore() ? scoreGreenTextColour : scoreRedTextColour,
+        gameManager->activeLevel->goalTime > gameManager->activeLevel->mTime->GetScore() ? scoreGreenTextColour : scoreRedTextColour,
         60,
         gameManager->activeLevel->mTime->GetScoreAsString(),
         recordingTextSize);
