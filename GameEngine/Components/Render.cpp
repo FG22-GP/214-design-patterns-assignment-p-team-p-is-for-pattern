@@ -3,8 +3,8 @@
 #include "..\Engine\Entity.h"
 #include "..\TextureManager.h"
 
-Render::Render(std::string name ,const std::shared_ptr<Entity>& Owner,Vector2D size,std::string imgName)
-: IComponent(Owner) {
+Render::Render(std::string name, const std::shared_ptr<Entity>& Owner, Vector2D size, std::string imgName)
+    : IComponent(Owner) {
     componentName = name;
     imageName = imgName;
     spriteSize = size;
@@ -15,8 +15,10 @@ void Render::Start() {
 }
 
 void Render::Execute() {
-    
     TheTextureManager::Instance()->Draw(imageName, owner->position, spriteSize);
+    if (owner->GetEntityName() == "Player") {
+        printf("playerpos.x: %f, playerpos.y: %f \n", owner->position.GetX(), owner->position.GetY());
+    }
 }
 
 void Render::Stop() {

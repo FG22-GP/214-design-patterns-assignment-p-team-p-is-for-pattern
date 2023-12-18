@@ -6,8 +6,8 @@
 #include "Level.h"
 
 
-class GameManager : std::enable_shared_from_this<GameManager> {
-    std::map<std::string, std::shared_ptr<Entity>> entityList;
+class GameManager : public std::enable_shared_from_this<GameManager> {
+    std::map<std::string, std::shared_ptr<Entity>> entityMap;
     struct Private{};
 
 public:

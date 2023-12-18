@@ -2,8 +2,6 @@
 #include <ranges>
 #include <SDL_log.h>
 #include <cvt/wstring>
-
-#include "ComponentCreator.h"
 #include "map"
 #include "Mono.h"
 #include "vector"
@@ -66,14 +64,3 @@ std::shared_ptr<T> Entity::GetComponent() {
     }
     return std::shared_ptr<T>(); 
 }
-
-class GameClass {
-public:
-    static std::shared_ptr<Entity> GetNewEntity() {
-        auto newEntity = Entity("Testing");
-        auto componentCreator = ComponentCreator();
-        newEntity.AddComponent(componentCreator.CreateComponent(std::make_shared<Entity>(newEntity)));
-        SDL_Log("New entity Added with ExampleComponent on it!");
-        return std::make_shared<Entity>(newEntity);
-    }
-};
