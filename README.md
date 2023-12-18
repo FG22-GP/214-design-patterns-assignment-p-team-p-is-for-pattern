@@ -15,6 +15,10 @@
 ## Design Patterns
 ### Command
 - Command.h
+> This was the central focus of the project, the game idea itself was spawned
+> from this pattern in combination with Event Queue. We chose this pattern 
+> for two reason, one it looked useful, powerful and fun. We made it fit the game.
+
 ### Event Queue
 - EventHandler.h
 ### Singleton
