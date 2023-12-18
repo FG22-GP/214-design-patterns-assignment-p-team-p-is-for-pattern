@@ -1,17 +1,11 @@
 #include "Record.h"
 
 #include <random>
-#include "../Level/Tileset.h"
-#include "..\Vector2D.h"
-#include "..\Engine/CollisionCreator.h"
-#include "..\Engine\RenderCreator.h"
-#include "..\Engine\MovementCreator.h"
-#include "..\Input.h"
-#include "..\Constants/Constants.h"
+#include "../GameManager.h"
 #include "..\EventHandler.h"
-#include "..\GameManager.h"
-#include "../Engine/TileCreator.h"
-
+#include "..\Input.h"
+#include "..\Vector2D.h"
+#include "../Level/Tileset.h"
 
 Record::Record() {
     // player = std::make_shared<Entity>("Player", Vector2D(200, 200));
