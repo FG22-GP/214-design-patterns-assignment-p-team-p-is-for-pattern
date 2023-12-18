@@ -35,9 +35,19 @@ void GameManager::Initialize(const std::shared_ptr<GameManager> gameManagerPtr) 
     wonState->SetGameManager(gameManagerPtr->GetPtr());
     record->SetGameManager(gameManagerPtr->GetPtr());
     lose->SetGameManager(gameManagerPtr->GetPtr());
+    
+   
+    Vector2D startPosition = entityMap.find("PlayerStartTile")->second->position;
+    auto player = std::make_shared<Entity>("Player", startPosition);
+    playerEntity = player;
 
-     playerEntity = entityMap.find("Player")->second;
+    player->AddComponent(RenderCreator().CreateComponent(player, Vector2D(32, 32), "MainCharacterSolo"));
+    player->AddComponent(MovementCreator().CreateComponent(player, 200.f));
+    player->AddComponent(CollisionCreator().CreateComponent(player, 32.0f, 32.0f));
 
+    entityMap.insert(std::make_pair(player->GetEntityName(), player));
+    
+    
     PushState(playState);
     PushState(pauseState);
     PushState(wonState);

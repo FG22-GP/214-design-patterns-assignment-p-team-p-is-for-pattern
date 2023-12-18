@@ -17,7 +17,7 @@ int main(int argc, char* args[]) {
     std::shared_ptr<GameManager> gameManager = GameManager::Create();
     gameManager->Initialize(gameManager);
     gameManager->Start();
-    gameManager->RestartLevel(true);
+    //gameManager->RestartLevel(true);
     gameManager->ChangeActiveState("Record");
 
     Timer* timer = Timer::Instance();

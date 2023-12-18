@@ -60,12 +60,7 @@ public:
         }
 
 
-        auto player = std::make_shared<Entity>("Player", StartPos);
-        player->AddComponent(RenderCreator().CreateComponent(player, Vector2D(32, 32), "MainCharacterSolo"));
-        player->AddComponent(MovementCreator().CreateComponent(player, 200.f));
-        player->AddComponent(CollisionCreator().CreateComponent(player, 32.0f, 32.0f));
-
-        entitiesLookup.insert(std::make_pair(player->GetEntityName(), player));
+        
     }
 
     static std::shared_ptr<Tile> GetTile(Vector2DInt gridPosition) {

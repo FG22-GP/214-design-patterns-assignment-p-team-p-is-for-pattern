@@ -11,7 +11,7 @@ class CollisionCreator final : IComponentFactory
 
 public:
     CollisionCreator() = default;
-    virtual std::shared_ptr<IComponent> CreateComponent(std::shared_ptr<Entity>& owner, float width, float height);
+    virtual std::shared_ptr<IComponent> CreateComponent(std::shared_ptr<Entity> owner, float width, float height);
 
     ~CollisionCreator() {}
 };
