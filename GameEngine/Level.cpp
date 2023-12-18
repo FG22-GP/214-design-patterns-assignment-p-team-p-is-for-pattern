@@ -5,7 +5,7 @@
 Level::Level(std::unique_ptr<std::array<std::array<char, TilemapX>, TilemapY>>& gridData): bGenerateLevel(false), targetTime(20.f) {
     mTime = std::make_shared<Score>();
     grid = std::make_shared<Grid>(gridData);
-    nextLevelIndex = 0;
+    levelIndex = 0;
 }
 
 void Level::GenerateRandomLevel() {

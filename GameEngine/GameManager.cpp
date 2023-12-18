@@ -1,4 +1,6 @@
 #include "GameManager.h"
+
+#include "EventHandler.h"
 #include "GameStates/Lose.h"
 #include "GameStates/PlayState.h"
 #include "GameStates/PauseState.h"
@@ -35,8 +37,8 @@ void GameManager::Initialize(const std::shared_ptr<GameManager> gameManagerPtr) 
     wonState->SetGameManager(gameManagerPtr->GetPtr());
     record->SetGameManager(gameManagerPtr->GetPtr());
     lose->SetGameManager(gameManagerPtr->GetPtr());
-    
-   
+
+
     Vector2D startPosition = entityMap.find("PlayerStartTile")->second->position;
     auto player = std::make_shared<Entity>("Player", startPosition);
     playerEntity = player;
@@ -46,8 +48,8 @@ void GameManager::Initialize(const std::shared_ptr<GameManager> gameManagerPtr) 
     player->AddComponent(CollisionCreator().CreateComponent(player, 32.0f, 32.0f));
 
     entityMap.insert(std::make_pair(player->GetEntityName(), player));
-    
-    
+
+
     PushState(playState);
     PushState(pauseState);
     PushState(wonState);
@@ -61,33 +63,29 @@ void GameManager::PushState(std::shared_ptr<GameState> pushState) {
 }
 
 void GameManager::Start() {
-    for (auto kvp : entityMap) 
-        if (kvp.second) kvp.second->Start();
+    for (auto kvp : entityMap) if (kvp.second) kvp.second->Start();
     for (auto state : allStates) {
         state.second->Start();
     }
 }
 
 void GameManager::Stop() {
-    for (auto kvp : entityMap) 
-        if (kvp.second) kvp.second->Stop();
+    for (auto kvp : entityMap) if (kvp.second) kvp.second->Stop();
     for (auto state : allStates) {
         state.second->Stop();
     }
-
 }
 
 void GameManager::Update() {
     if (activeState == nullptr) return;
-    
-    for (auto kvp : entityMap) 
-        if (kvp.second) kvp.second->Update();
-    
+
+    for (auto kvp : entityMap) if (kvp.second) kvp.second->Update();
+
     activeState->Update();
 
-   // printf("playerpos.x: %f, playerpos.y: %f \n", playerEntity->position.GetX(), playerEntity->position.GetY());
-    
+    // printf("playerpos.x: %f, playerpos.y: %f \n", playerEntity->position.GetX(), playerEntity->position.GetY());
 }
+
 void GameManager::ChangeActiveState(std::string changeID) {
     std::shared_ptr<GameState> stateToChange = allStates[changeID];
 
@@ -98,22 +96,30 @@ void GameManager::ChangeActiveState(std::string changeID) {
     }
 }
 
+void GameManager::CleanEntities() {
+    std::erase_if(entityMap,[](const std::pair<std::string, std::shared_ptr<Entity>>& entity){return entity.second->GetEntityName() != "Player";});
+}
+
+
+
 void GameManager::RestartLevel(const bool buildNextLevel) {
     if (buildNextLevel) {
-        entityMap.clear();
-        BuildLevel(activeLevel->nextLevelIndex);
-        activeLevel->nextLevelIndex++;
+        CleanEntities();
+        activeLevel->levelIndex++;
+        BuildLevel(activeLevel->levelIndex);
     }
 
+    
     strokes = 0;
+    EventHandler::Clear();
     activeLevel->mTime->ResetScore();
-   // playerEntity->position = activeLevel->grid->entitiesLookup.find("PlayerStartTile")->second->position;
+    playerEntity->position = activeLevel->grid->entitiesLookup.find("PlayerStartTile")->second->position;
 }
 
 void GameManager::BuildLevel(const int index) {
     auto arrays = std::make_unique<std::array<std::array<char, TilemapX>, TilemapY>>(gridData->data()[index]);
     activeLevel = std::make_shared<Level>(arrays);
-    activeLevel->nextLevelIndex = index;
+    activeLevel->levelIndex = index;
     for (const auto& entity : activeLevel->grid->entitiesLookup) {
         entityMap.insert(entity);
     }
@@ -129,4 +135,3 @@ std::shared_ptr<Entity> GameManager::GetEntity(const std::string& entityName) {
 std::shared_ptr<GameManager> GameManager::GetPtr() {
     return shared_from_this();
 }
-

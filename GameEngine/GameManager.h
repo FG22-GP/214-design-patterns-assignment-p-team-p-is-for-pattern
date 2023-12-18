@@ -28,6 +28,7 @@ public:
     //Might not need pop
     //void PopState();
     void ChangeActiveState(std::string changeID);
+    void CleanEntities();
     void RestartLevel(bool buildNextLevel);
     void BuildLevel(int index);
     std::shared_ptr<Entity> GetEntity(const std::string& entityName);

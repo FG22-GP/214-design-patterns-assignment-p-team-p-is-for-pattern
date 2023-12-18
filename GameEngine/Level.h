@@ -19,6 +19,6 @@ public:
     Vector2D GetGoalPosition() const;
     std::shared_ptr<Score> mTime;
     float targetTime;
-    int nextLevelIndex;
+    int levelIndex;
 
 };

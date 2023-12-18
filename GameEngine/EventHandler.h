@@ -21,4 +21,8 @@ public:
     static bool Empty(){
         return CommandQueue.empty();
     }
+
+    static void Clear() {
+        CommandQueue = {};
+    }
 };
