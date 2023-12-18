@@ -11,8 +11,7 @@ class IGameState : std::enable_shared_from_this<IGameState>
 {
 
 public:
-    std::map<std::string, std::shared_ptr<Entity>> entityList;
-    GameManager* gameManager;
+    std::shared_ptr<GameManager> gameManager;
     IGameState() = default;
     virtual void Start() = 0;
     virtual void Stop() = 0;
@@ -20,8 +19,9 @@ public:
 
     virtual std::string GetStateID() const = 0;
     void ClearRefs();
+    virtual void SetGameManager(std::shared_ptr<GameManager> manager) = 0;
 
-    ~IGameState() = default;
+    virtual ~IGameState() = default;
     
 };
 
@@ -33,12 +33,13 @@ class GameState : public IGameState , std::enable_shared_from_this<GameState>
     const std::string stateID = "";
     
 public:
-    GameState(GameManager* manager);
+    explicit GameState() = default;
     void Start() override;
     void Stop() override;
     void Update() override;
 
-    virtual std::string GetStateID() const override{ return stateID; };
+    std::string GetStateID() const override{ return stateID; }
+    void SetGameManager(std::shared_ptr<GameManager> manager) override;
 
-    ~GameState() {}
+    ~GameState() override = default;
 };

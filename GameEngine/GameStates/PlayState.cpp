@@ -10,17 +10,15 @@
 
 //const std::string PlayState::stateID = "Play";
 
-PlayState::PlayState(GameManager* manager) : GameState(manager) {
+PlayState::PlayState() {
 }
 
 void PlayState::Start() {
     GameState::Start();
-    for (const auto& entity : entityList) {
-        if (entity.second->GetComponent<Movement>()) {
-            // player entity collision;
-            playerCollision = entity.second->GetComponent<Collision>();
-            break;
-        }
+    const auto playerEntity = gameManager->GetEntity("Player");
+    if (playerEntity->GetComponent<Movement>()) {
+        // player entity collision;
+        playerCollision = playerEntity->GetComponent<Collision>();
     }
     gameManager->activeLevel->mTime->GiveScoreValue(1.0f);
 }
@@ -59,17 +57,16 @@ void PlayState::Update() {
 
     switch (playerCollision->CheckCollision()) {
     case TILE_UNWALKABLE:
-        gameManager->ChangeActiveState("Lose", true);
+        gameManager->ChangeActiveState("Lose");
         break;
     case TILE_GOAL:
-        if (gameManager->activeLevel->mTime->GetScore() < gameManager->activeLevel->targetTime)
-            gameManager->ChangeActiveState("Won", true);
-        else gameManager->ChangeActiveState("Lose", true);
-        
+        if (gameManager->activeLevel->mTime->GetScore() < gameManager->activeLevel->targetTime) gameManager->ChangeActiveState("Won");
+        else gameManager->ChangeActiveState("Lose");
+
         break;
     default:
         if (EventHandler::Empty()) {
-            gameManager->ChangeActiveState("Record", true);
+            gameManager->ChangeActiveState("Record");
         }
         break;
     }

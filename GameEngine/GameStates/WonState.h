@@ -10,7 +10,7 @@ class WonState : public GameState
     Vector2D restartTextSize;
 
 public:
-    WonState(GameManager* manager);
+    WonState();
     void Start() override;
     void Stop() override;
     void Update() override;

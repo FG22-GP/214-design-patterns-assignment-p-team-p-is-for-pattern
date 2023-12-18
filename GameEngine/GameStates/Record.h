@@ -11,7 +11,7 @@ class Record : public GameState
 
 
 public:
-    Record(GameManager* manager);
+    Record();
     void Start() override;
     void Stop() override;
     void Update() override;

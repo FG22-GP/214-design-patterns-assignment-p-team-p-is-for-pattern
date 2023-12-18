@@ -13,7 +13,7 @@ class TempTile;
 class Grid { // new grid, 
 public:
     static inline std::shared_ptr<Entity> tiles[32][24];
-    static constexpr constexpr int WindowSizeX = 1056, WindowSizeY = 792;
+    static constexpr int WindowSizeX = 1056, WindowSizeY = 792;
     std::map<std::string, std::shared_ptr<Entity>> entitiesLookup;
 
     explicit Grid(std::unique_ptr<std::array<std::array<char, 32>, 24>>& gridData) {
@@ -23,7 +23,9 @@ public:
                 tiles[i][j] = nullptr;
             }
         }
+        
         entitiesLookup.clear();
+        
         for (int y = 0; y < gridData->size(); y++) {
             for (int x = 0; x < gridData->data()[y].size(); x++) {
                 auto entity = std::make_shared<Entity>("", Vector2D(x * 32 + x, y * 32 + y));
@@ -60,7 +62,7 @@ public:
 
         auto player = std::make_shared<Entity>("Player", StartPos);
         player->AddComponent(RenderCreator().CreateComponent(player, Vector2D(32, 32), "MainCharacterSolo"));
-        player->AddComponent(MovementCreator().CreateComponent(player, 100.f));
+        player->AddComponent(MovementCreator().CreateComponent(player, 200.f));
         player->AddComponent(CollisionCreator().CreateComponent(player, 32.0f, 32.0f));
 
         entitiesLookup.insert(std::make_pair(player->GetEntityName(), player));

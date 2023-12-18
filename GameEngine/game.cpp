@@ -1,6 +1,7 @@
 //Using SDL and standard IO
 #include <queue>
 #include <SDL.h>
+
 #include "Command.h"
 #include "GameManager.h"
 #include "GameWindow.h"
@@ -13,7 +14,8 @@
 int main(int argc, char* args[]) {
     TheGameWindow::Instance()->Init(WindowSizeX, WindowSizeY, IMG_INIT_PNG);
 
-    auto gameManager = new GameManager();
+    auto gameManager = GameManager::Create();
+    gameManager->Initialize(gameManager);
     gameManager->Start();
     gameManager->RestartLevel(true);
     gameManager->ChangeActiveState("Record");
@@ -25,11 +27,9 @@ int main(int argc, char* args[]) {
     while (quit == false) {
         timer->Update();
 
-
         if (Input::GetKeyDown(SDLK_ESCAPE)) quit = true;
 
         TheGameWindow::Instance()->Clear();
-
 
         if (timer->DeltaTime() >= 1.0f / FrameRate) {
             Input::UpdateInput();

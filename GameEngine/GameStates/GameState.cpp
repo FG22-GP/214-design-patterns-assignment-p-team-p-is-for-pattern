@@ -1,35 +1,22 @@
 #include "GameState.h"
 
-void IGameState::ClearRefs() {
-	entityList.clear();
-}
+#include "../GameManager.h"
 
-GameState::GameState(GameManager* manager)
-{
-	gameManager = manager;
+void IGameState::ClearRefs() {
 }
 
 void GameState::Start()
 {
-	for (auto entity : entityList)
-	{
-		entity.second->Start();
-	}
 }
 
 void GameState::Stop()
 {
-	for (auto entity : entityList)
-	{
-		entity.second->Stop();
-	}
-
 }
 
 void GameState::Update() 
 {
-	for (auto entity : entityList)
-	{
-		entity.second->Update();
-	}
+}
+
+void GameState::SetGameManager(std::shared_ptr<GameManager> manager) {
+    gameManager = manager;
 }

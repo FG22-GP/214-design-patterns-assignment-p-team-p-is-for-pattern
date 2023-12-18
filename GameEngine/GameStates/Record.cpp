@@ -13,7 +13,7 @@
 #include "../Engine/TileCreator.h"
 
 
-Record::Record(GameManager* manager) : GameState(manager) {
+Record::Record() {
     // player = std::make_shared<Entity>("Player", Vector2D(200, 200));
     // player->AddComponent(RenderCreator().CreateComponent(player, Vector2D(32, 32), "MainCharacterSolo"));
     // player->AddComponent(MovementCreator().CreateComponent(player, 100.f));
@@ -36,12 +36,6 @@ void Record::Initilize() {
 
 void Record::Start() {
     GameState::Start();
-
-    for (const auto& entity : gameManager->activeLevel->grid->entitiesLookup) {
-        entityList.insert(entity);
-    }
-
-    gameManager->playerEntity = entityList.find("Player")->second;
     //theEnd->position = gameManager->activeLevel->GetGoalPosition(); // Player position gets set on game manager when its needed
 }
 
@@ -66,7 +60,7 @@ void Record::Update() {
     }
     if (!Input::GetKey(SDLK_w) && !Input::GetKey(SDLK_s) && !Input::GetKey(SDLK_a) && !Input::GetKey(SDLK_d)) {
         if (!EventHandler::Empty()) {
-            gameManager->ChangeActiveState("Play", true);
+            gameManager->ChangeActiveState("Play");
         }
     }
     GameState::Update();

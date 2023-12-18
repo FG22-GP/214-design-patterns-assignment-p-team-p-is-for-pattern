@@ -3,7 +3,7 @@
 #include "..\Input.h"
 #include "..\GameManager.h"
 
-Lose::Lose(GameManager* manager) : GameState(manager) {
+Lose::Lose() {
     Color lostTextColor = {0xff, 0xff, 0xff};
     TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "lost", lostTextColor, 60, "You Lost!!!", loseTextSize);
     TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "next", lostTextColor, 30, "Press Enter to Play Next Level", restartTextSize);

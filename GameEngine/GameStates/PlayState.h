@@ -11,7 +11,7 @@ class PlayState : public GameState
     std::shared_ptr<Collision> playerCollision;
 
 public:
-    PlayState(GameManager* manager);
+    PlayState();
     void Start() override;
     void Stop() override;
     void Update() override;

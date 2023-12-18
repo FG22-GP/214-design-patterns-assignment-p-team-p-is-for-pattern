@@ -12,7 +12,7 @@ class Lose : public GameState {
     
 
 public:
-    Lose(GameManager* manager);
+    Lose();
     void Start() override;
     void Stop() override;
     void Update() override;

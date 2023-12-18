@@ -5,7 +5,7 @@
 
 //const std::string WonState::stateID = "Won";
 
-WonState::WonState(GameManager* manager) : GameState(manager)
+WonState::WonState()
 {
     Color wonTextColor = { 0xff,0xff,0xff };
     TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "lazy", wonTextColor, 60 ,"You Won!!!",wonTextSize);
