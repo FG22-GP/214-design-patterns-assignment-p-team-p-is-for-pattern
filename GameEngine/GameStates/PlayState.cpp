@@ -1,16 +1,15 @@
 #include "PlayState.h"
 
 #include "../GameManager.h"
+#include "../TextureManager.h"
 #include "../Timer.h"
 #include "..\EventHandler.h"
 #include "../Components/Collision.h"
-#include "../Constants/Constants.h"
-#include "../Engine/Engine.h"
-#include "../Components/Render.h"
 
 //const std::string PlayState::stateID = "Play";
 
 PlayState::PlayState() {
+    
 }
 
 void PlayState::Start() {
@@ -70,6 +69,9 @@ void PlayState::Update() {
         }
         break;
     }
+
+    TextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "PlayScore", scoreTextColour, 60, gameManager->activeLevel->mTime->GetScoreAsString(), recordingTextSize);
+    TextureManager::Instance()->Draw("PlayScore", Vector2D(WindowSizeX / 4.5, WindowSizeY / 32), recordingTextSize);
 
 
     // if (/* Player Collision with evil tile of hell ||*/ !IsOnScreen(gameManager->playerEntity->position) || gameManager->strokes == 3) {

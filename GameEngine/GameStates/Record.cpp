@@ -2,12 +2,14 @@
 
 #include <random>
 #include "../GameManager.h"
+#include "../TextureManager.h"
 #include "..\EventHandler.h"
 #include "..\Input.h"
 #include "..\Vector2D.h"
-#include "../Level/Tileset.h"
 
 Record::Record() {
+    constexpr Color recordingTextColour = {0xff, 0xff, 0xff};
+    TextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "Recording", recordingTextColour, 60, "Recording Input", recordingTextSize);
     // player = std::make_shared<Entity>("Player", Vector2D(200, 200));
     // player->AddComponent(RenderCreator().CreateComponent(player, Vector2D(32, 32), "MainCharacterSolo"));
     // player->AddComponent(MovementCreator().CreateComponent(player, 100.f));
@@ -39,7 +41,7 @@ void Record::Stop() {
 
 void Record::Update() {
     // pixels per frame movement
-    
+
     if (Input::GetKey(SDLK_w)) {
         EventHandler::Push(std::make_shared<MoveCommand>(MoveCommand(Vector2D(0, -1), gameManager->playerEntity)));
     }
@@ -57,6 +59,7 @@ void Record::Update() {
             gameManager->ChangeActiveState("Play");
         }
     }
+    TextureManager::Instance()->Draw("Recording", Vector2D(WindowSizeX / 4.5, WindowSizeY / 32), recordingTextSize);
     GameState::Update();
 }
 

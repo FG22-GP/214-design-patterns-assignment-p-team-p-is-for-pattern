@@ -19,6 +19,7 @@ void Score::GiveScoreValue(float toAdd) {
 
 void Score::UpdateScore(float DeltaTime) {
     Time += DeltaTime;
+    printf("Time: %s", GetScoreAsString().c_str());
 }
 
 void Score::ResetScore() {

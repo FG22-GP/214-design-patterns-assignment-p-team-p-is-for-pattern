@@ -1,5 +1,6 @@
 #pragma once
 #include "GameState.h"
+#include "../TextureManager.h"
 
 
 class Record : public GameState
@@ -8,7 +9,7 @@ class Record : public GameState
 
     std::shared_ptr<Entity> player;
     std::shared_ptr<Entity> theEnd;
-
+    Vector2D recordingTextSize;
 
 public:
     Record();
