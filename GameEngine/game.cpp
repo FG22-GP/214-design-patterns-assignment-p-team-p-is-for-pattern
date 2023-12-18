@@ -14,7 +14,7 @@
 int main(int argc, char* args[]) {
     TheGameWindow::Instance()->Init(WindowSizeX, WindowSizeY, IMG_INIT_PNG);
 
-    auto gameManager = GameManager::Create();
+    std::shared_ptr<GameManager> gameManager = GameManager::Create();
     gameManager->Initialize(gameManager);
     gameManager->Start();
     gameManager->RestartLevel(true);

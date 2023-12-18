@@ -28,13 +28,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Components\Collision.cpp" />
-    <ClCompile Include="Components\EntityComponentExample.cpp" />
     <ClCompile Include="Components\IComponent.cpp" />
     <ClCompile Include="Components\Movement.cpp" />
     <ClCompile Include="Components\Render.cpp" />
     <ClCompile Include="Components\Tile.cpp" />
     <ClCompile Include="Engine\CollisionCreator.cpp" />
-    <ClCompile Include="Engine\ComponentCreator.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\Entity.cpp" />
     <ClCompile Include="Engine\Mono.cpp">
@@ -439,7 +437,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\Collision.h" />
-    <ClInclude Include="Components\ExampleEntityComponent.h" />
     <ClInclude Include="Components\IComponent.h" />
     <ClInclude Include="Components\IComponentFactory.h" />
     <ClInclude Include="Components\Movement.h" />
@@ -447,7 +444,6 @@
     <ClInclude Include="Components\Tile.h" />
     <ClInclude Include="Constants\Constants.h" />
     <ClInclude Include="Engine\CollisionCreator.h" />
-    <ClInclude Include="Engine\ComponentCreator.h" />
     <ClInclude Include="Engine\Entity.h" />
     <ClInclude Include="Engine\MovementCreator.h" />
     <ClInclude Include="Engine\RenderCreator.h" />

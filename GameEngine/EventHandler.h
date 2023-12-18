@@ -8,7 +8,9 @@ class EventHandler {
 public:
     static std::shared_ptr<Command> TryPop() {
         std::shared_ptr<Command> item = CommandQueue.front();
-        if (!item->Execute()) CommandQueue.pop();
+        if (!item->Execute()) {
+            CommandQueue.pop();
+        }
         return item;
     }
 
