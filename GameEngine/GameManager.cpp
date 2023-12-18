@@ -83,7 +83,6 @@ void GameManager::Update() {
 
     activeState->Update();
 
-    // printf("playerpos.x: %f, playerpos.y: %f \n", playerEntity->position.GetX(), playerEntity->position.GetY());
 }
 
 void GameManager::ChangeActiveState(std::string changeID) {

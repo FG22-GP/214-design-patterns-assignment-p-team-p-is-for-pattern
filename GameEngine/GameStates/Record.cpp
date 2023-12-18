@@ -3,12 +3,11 @@
 #include <random>
 #include "../GameManager.h"
 #include "../TextureManager.h"
-#include "..\EventHandler.h"
-#include "..\Input.h"
-#include "..\Vector2D.h"
+#include "../EventHandler.h"
+#include "../Input.h"
+#include "../Vector2D.h"
 
 Record::Record() {
-   
     TextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "Recording", scoreTextColour, 60, "Recording Input", recordingTextSize);
     // player = std::make_shared<Entity>("Player", Vector2D(200, 200));
     // player->AddComponent(RenderCreator().CreateComponent(player, Vector2D(32, 32), "MainCharacterSolo"));
@@ -30,7 +29,7 @@ void Record::Initilize() {
 }
 
 
-void Record::Start() { 
+void Record::Start() {
     GameState::Start();
     //theEnd->position = gameManager->activeLevel->GetGoalPosition(); // Player position gets set on game manager when its needed
 }
@@ -41,32 +40,42 @@ void Record::Stop() {
 
 void Record::Update() {
     // pixels per frame movement
-
+    Vector2D inputVector;
     if (Input::GetKey(SDLK_w)) {
-        EventHandler::Push(std::make_shared<MoveCommand>(MoveCommand(Vector2D(0, -1), gameManager->playerEntity)));
+        inputVector = inputVector + Vector2D(0.f, -1.f);
     }
+
     if (Input::GetKey(SDLK_s)) {
-        EventHandler::Push(std::make_shared<MoveCommand>(MoveCommand(Vector2D(0, 1), gameManager->playerEntity)));
+        inputVector = inputVector + Vector2D(0.f, 1.f);
     }
+
     if (Input::GetKey(SDLK_a)) {
-        EventHandler::Push(std::make_shared<MoveCommand>(MoveCommand(Vector2D(-1, 0), gameManager->playerEntity)));
+        inputVector = inputVector + Vector2D(-1.f, 0.f);
     }
+
     if (Input::GetKey(SDLK_d)) {
-        EventHandler::Push(std::make_shared<MoveCommand>(MoveCommand(Vector2D(1, 0), gameManager->playerEntity)));
+        inputVector = inputVector + Vector2D(1.f, 0.f);
     }
+
+    if (inputVector.GetX() != 0.f || inputVector.GetY() != 0.f) {
+        EventHandler::Push(std::make_shared<MoveCommand>(MoveCommand(inputVector, gameManager->playerEntity)));
+    }
+
     if (!Input::GetKey(SDLK_w) && !Input::GetKey(SDLK_s) && !Input::GetKey(SDLK_a) && !Input::GetKey(SDLK_d)) {
         if (!EventHandler::Empty()) {
             gameManager->ChangeActiveState("Play");
         }
     }
     TextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "PlayScore",
-        gameManager->activeLevel->targetTime > gameManager->activeLevel->mTime->GetScore() ? scoreGreenTextColour : scoreRedTextColour,
-        60,
-        gameManager->activeLevel->mTime->GetScoreAsString(),
-        scoreTextSize);
+                                         gameManager->activeLevel->targetTime > gameManager->activeLevel->mTime->GetScore()
+                                             ? scoreGreenTextColour
+                                             : scoreRedTextColour,
+                                         60,
+                                         gameManager->activeLevel->mTime->GetScoreAsString(),
+                                         scoreTextSize);
     TextureManager::Instance()->Draw("PlayScore", Vector2D(WindowSizeX / 20, WindowSizeY / 32), scoreTextSize);
     TextureManager::Instance()->Draw("Recording", Vector2D(WindowSizeX / 4.5, WindowSizeY / 32), recordingTextSize);
-    
+
     GameState::Update();
 }
 
