@@ -33,6 +33,7 @@ void GameManager::Initialize(const std::shared_ptr<GameManager> gameManagerPtr) 
     const auto wonState = std::make_shared<WonState>();
     const auto record = std::make_shared<Record>();
     const auto lose = std::make_shared<Lose>();
+    
     playState->SetGameManager(gameManagerPtr->GetPtr());
     pauseState->SetGameManager(gameManagerPtr->GetPtr());
     wonState->SetGameManager(gameManagerPtr->GetPtr());

@@ -39,28 +39,17 @@ void Record::Stop() {
 }
 
 void Record::Update() {
-    // pixels per frame movement
     Vector2D inputVector;
-    if (Input::GetKey(SDLK_w)) {
-        inputVector = inputVector + Vector2D(0.f, -1.f);
-    }
+    
+    if (Input::GetKey(SDLK_w)) inputVector += Vector2D::DOWN();
+    if (Input::GetKey(SDLK_s)) inputVector += Vector2D::UP();
+    if (Input::GetKey(SDLK_a)) inputVector += Vector2D::LEFT();
+    if (Input::GetKey(SDLK_d)) inputVector += Vector2D::RIGHT();
 
-    if (Input::GetKey(SDLK_s)) {
-        inputVector = inputVector + Vector2D(0.f, 1.f);
-    }
-
-    if (Input::GetKey(SDLK_a)) {
-        inputVector = inputVector + Vector2D(-1.f, 0.f);
-    }
-
-    if (Input::GetKey(SDLK_d)) {
-        inputVector = inputVector + Vector2D(1.f, 0.f);
-    }
-
-    if (inputVector.GetX() != 0.f || inputVector.GetY() != 0.f) {
+    if (!Vector2D::ZeroVector(inputVector)) 
         EventHandler::Push(std::make_shared<MoveCommand>(MoveCommand(inputVector, gameManager->playerEntity)));
-    }
 
+    
     if (!Input::GetKey(SDLK_w) && !Input::GetKey(SDLK_s) && !Input::GetKey(SDLK_a) && !Input::GetKey(SDLK_d)) {
         if (!EventHandler::Empty()) {
             gameManager->ChangeActiveState("Play");

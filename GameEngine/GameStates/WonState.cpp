@@ -7,29 +7,17 @@
 
 WonState::WonState() {
     Color wonTextColor = {0xff, 0xff, 0xff};
-    TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "lazy", wonTextColor, 60, "Congratulations",
-                                            wonTextSize);
-    TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "wonNext", wonTextColor, 40, "Better time? Backspace",
-                                            restartTextSize);
-    TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "wonRetry", wonTextColor, 40, "Continue? Enter",
-                                            continueTextSize);
+    TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "lazy", wonTextColor, 60, "Congratulations",wonTextSize);
+    TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "wonNext", wonTextColor, 40, "Better time? Backspace",restartTextSize);
+    TheTextureManager::Instance()->LoadText("font/Silkscreen-Regular.ttf", "wonRetry", wonTextColor, 40, "Continue? Enter", continueTextSize);
 }
 
 void WonState::Start() {
-    //State Start logic here
-
-
-    //runs entity Start logic
     GameState::Start();
 }
 
 void WonState::Stop() {
-    //State Stop logic here
-
-
-    //runs entity Stop logic
     GameState::Stop();
-
     ClearRefs();
 }
 
