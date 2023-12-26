@@ -69,3 +69,16 @@
 ### Subclass Sandbox (maybe)
 - Mono.h
 - Entity.h/cpp
+
+### ScreenShots:
+
+![Screenshot1](resources/screenshot1.png)
+
+![Screenshot2](resources/screenshot2.png)
+
+### GameplayVideo:
+
+<video width="1056" height="824" controls>
+  <source src="resources/GameplayVideo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
