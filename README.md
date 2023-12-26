@@ -78,4 +78,4 @@
 
 ### GameplayVideo:
 
-[![Video](resources/screenshot1.png)](https://www.youtube.com/watch?v=mU0tndEC-o8)
+[![Video](resources/videoimage.png)](https://www.youtube.com/watch?v=mU0tndEC-o8)
