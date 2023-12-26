@@ -78,7 +78,4 @@
 
 ### GameplayVideo:
 
-<video width="1056" height="824" controls>
-  <source src="resources/GameplayVideo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+https://www.youtube.com/watch?v=mU0tndEC-o8
