@@ -36,8 +36,8 @@ public:
     }
 
     Entity(std::string name);
-    explicit Entity(std::string name, Vector2D start_position);
-    explicit Entity(std::string name, std::vector<std::shared_ptr<IComponent>>& attachedComponents, Vector2D startPosition = Vector2D(0.f, 0.f));
+    explicit Entity(std::string name, Vector2D startPosition);
+    explicit Entity(std::string name, const std::vector<std::shared_ptr<IComponent>>& attachedComponents, Vector2D startPosition = Vector2D(0.f, 0.f));
     explicit Entity(std::string name, const std::vector<std::shared_ptr<IComponent>>& attachedComponents);
 
     Vector2D position;

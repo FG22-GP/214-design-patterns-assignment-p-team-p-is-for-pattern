@@ -22,8 +22,8 @@ public:
     static std::shared_ptr<GameManager> Create();
     void Initialize(const std::shared_ptr<GameManager> gameManagerPtr);
     void PushState(std::shared_ptr<GameState> pushState);
-    void Start();
-    void Stop();
+    void Start() const;
+    void Stop() const;
 
     //Might not need pop
     //void PopState();
@@ -34,7 +34,7 @@ public:
     std::shared_ptr<Entity> GetEntity(const std::string& entityName);
     std::shared_ptr<GameManager> GetPtr();
     //Probs same
-    void Update();
+    void Update() const;
 
     ~GameManager() {
     }

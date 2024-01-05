@@ -64,21 +64,21 @@ void GameManager::PushState(std::shared_ptr<GameState> pushState) {
     allStates[pushState->GetStateID()] = pushState;
 }
 
-void GameManager::Start() {
+void GameManager::Start() const {
     for (auto kvp : entityMap) if (kvp.second) kvp.second->Start();
     for (auto state : allStates) {
         state.second->Start();
     }
 }
 
-void GameManager::Stop() {
+auto GameManager::Stop() const -> void {
     for (auto kvp : entityMap) if (kvp.second) kvp.second->Stop();
     for (auto state : allStates) {
         state.second->Stop();
     }
 }
 
-void GameManager::Update() {
+void GameManager::Update() const {
     if (activeState == nullptr) return;
 
     for (auto kvp : entityMap) if (kvp.second) kvp.second->Update();
